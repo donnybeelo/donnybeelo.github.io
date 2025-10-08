@@ -51,13 +51,9 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
 	};
 }
 
-type Props = {
-	params: { slug: string };
-	searchParams: { [key: string]: string | string[] | undefined };
-};
-
-export default function Blog({ params }: Props) {
-	let post = getBlogPosts().find((post) => post.slug === params.slug);
+export default async function Blog({ params }: PageProps<"/blog/[slug]">) {
+	const { slug } = await params;
+	let post = getBlogPosts().find((post) => post.slug === slug);
 
 	if (!post) {
 		notFound();
