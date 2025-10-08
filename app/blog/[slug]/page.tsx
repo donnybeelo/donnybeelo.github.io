@@ -51,7 +51,11 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
 	};
 }
 
-export default function Blog({ params }: { params: { slug: string } }) {
+type Props = {
+	params: { slug: string };
+};
+
+export default function Blog({ params }: Props) {
 	let post = getBlogPosts().find((post) => post.slug === params.slug);
 
 	if (!post) {
