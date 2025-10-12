@@ -27,7 +27,8 @@ export const NavButton = ({ path, name }: { path: string; name: string }) => {
 			ref={buttonRef}
 			className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 px-2 m-1 navButton"
 			style={{
-				backgroundColor: path === pathname ? "var(--button-outline)" : "",
+				backgroundColor:
+					path === "/" + pathname.split("/")[1] ? "var(--button-outline)" : "",
 			}}
 		>
 			{name}
