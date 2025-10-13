@@ -15,7 +15,8 @@
 	--sh-jsxliterals: #6266d1;
 	--sh-property: #e25a1c;
 	--sh-entity: #e25a1c;
-	--button-outline: #555;
+	--button-active: #bbb;
+	--button-shine: var(--sh-identifier);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -24,6 +25,7 @@
 		--sh-identifier: white;
 		--sh-keyword: #f47067;
 		--sh-string: #0fa295;
+		--button-active: #555;
 	}
 	html {
 		color-scheme: dark;
@@ -151,14 +153,14 @@ table {
 }
 
 .navButton {
-	border: 2px solid transparent;
+	border: 1px solid transparent;
 	margin: 0;
 	margin-right: 0.5rem;
 	overflow: hidden;
 	border-radius: 0.375rem;
 }
 .navButton:hover {
-	border-color: var(--button-outline) !important;
+	border-color: var(--button-shine) !important;
 }
 
 .navButton::after {
@@ -168,7 +170,7 @@ table {
 	left: calc(var(--x, 0) * 1px - 75px);
 	width: 150px;
 	height: 150px;
-	background: radial-gradient(white, transparent 65%);
+	background: radial-gradient(var(--button-shine), transparent 65%);
 
 	opacity: 0;
 	transition: opacity 0.2s;
