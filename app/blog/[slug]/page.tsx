@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { CustomMDX } from "app/components/mdx";
 import { formatDate, getBlogPosts } from "app/blog/utils";
 import { baseUrl } from "@/sitemap";
+import { BackButton } from "app/components/backButton";
 
 export async function generateStaticParams() {
 	let posts = getBlogPosts();
@@ -85,6 +86,9 @@ export default async function Blog({ params }: PageProps<"/blog/[slug]">) {
 					}),
 				}}
 			/>
+			<div className="mb-4">
+				<BackButton />
+			</div>
 			<h1 className="title font-semibold text-2xl tracking-tighter">
 				{post.metadata.title}
 			</h1>

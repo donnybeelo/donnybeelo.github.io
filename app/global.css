@@ -16,7 +16,7 @@
 	--sh-property: #e25a1c;
 	--sh-entity: #e25a1c;
 	--button-active: #bbb;
-	--button-shine: var(--sh-identifier);
+	--button-shine: #567;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,6 +26,7 @@
 		--sh-keyword: #f47067;
 		--sh-string: #0fa295;
 		--button-active: #555;
+		--button-shine: white;
 	}
 	html {
 		color-scheme: dark;
@@ -161,6 +162,7 @@ table {
 }
 .navButton:hover {
 	border-color: var(--button-shine) !important;
+	background-color: #7775;
 }
 
 .navButton::after {
