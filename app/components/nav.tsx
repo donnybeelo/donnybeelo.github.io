@@ -1,11 +1,8 @@
 "use client";
 
-import { NavButton } from "./navButton";
+import { NavButton } from "./shinyButton";
 
 const navItems = {
-	"/": {
-		name: "home",
-	},
 	"/projects": {
 		name: "projects",
 	},
@@ -13,6 +10,10 @@ const navItems = {
 		name: "blog",
 	},
 };
+
+const HomeIcon = () => (
+	<img src="/favicon.png" alt="Home" className="w-10 h-10" />
+);
 
 export function Navbar() {
 	return (
@@ -22,7 +23,8 @@ export function Navbar() {
 					className="flex flex-row items-start relative px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
 					id="nav"
 				>
-					<div className="flex flex-row space-x-0 pr-10">
+					<div className="flex flex-row items-center space-x-0 pr-10">
+						<NavButton path="/" icon={<HomeIcon />} />
 						{Object.entries(navItems).map(([path, { name }]) => {
 							return <NavButton key={path} path={path} name={name} />;
 						})}

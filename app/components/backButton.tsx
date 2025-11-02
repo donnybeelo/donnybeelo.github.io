@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { NavButton } from "./navButton";
+import { NavButton } from "./shinyButton";
 
 function BackArrowIcon() {
 	return (

@@ -23,14 +23,14 @@ function ArrowIcon() {
 
 export const NavButton = ({
 	path = undefined,
-	name,
+	name = undefined,
 	icon = null,
 	onClick = null,
 	external = false,
 	className = undefined,
 }: {
 	path?: string;
-	name: string;
+	name?: string;
 	icon?: React.ReactNode;
 	onClick?: (() => void) | null;
 	external?: boolean;
@@ -109,7 +109,7 @@ export const NavButton = ({
 			ref={buttonRef}
 			onClick={onClick ? () => onClick() : undefined}
 			className={
-				"transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center gap-2 relative py-1 px-2 m-1 w-fit navButton " +
+				"transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center gap-2 relative py-1 px-2 m-1 w-fit h-fit navButton " +
 				(isTouched ? "touch-active " : "") +
 				className
 			}

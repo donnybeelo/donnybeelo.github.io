@@ -12,6 +12,9 @@ export const metadata: Metadata = {
 		template: "%s | Daniel Elia",
 	},
 	description: "This is my portfolio.",
+	icons: {
+		icon: "/favicon.png",
+	},
 	openGraph: {
 		title: "Daniel Elia",
 		description: "The official Daniel Elia portfolio.",

@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { CustomMDX } from "app/components/mdx";
 import { formatDate, getProjects } from "app/projects/utils";
 import { baseUrl } from "@/sitemap";
-import { NavButton } from "app/components/navButton";
+import { NavButton } from "app/components/shinyButton";
 import { BackButton } from "app/components/backButton";
 
 export async function generateStaticParams() {

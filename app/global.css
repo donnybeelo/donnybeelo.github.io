@@ -180,7 +180,6 @@ table {
 	width: var(--shine-width);
 	height: var(--shine-width);
 	background: radial-gradient(var(--button-shine), transparent 65%);
-
 	opacity: 0;
 	transition: opacity 0.2s;
 }

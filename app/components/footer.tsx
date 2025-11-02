@@ -1,4 +1,4 @@
-import { NavButton } from "./navButton";
+import { NavButton } from "./shinyButton";
 
 const footerItems: Record<
 	string,
