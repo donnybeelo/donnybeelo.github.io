@@ -12,7 +12,7 @@ export default function Page() {
 			<p className="mb-8">
 				My thoughts and opinions that I feel passionate about enough to write a
 				blog post for, that being in the realm of software development (or
-				potentially music 👀)
+				potentially music in the future 👀)
 			</p>
 			<BlogPosts />
 		</section>

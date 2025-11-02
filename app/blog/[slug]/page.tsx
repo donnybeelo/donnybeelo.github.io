@@ -86,9 +86,9 @@ export default async function Blog({ params }: PageProps<"/blog/[slug]">) {
 					}),
 				}}
 			/>
-			<div className="mb-4">
-				<BackButton />
-			</div>
+
+			<BackButton />
+
 			<h1 className="title font-semibold text-2xl tracking-tighter">
 				{post.metadata.title}
 			</h1>

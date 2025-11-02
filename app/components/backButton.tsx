@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavButton } from "./navButton";
 
 function BackArrowIcon() {
@@ -79,12 +79,17 @@ export const BackButton = () => {
 	};
 
 	// Don't show button if we determined it shouldn't be shown (direct navigation)
-	if (shouldShow === false) {
+	if (shouldShow !== true) {
 		return null;
 	}
 
-	// Show button if we should show it, or while we're still checking
+	// Show button if we should show it
 	return (
-		<NavButton onClick={handleBack} name="Back" icon={<BackArrowIcon />} />
+		<NavButton
+			className="!mb-8"
+			onClick={handleBack}
+			name="Back"
+			icon={<BackArrowIcon />}
+		/>
 	);
 };

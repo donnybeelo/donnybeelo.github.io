@@ -160,9 +160,18 @@ table {
 	overflow: hidden;
 	border-radius: 0.375rem;
 }
-.navButton:hover {
+
+.navButton.touch-active {
 	border-color: var(--button-shine) !important;
 	background-color: #7775;
+	color: rgb(38 38 38);
+}
+
+@media (prefers-color-scheme: dark) {
+	.navButton:hover,
+	.navButton.touch-active {
+		color: rgb(229 229 229);
+	}
 }
 
 .navButton::after {
@@ -178,6 +187,6 @@ table {
 	transition: opacity 0.2s;
 }
 
-.navButton:hover::after {
+.navButton.touch-active::after {
 	opacity: 0.4;
 }

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function ArrowIcon() {
 	return (
@@ -27,12 +27,14 @@ export const NavButton = ({
 	icon = null,
 	onClick = null,
 	external = false,
+	className = undefined,
 }: {
 	path?: string;
 	name: string;
 	icon?: React.ReactNode;
 	onClick?: (() => void) | null;
 	external?: boolean;
+	className?: string;
 }) => {
 	const pathname = usePathname();
 	if (!path && !onClick) {
@@ -40,20 +42,61 @@ export const NavButton = ({
 	}
 
 	const buttonRef = useRef<HTMLAnchorElement | null>(null);
+	const [isTouched, setIsTouched] = useState(false);
+
+	function updateButtonVars(clientX: number, clientY: number) {
+		if (!buttonRef.current) return;
+		const { x, y } = buttonRef.current.getBoundingClientRect();
+		buttonRef.current.style.setProperty("--x", String(clientX - x));
+		buttonRef.current.style.setProperty("--y", String(clientY - y));
+	}
+
 	function mouseMoveEvent(e: MouseEvent): void {
-		const { x, y } = buttonRef.current!.getBoundingClientRect();
-		buttonRef.current!.style.setProperty("--x", String(e.clientX - x));
-		buttonRef.current!.style.setProperty("--y", String(e.clientY - y));
+		updateButtonVars(e.clientX, e.clientY);
+	}
+
+	function touchMoveEvent(e: TouchEvent): void {
+		if (e.touches && e.touches.length > 0) {
+			const touch = e.touches[0];
+			updateButtonVars(touch.clientX, touch.clientY);
+		}
+	}
+
+	function touchStartEvent(e: TouchEvent): void {
+		setIsTouched(true);
+		if (e.touches && e.touches.length > 0) {
+			const touch = e.touches[0];
+			updateButtonVars(touch.clientX, touch.clientY);
+		}
+	}
+
+	async function touchEndEvent(): Promise<void> {
+		// INSERT_YOUR_CODE
+		await new Promise((resolve) => setTimeout(resolve, 150));
+		setIsTouched(false);
+	}
+
+	async function touchCancelEvent(): Promise<void> {
+		await new Promise((resolve) => setTimeout(resolve, 150));
+		setIsTouched(false);
 	}
 
 	useEffect(() => {
 		const button = buttonRef.current;
 		if (button) {
 			button.addEventListener("mousemove", mouseMoveEvent);
+			button.addEventListener("touchmove", touchMoveEvent);
+			button.addEventListener("touchstart", touchStartEvent);
+			button.addEventListener("touchend", touchEndEvent);
+			button.addEventListener("touchcancel", touchCancelEvent);
 		}
 		return () => {
 			if (button) {
 				button.removeEventListener("mousemove", mouseMoveEvent);
+				button.removeEventListener("touchmove", touchMoveEvent);
+				button.removeEventListener("touchstart", touchStartEvent);
+				button.removeEventListener("touchend", touchEndEvent);
+				button.removeEventListener("touchcancel", touchCancelEvent);
 			}
 		};
 	}, []);
@@ -64,7 +107,11 @@ export const NavButton = ({
 			href={path ?? "#"}
 			ref={buttonRef}
 			onClick={onClick ? () => onClick() : undefined}
-			className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center gap-2 relative py-1 px-2 m-1 navButton"
+			className={
+				"transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center gap-2 relative py-1 px-2 m-1 w-fit navButton " +
+				(isTouched ? "touch-active " : "") +
+				className
+			}
 			style={{
 				backgroundColor:
 					path === "/" + pathname.split("/")[1] ? "var(--button-active)" : "",

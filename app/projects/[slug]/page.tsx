@@ -90,9 +90,7 @@ export default async function Blog({ params }: PageProps<"/projects/[slug]">) {
 				}}
 			/>
 
-			<div className="w-fit mb-8 mt-0">
-				<BackButton />
-			</div>
+			<BackButton />
 
 			<div className="flex justify-between items-center">
 				<h1 className="title font-semibold text-2xl tracking-tighter">
