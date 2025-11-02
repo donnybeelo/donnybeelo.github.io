@@ -17,6 +17,7 @@
 	--sh-entity: #e25a1c;
 	--button-active: #bbb;
 	--button-shine: #567;
+	--shine-width: 150px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -154,7 +155,6 @@ table {
 }
 
 .navButton {
-	border: 1px solid transparent;
 	margin: 0;
 	margin-right: 0.5rem;
 	overflow: hidden;
@@ -162,13 +162,11 @@ table {
 }
 
 .navButton.touch-active {
-	border-color: var(--button-shine) !important;
 	background-color: #7775;
 	color: rgb(38 38 38);
 }
 
 @media (prefers-color-scheme: dark) {
-	.navButton:hover,
 	.navButton.touch-active {
 		color: rgb(229 229 229);
 	}
@@ -179,12 +177,18 @@ table {
 	position: absolute;
 	top: calc(var(--y, 0) * 1px - 75px);
 	left: calc(var(--x, 0) * 1px - 75px);
-	width: 150px;
-	height: 150px;
+	width: var(--shine-width);
+	height: var(--shine-width);
 	background: radial-gradient(var(--button-shine), transparent 65%);
 
 	opacity: 0;
 	transition: opacity 0.2s;
+}
+
+@media (hover: hover) {
+	.navButton:hover::after {
+		opacity: 0.4;
+	}
 }
 
 .navButton.touch-active::after {

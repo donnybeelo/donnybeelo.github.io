@@ -71,8 +71,7 @@ export const NavButton = ({
 	}
 
 	async function touchEndEvent(): Promise<void> {
-		// INSERT_YOUR_CODE
-		await new Promise((resolve) => setTimeout(resolve, 150));
+		await new Promise((resolve) => setTimeout(resolve, 300));
 		setIsTouched(false);
 	}
 
@@ -84,6 +83,7 @@ export const NavButton = ({
 	useEffect(() => {
 		const button = buttonRef.current;
 		if (button) {
+			button.addEventListener("mouseenter", mouseMoveEvent);
 			button.addEventListener("mousemove", mouseMoveEvent);
 			button.addEventListener("touchmove", touchMoveEvent);
 			button.addEventListener("touchstart", touchStartEvent);
@@ -92,6 +92,7 @@ export const NavButton = ({
 		}
 		return () => {
 			if (button) {
+				button.removeEventListener("mouseenter", mouseMoveEvent);
 				button.removeEventListener("mousemove", mouseMoveEvent);
 				button.removeEventListener("touchmove", touchMoveEvent);
 				button.removeEventListener("touchstart", touchStartEvent);
