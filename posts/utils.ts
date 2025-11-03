@@ -6,6 +6,7 @@ type Metadata = {
   publishedAt: string
   summary: string
   image?: string
+  repoUrl?: string
 }
 
 function parseFrontmatter(fileContent: string) {
@@ -51,6 +52,10 @@ function getMDXData(dir: string) {
 
 export function getBlogPosts() {
   return getMDXData(path.join(process.cwd(), 'posts', 'blog'))
+}
+
+export function getProjectPosts() {
+  return getMDXData(path.join(process.cwd(), 'posts', 'projects'))
 }
 
 export function formatDate(date: string, includeRelative = false) {

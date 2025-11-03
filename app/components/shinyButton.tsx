@@ -30,6 +30,7 @@ export const ShinyButton = ({
 	className = undefined,
 	style = undefined,
 	ariaLabel = name,
+	children = null,
 }: {
 	path?: string;
 	name?: string;
@@ -39,6 +40,7 @@ export const ShinyButton = ({
 	className?: string;
 	style?: React.CSSProperties;
 	ariaLabel?: string;
+	children?: React.ReactNode;
 }) => {
 	const pathname = usePathname();
 	if (!path && !onClick) {
@@ -129,7 +131,7 @@ export const ShinyButton = ({
 			>
 				{external && ArrowIcon()}
 				{icon}
-				{name}
+				{name ? name : children}
 			</Link>
 		);
 	} else {
@@ -141,7 +143,7 @@ export const ShinyButton = ({
 			>
 				{external && ArrowIcon()}
 				{icon}
-				{name}
+				{name ? name : children}
 			</button>
 		);
 	}

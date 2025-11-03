@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
 import { CustomMDX } from "app/components/mdx";
-import { formatDate, getProjects } from "app/projects/utils";
-import { baseUrl } from "@/sitemap";
+import { formatDate, getProjectPosts } from "@/posts/utils";
+import { baseUrl } from "@/src/sitemap";
 import { ShinyButton } from "app/components/shinyButton";
 import { BackButton } from "app/components/backButton";
 
 export async function generateStaticParams() {
-	let posts = getProjects();
+	let posts = getProjectPosts();
 
 	return posts.map((post) => ({
 		slug: post.slug,
@@ -18,7 +18,7 @@ export async function generateMetadata({
 }: PageProps<"/projects/[slug]">) {
 	let { slug } = await params;
 
-	let post = getProjects().find((post) => post.slug === slug);
+	let post = getProjectPosts().find((post) => post.slug === slug);
 	if (!post) {
 		return;
 	}
@@ -59,7 +59,7 @@ export async function generateMetadata({
 
 export default async function Blog({ params }: PageProps<"/projects/[slug]">) {
 	const { slug } = await params;
-	let post = getProjects().find((post) => post.slug === slug);
+	let post = getProjectPosts().find((post) => post.slug === slug);
 
 	if (!post) {
 		notFound();

@@ -1,4 +1,4 @@
-import { baseUrl } from "@/sitemap";
+import { baseUrl } from "@/src/sitemap";
 
 export const dynamic = "force-static";
 

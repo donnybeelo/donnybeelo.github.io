@@ -1,8 +1,9 @@
-import Link from "next/link";
+// import Link from "next/link";
 import Image, { ImageProps } from "next/image";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import { highlight } from "sugar-high";
 import React from "react";
+import { ShinyButton } from "./shinyButton";
 
 interface TableProps {
 	data: {
@@ -34,21 +35,14 @@ function Table({ data }: TableProps) {
 }
 
 function CustomLink(props: React.ComponentProps<"a">) {
-	let href = props.href;
-
-	if (href && href.startsWith("/")) {
-		return (
-			<Link href={href} {...props}>
-				{props.children}
-			</Link>
-		);
-	}
-
-	if (href && href.startsWith("#")) {
-		return <a {...props} />;
-	}
-
-	return <a target="_blank" rel="noopener noreferrer" {...props} />;
+	return (
+		<ShinyButton
+			path={props.href}
+			className="!p-0 !m-0 !px-0.5 !-mx-0.5 !rounded-xs inline-block align-bottom"
+		>
+			{props.children}
+		</ShinyButton>
+	);
 }
 
 function RoundedImage(props: ImageProps) {
