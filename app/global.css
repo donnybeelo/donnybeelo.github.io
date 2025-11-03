@@ -16,7 +16,7 @@
 	--sh-property: #e25a1c;
 	--sh-entity: #e25a1c;
 	--button-active: #bbb;
-	--button-shine: #567;
+	--button-shine: #555;
 	--shine-width: 150px;
 }
 
@@ -154,25 +154,25 @@ table {
 	text-wrap: balance;
 }
 
-.navButton {
+.shinyButton {
 	margin: 0;
 	margin-right: 0.5rem;
 	overflow: hidden;
 	border-radius: 0.375rem;
 }
 
-.navButton.touch-active {
+.shinyButton.touch-active {
 	background-color: #7775;
 	color: rgb(38 38 38);
 }
 
 @media (prefers-color-scheme: dark) {
-	.navButton.touch-active {
+	.shinyButton.touch-active {
 		color: rgb(229 229 229);
 	}
 }
 
-.navButton::after {
+.shinyButton::after {
 	content: "";
 	position: absolute;
 	top: calc(var(--y, 0) * 1px - 75px);
@@ -184,12 +184,24 @@ table {
 	transition: opacity 0.2s;
 }
 
+.shinyButton.home-button {
+	mask: url("/favicon.png");
+	mask-size: 40px 40px;
+	mask-position: 8px 4px;
+	mask-repeat: no-repeat;
+	background: var(--button-active);
+}
+
+.shinyButton.home-button::after {
+	background: radial-gradient(black, transparent 35%);
+}
+
 @media (hover: hover) {
-	.navButton:hover::after {
+	.shinyButton:hover::after {
 		opacity: 0.4;
 	}
 }
 
-.navButton.touch-active::after {
+.shinyButton.touch-active::after {
 	opacity: 0.4;
 }

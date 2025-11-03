@@ -1,8 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import { NavButton } from "./shinyButton";
+import { useEffect, useState } from "react";
+import { ShinyButton } from "./shinyButton";
+import { usePathname } from "next/navigation";
 
 function BackArrowIcon() {
 	return (
@@ -24,69 +25,22 @@ function BackArrowIcon() {
 
 export const BackButton = () => {
 	const router = useRouter();
-	const [shouldShow, setShouldShow] = useState<boolean | null>(null);
+	const pathname = usePathname();
 
-	useEffect(() => {
-		// Check if we should show the button
-		if (typeof window !== "undefined") {
-			const referrer = document.referrer;
-			const currentOrigin = window.location.origin;
-			const hasHistory = window.history.length > 1;
-
-			// Check if there's a valid referrer from the same origin
-			let hasValidReferrer = false;
-			if (referrer) {
-				try {
-					const referrerUrl = new URL(referrer);
-					hasValidReferrer = referrerUrl.origin === currentOrigin;
-				} catch {
-					hasValidReferrer = referrer.startsWith(currentOrigin);
-				}
-			}
-
-			// Show button if we have history OR a valid same-origin referrer
-			// Only hide if we have no history AND no valid referrer (direct navigation)
-			setShouldShow(hasHistory || hasValidReferrer);
-		}
-	}, []);
+	console.log("Current pathname:", pathname);
 
 	const handleBack = () => {
-		if (typeof window === "undefined") return;
-
-		const currentOrigin = window.location.origin;
-		const referrer = document.referrer;
-
-		// Parse the referrer URL to check if it's the homepage
-		let cameFromHomepage = false;
-		if (referrer) {
-			try {
-				const referrerPath = new URL(referrer).pathname;
-				// Only go to homepage if referrer path is exactly "/"
-				cameFromHomepage = referrerPath === "/";
-			} catch {
-				// If URL parsing fails, check if referrer matches origin (homepage)
-				cameFromHomepage =
-					referrer === currentOrigin || referrer === `${currentOrigin}/`;
-			}
-		}
-
-		if (cameFromHomepage) {
-			router.push("/");
-		} else {
-			// Use browser back functionality to go to previous page
-			router.back();
-		}
+		const segments = pathname.split("/");
+		console.log("Path segments:", segments);
+		segments.pop();
+		const upPath = segments.join("/");
+		console.log("Navigating up to:", upPath || "/");
+		router.push(upPath);
 	};
 
-	// Don't show button if we determined it shouldn't be shown (direct navigation)
-	if (shouldShow !== true) {
-		return null;
-	}
-
-	// Show button if we should show it
 	return (
-		<NavButton
-			className="!mb-8"
+		<ShinyButton
+			className="!mb-6"
 			onClick={handleBack}
 			name="Back"
 			icon={<BackArrowIcon />}

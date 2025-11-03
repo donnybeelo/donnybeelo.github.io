@@ -1,4 +1,4 @@
-import { NavButton } from "./shinyButton";
+import { ShinyButton } from "./shinyButton";
 
 const footerItems: Record<
 	string,
@@ -27,7 +27,7 @@ export default function Footer() {
 			<ul className="font-sm mt-8 flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
 				{Object.entries(footerItems).map(([name, { url, external, icon }]) => {
 					return (
-						<NavButton
+						<ShinyButton
 							key={name}
 							path={url}
 							name={name}

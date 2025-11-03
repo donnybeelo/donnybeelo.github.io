@@ -21,13 +21,15 @@ function ArrowIcon() {
 	);
 }
 
-export const NavButton = ({
+export const ShinyButton = ({
 	path = undefined,
 	name = undefined,
 	icon = null,
 	onClick = null,
 	external = false,
 	className = undefined,
+	style = undefined,
+	ariaLabel = name,
 }: {
 	path?: string;
 	name?: string;
@@ -35,13 +37,15 @@ export const NavButton = ({
 	onClick?: (() => void) | null;
 	external?: boolean;
 	className?: string;
+	style?: React.CSSProperties;
+	ariaLabel?: string;
 }) => {
 	const pathname = usePathname();
 	if (!path && !onClick) {
 		return null;
 	}
 
-	const buttonRef = useRef<HTMLAnchorElement | null>(null);
+	const buttonRef = useRef<HTMLElement | null>(null);
 	const [isTouched, setIsTouched] = useState(false);
 
 	function updateButtonVars(clientX: number, clientY: number) {
@@ -102,25 +106,43 @@ export const NavButton = ({
 		};
 	}, []);
 
-	return (
-		<Link
-			key={path}
-			href={path ?? "#"}
-			ref={buttonRef}
-			onClick={onClick ? () => onClick() : undefined}
-			className={
-				"transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center gap-2 relative py-1 px-2 m-1 w-fit h-fit navButton " +
-				(isTouched ? "touch-active " : "") +
-				className
-			}
-			style={{
-				backgroundColor:
-					path === "/" + pathname.split("/")[1] ? "var(--button-active)" : "",
-			}}
-		>
-			{external && ArrowIcon()}
-			{icon}
-			{name}
-		</Link>
-	);
+	const commonProps = {
+		className:
+			"transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer " +
+			(isTouched ? "touch-active " : "") +
+			className,
+		style: {
+			backgroundColor:
+				path === "/" + pathname.split("/")[1] ? "var(--button-active)" : "",
+			...style,
+		},
+		"aria-label": ariaLabel,
+	};
+
+	if (path) {
+		return (
+			<Link
+				key={path}
+				href={path}
+				ref={buttonRef as React.RefObject<HTMLAnchorElement>}
+				{...commonProps}
+			>
+				{external && ArrowIcon()}
+				{icon}
+				{name}
+			</Link>
+		);
+	} else {
+		return (
+			<button
+				onClick={onClick!}
+				ref={buttonRef as React.RefObject<HTMLButtonElement>}
+				{...commonProps}
+			>
+				{external && ArrowIcon()}
+				{icon}
+				{name}
+			</button>
+		);
+	}
 };
