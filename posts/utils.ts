@@ -81,11 +81,22 @@ export function formatDate(date: string, includeRelative = false) {
     formattedDate = 'Today'
   }
 
-  let fullDate = targetDate.toLocaleString('en-us', {
+  function getOrdinalSuffix(day: number): string {
+    if (day > 3 && day < 21) return 'th'
+    switch (day % 10) {
+      case 1: return 'st'
+      case 2: return 'nd'
+      case 3: return 'rd'
+      default: return 'th'
+    }
+  }
+
+  let day = targetDate.getDate()
+  let suffix = getOrdinalSuffix(day)
+  let fullDate = `${day}${suffix} ${targetDate.toLocaleString('en-gb', {
     month: 'long',
-    day: 'numeric',
     year: 'numeric',
-  })
+  })}`
 
   if (!includeRelative) {
     return fullDate
