@@ -111,6 +111,9 @@ export const ShinyButton = ({
 	useEffect(() => {
 		const button = buttonRef.current;
 		if (button) {
+			const { width, height } = button.getBoundingClientRect();
+			button.style.setProperty("--x", String(width / 2));
+			button.style.setProperty("--y", String(height / 2));
 			button.addEventListener("mouseenter", mouseMoveEvent);
 			button.addEventListener("mousemove", mouseMoveEvent);
 			button.addEventListener("touchmove", touchMoveEvent);
