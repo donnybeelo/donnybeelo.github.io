@@ -60,6 +60,12 @@ export const ShinyButton = ({
 
 	function mouseMoveEvent(e: MouseEvent): void {
 		updateButtonVars(e.clientX, e.clientY);
+		const button = buttonRef.current;
+		if (!button) return;
+		const height = button.offsetHeight;
+		const width = button.offsetWidth;
+		const aspectRatio = width / height;
+		button.style.setProperty("--shine-width", `${aspectRatio * 75}px`);
 	}
 
 	function touchMoveEvent(e: TouchEvent): void {
@@ -86,22 +92,20 @@ export const ShinyButton = ({
 
 	async function mouseDownEvent(): Promise<void> {
 		const button = buttonRef.current;
-		if (button) {
-			const width = parseInt(
-				button.style.getPropertyValue("--shine-width").slice(0, -2)
-			);
-			button.style.setProperty("--shine-width", `${width / 2}px`);
-		}
+		if (!button) return;
+		const height = button.offsetHeight;
+		const width = button.offsetWidth;
+		const aspectRatio = width / height;
+		button.style.setProperty("--shine-width", `${(aspectRatio * 75) / 2}px`);
 	}
 
 	async function mouseUpEvent(): Promise<void> {
 		const button = buttonRef.current;
-		if (button) {
-			const height = button.offsetHeight;
-			const width = button.offsetWidth;
-			const aspectRatio = width / height;
-			button.style.setProperty("--shine-width", `${aspectRatio * 75}px`);
-		}
+		if (!button) return;
+		const height = button.offsetHeight;
+		const width = button.offsetWidth;
+		const aspectRatio = width / height;
+		button.style.setProperty("--shine-width", `${aspectRatio * 75}px`);
 	}
 
 	useEffect(() => {
@@ -115,7 +119,6 @@ export const ShinyButton = ({
 			button.addEventListener("touchcancel", touchEndEvent);
 			button.addEventListener("mousedown", mouseDownEvent);
 			button.addEventListener("mouseup", mouseUpEvent);
-			button.addEventListener("mouseout", mouseUpEvent);
 		}
 		return () => {
 			if (button) {
@@ -127,7 +130,6 @@ export const ShinyButton = ({
 				button.removeEventListener("touchcancel", touchEndEvent);
 				button.removeEventListener("mousedown", mouseDownEvent);
 				button.removeEventListener("mouseup", mouseUpEvent);
-				button.removeEventListener("mouseout", mouseUpEvent);
 			}
 		};
 	}, []);
