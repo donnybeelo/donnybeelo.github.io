@@ -1,5 +1,6 @@
 "use client";
 
+import { Istok_Web } from "next/font/google";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -48,7 +49,7 @@ export const ShinyButton = ({
 	}
 
 	const buttonRef = useRef<HTMLElement | null>(null);
-	const [isTouched, setIsTouched] = useState(false);
+	const [isTouched, setIsTouched] = useState(0);
 
 	function updateButtonVars(clientX: number, clientY: number) {
 		if (!buttonRef.current) return;
@@ -69,7 +70,7 @@ export const ShinyButton = ({
 	}
 
 	function touchStartEvent(e: TouchEvent): void {
-		setIsTouched(true);
+		setIsTouched(2);
 		if (e.touches && e.touches.length > 0) {
 			const touch = e.touches[0];
 			updateButtonVars(touch.clientX, touch.clientY);
@@ -77,13 +78,30 @@ export const ShinyButton = ({
 	}
 
 	async function touchEndEvent(): Promise<void> {
-		await new Promise((resolve) => setTimeout(resolve, 300));
-		setIsTouched(false);
+		await new Promise((resolve) => setTimeout(resolve, 50));
+		setIsTouched(1);
+		await new Promise((resolve) => setTimeout(resolve, 100));
+		setIsTouched(0);
 	}
 
-	async function touchCancelEvent(): Promise<void> {
-		await new Promise((resolve) => setTimeout(resolve, 150));
-		setIsTouched(false);
+	async function mouseDownEvent(): Promise<void> {
+		const button = buttonRef.current;
+		if (button) {
+			const width = parseInt(
+				button.style.getPropertyValue("--shine-width").slice(0, -2)
+			);
+			button.style.setProperty("--shine-width", `${width / 2}px`);
+		}
+	}
+
+	async function mouseUpEvent(): Promise<void> {
+		const button = buttonRef.current;
+		if (button) {
+			const width = parseInt(
+				button.style.getPropertyValue("--shine-width").slice(0, -2)
+			);
+			button.style.setProperty("--shine-width", `${width * 2}px`);
+		}
 	}
 
 	useEffect(() => {
@@ -94,7 +112,9 @@ export const ShinyButton = ({
 			button.addEventListener("touchmove", touchMoveEvent);
 			button.addEventListener("touchstart", touchStartEvent);
 			button.addEventListener("touchend", touchEndEvent);
-			button.addEventListener("touchcancel", touchCancelEvent);
+			button.addEventListener("touchcancel", touchEndEvent);
+			button.addEventListener("mousedown", mouseDownEvent);
+			button.addEventListener("mouseup", mouseUpEvent);
 		}
 		return () => {
 			if (button) {
@@ -103,7 +123,9 @@ export const ShinyButton = ({
 				button.removeEventListener("touchmove", touchMoveEvent);
 				button.removeEventListener("touchstart", touchStartEvent);
 				button.removeEventListener("touchend", touchEndEvent);
-				button.removeEventListener("touchcancel", touchCancelEvent);
+				button.removeEventListener("touchcancel", touchEndEvent);
+				button.removeEventListener("mousedown", mouseDownEvent);
+				button.removeEventListener("mouseup", mouseUpEvent);
 			}
 		};
 	}, []);
@@ -133,7 +155,11 @@ export const ShinyButton = ({
 	const commonProps = {
 		className:
 			"transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer " +
-			(isTouched ? "touch-active " : "") +
+			(isTouched === 2
+				? "touch-active "
+				: isTouched === 1
+				? "touch-going "
+				: "") +
 			className,
 		style: {
 			backgroundColor:

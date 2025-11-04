@@ -181,7 +181,7 @@ table {
 	height: var(--shine-width);
 	background: radial-gradient(var(--button-shine), transparent 65%);
 	opacity: 0;
-	transition: opacity 0.2s;
+	transition: opacity 0.2s, width 0.1s, height 0.1s, top 0.1s, left 0.1s;
 }
 
 .shinyButton.home-button {
@@ -205,6 +205,7 @@ table {
 	}
 }
 
-.shinyButton.touch-active::after {
+.shinyButton.touch-active::after,
+.shinyButton.touch-going::after {
 	opacity: 0.4;
 }
