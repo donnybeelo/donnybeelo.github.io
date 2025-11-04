@@ -53,7 +53,7 @@ export const ShinyButton = ({
 
 	function updateButtonVars(clientX: number, clientY: number) {
 		if (!buttonRef.current) return;
-		const { x, y, width, height } = buttonRef.current.getBoundingClientRect();
+		const { x, y } = buttonRef.current.getBoundingClientRect();
 		buttonRef.current.style.setProperty("--x", String(clientX - x));
 		buttonRef.current.style.setProperty("--y", String(clientY - y));
 	}
