@@ -52,7 +52,7 @@ export const ShinyButton = ({
 
 	function updateButtonVars(clientX: number, clientY: number) {
 		if (!buttonRef.current) return;
-		const { x, y } = buttonRef.current.getBoundingClientRect();
+		const { x, y, width, height } = buttonRef.current.getBoundingClientRect();
 		buttonRef.current.style.setProperty("--x", String(clientX - x));
 		buttonRef.current.style.setProperty("--y", String(clientY - y));
 	}
@@ -106,6 +106,28 @@ export const ShinyButton = ({
 				button.removeEventListener("touchcancel", touchCancelEvent);
 			}
 		};
+	}, []);
+
+	useEffect(() => {
+		const button = buttonRef.current;
+		if (button) {
+			const updateShineWidth = () => {
+				const height = button.offsetHeight;
+				const width = button.offsetWidth;
+				const aspectRatio = width / height;
+				button.style.setProperty("--shine-width", `${aspectRatio * 75}px`);
+			};
+
+			// Initial update
+			updateShineWidth();
+
+			// Update on resize
+			window.addEventListener("resize", updateShineWidth);
+
+			return () => {
+				window.removeEventListener("resize", updateShineWidth);
+			};
+		}
 	}, []);
 
 	const commonProps = {

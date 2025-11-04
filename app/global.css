@@ -27,7 +27,7 @@
 		--sh-keyword: #f47067;
 		--sh-string: #0fa295;
 		--button-active: #555;
-		--button-shine: white;
+		--button-shine: #aaa;
 	}
 	html {
 		color-scheme: dark;
@@ -175,8 +175,8 @@ table {
 .shinyButton::after {
 	content: "";
 	position: absolute;
-	top: calc(var(--y, 0) * 1px - 75px);
-	left: calc(var(--x, 0) * 1px - 75px);
+	top: calc(var(--y, 0) * 1px - var(--shine-width) / 2);
+	left: calc(var(--x, 0) * 1px - var(--shine-width) / 2);
 	width: var(--shine-width);
 	height: var(--shine-width);
 	background: radial-gradient(var(--button-shine), transparent 65%);
@@ -193,12 +193,15 @@ table {
 }
 
 .shinyButton.home-button::after {
-	background: radial-gradient(black, transparent 35%);
+	background: radial-gradient(black, transparent 65%);
 }
 
 @media (hover: hover) {
 	.shinyButton:hover::after {
 		opacity: 0.4;
+	}
+	.shinyButton:hover {
+		background-color: #6662;
 	}
 }
 
