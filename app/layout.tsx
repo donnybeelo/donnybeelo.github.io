@@ -17,9 +17,9 @@ export const metadata: Metadata = {
 	},
 	openGraph: {
 		title: "Daniel Elia",
-		description: "The official Daniel Elia portfolio.",
+		description: "My website filled with wonderful black-and-white whimsy!",
 		url: baseUrl,
-		siteName: "Daniel Elia",
+		siteName: "donnybeelo",
 		locale: "en_GB",
 		type: "website",
 	},
