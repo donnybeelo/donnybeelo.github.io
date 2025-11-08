@@ -24,7 +24,7 @@ This repository hosts a personal portfolio site built with Next.js. It includes 
 Use the following command to start the development server:
 
 ```bash
-bun run dev
+bun dev
 ```
 
 ### Building for Production
@@ -32,7 +32,7 @@ bun run dev
 To create a production build, run:
 
 ```bash
-bun run build
+bun build
 ```
 
 ## Project-Specific Conventions
