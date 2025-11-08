@@ -50,6 +50,7 @@ export const ShinyButton = ({
 
 	const buttonRef = useRef<HTMLElement | null>(null);
 	const [isTouched, setIsTouched] = useState(0);
+	let touchStartTime: number | null = null; // Track the start time of the touch
 
 	function updateButtonVars(clientX: number, clientY: number) {
 		if (!buttonRef.current) return;
@@ -77,6 +78,7 @@ export const ShinyButton = ({
 
 	function touchStartEvent(e: TouchEvent): void {
 		setIsTouched(2);
+		touchStartTime = Date.now(); // Record the start time of the touch
 		if (e.touches && e.touches.length > 0) {
 			const touch = e.touches[0];
 			updateButtonVars(touch.clientX, touch.clientY);
@@ -84,9 +86,14 @@ export const ShinyButton = ({
 	}
 
 	async function touchEndEvent(): Promise<void> {
-		await new Promise((resolve) => setTimeout(resolve, 50));
+		const touchDuration = touchStartTime ? Date.now() - touchStartTime : 0;
+		touchStartTime = null;
+
+		if (touchDuration < 200) {
+			await new Promise((resolve) => setTimeout(resolve, 200 - touchDuration));
+		}
 		setIsTouched(1);
-		await new Promise((resolve) => setTimeout(resolve, 100));
+		await new Promise((resolve) => setTimeout(resolve, 75));
 		setIsTouched(0);
 	}
 

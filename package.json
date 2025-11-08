@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "prod":  "next build --turbopack && trap 'rm -rf out' INT; npx serve@latest out",
     "build": "next build --turbopack",
-    "start": "next start",
+    "start": "npx serve@latest out",
     "lint": "biome check",
     "format": "biome format --write"
   },
