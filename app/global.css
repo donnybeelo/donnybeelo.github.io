@@ -17,7 +17,8 @@
 	--sh-entity: #e25a1c;
 	--button-active: #bbb;
 	--button-shine: #555;
-	--shine-width: 150px;
+	--shine-width: 100vw;
+	--shine-background: #6662;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -165,6 +166,8 @@ table {
 
 .title {
 	text-wrap: balance;
+	font-family: var(--font-momo-display);
+	letter-spacing: normal;
 }
 
 .shinyButton {
@@ -175,7 +178,7 @@ table {
 }
 
 .shinyButton.touch-active {
-	background-color: #7775;
+	background-color: var(--shine-background);
 	color: rgb(38 38 38);
 }
 
@@ -214,11 +217,25 @@ table {
 		opacity: 0.4;
 	}
 	.shinyButton:hover {
-		background-color: #6662;
+		background-color: var(--shine-background);
 	}
 }
 
 .shinyButton.touch-active::after,
 .shinyButton.touch-going::after {
 	opacity: 0.4;
+}
+
+.font-fira-mono {
+	font-family: var(--font-fira-mono);
+}
+.font-momo {
+	font-family: var(--font-momo);
+}
+.font-momo-display {
+	font-family: var(--font-momo-display);
+}
+
+h1 {
+	@apply mb-2;
 }

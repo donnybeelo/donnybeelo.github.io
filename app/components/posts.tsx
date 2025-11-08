@@ -50,7 +50,7 @@ function Posts({
 								<p className="text-neutral-900 dark:text-neutral-100 tracking-tight">
 									{post.metadata.title}
 								</p>
-								<p className="text-neutral-600 dark:text-neutral-400 overflow-ellipsis md:inline-flex">
+								<p className="text-neutral-600 dark:text-neutral-400 font-fira-mono overflow-ellipsis md:inline-flex">
 									{post.metadata.summary}
 								</p>
 							</div>

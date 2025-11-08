@@ -1,6 +1,7 @@
 import "./global.css";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import { Fira_Mono } from "next/font/google";
 import { Navbar } from "./components/nav";
 import Footer from "./components/footer";
 import { baseUrl } from "@/src/sitemap";
@@ -37,18 +38,23 @@ export const metadata: Metadata = {
 	},
 };
 
-const cx: (...classes: (string | undefined | null | false)[]) => string = (
-	...classes
-) => classes.filter(Boolean).join(" ");
-
-const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
+const momo = localFont({
+	src: "../public/MomoTrustSans.ttf",
+	variable: "--font-momo",
+	display: "swap",
 });
 
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
+const momoDisplay = localFont({
+	src: "../public/MomoTrustDisplay.ttf",
+	variable: "--font-momo-display",
+	display: "swap",
+});
+
+const firaMono = Fira_Mono({
 	subsets: ["latin"],
+	weight: ["400", "700"],
+	variable: "--font-fira-mono",
+	display: "swap",
 });
 
 export default function RootLayout({
@@ -59,13 +65,9 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			className={cx(
-				"text-black bg-white dark:text-white dark:bg-black",
-				geistSans.variable,
-				geistMono.variable
-			)}
+			className={`${momo.variable} ${firaMono.variable} ${momoDisplay.variable} text-black bg-white dark:text-white dark:bg-black`}
 		>
-			<body className="antialiased max-w-xl mx-4 mt-8 lg:mx-auto">
+			<body className="font-momo antialiased max-w-xl mx-4 mt-8 lg:mx-auto">
 				<main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
 					<Navbar />
 					<AnimationLayer>{children}</AnimationLayer>

@@ -59,14 +59,19 @@ export const ShinyButton = ({
 		buttonRef.current.style.setProperty("--y", String(clientY - y));
 	}
 
+	function getShineWidth(): number {
+		const button = buttonRef.current;
+		if (!button) return 1;
+		const height = button.offsetHeight;
+		const width = button.offsetWidth;
+		return Math.max(width, height) * 1.5;
+	}
+
 	function mouseMoveEvent(e: MouseEvent): void {
 		updateButtonVars(e.clientX, e.clientY);
 		const button = buttonRef.current;
 		if (!button) return;
-		const height = button.offsetHeight;
-		const width = button.offsetWidth;
-		const aspectRatio = width / height;
-		button.style.setProperty("--shine-width", `${aspectRatio * 75}px`);
+		button.style.setProperty("--shine-width", `${getShineWidth()}px`);
 	}
 
 	function touchMoveEvent(e: TouchEvent): void {
@@ -100,19 +105,13 @@ export const ShinyButton = ({
 	async function mouseDownEvent(): Promise<void> {
 		const button = buttonRef.current;
 		if (!button) return;
-		const height = button.offsetHeight;
-		const width = button.offsetWidth;
-		const aspectRatio = width / height;
-		button.style.setProperty("--shine-width", `${(aspectRatio * 75) / 2}px`);
+		button.style.setProperty("--shine-width", `${getShineWidth() / 1.75}px`);
 	}
 
 	async function mouseUpEvent(): Promise<void> {
 		const button = buttonRef.current;
 		if (!button) return;
-		const height = button.offsetHeight;
-		const width = button.offsetWidth;
-		const aspectRatio = width / height;
-		button.style.setProperty("--shine-width", `${aspectRatio * 75}px`);
+		button.style.setProperty("--shine-width", `${getShineWidth()}px`);
 	}
 
 	useEffect(() => {
@@ -148,10 +147,7 @@ export const ShinyButton = ({
 		const button = buttonRef.current;
 		if (button) {
 			const updateShineWidth = () => {
-				const height = button.offsetHeight;
-				const width = button.offsetWidth;
-				const aspectRatio = width / height;
-				button.style.setProperty("--shine-width", `${aspectRatio * 75}px`);
+				button.style.setProperty("--shine-width", `${getShineWidth()}px`);
 			};
 
 			// Initial update
