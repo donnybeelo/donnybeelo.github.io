@@ -3,10 +3,11 @@
 ## Run development server
 
 ```bash
-npm run dev
+bun run dev
 ```
+
 ## Build for production
 
 ```bash
-npm run build
+bun run build
 ```
