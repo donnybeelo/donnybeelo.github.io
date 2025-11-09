@@ -19,33 +19,33 @@ const HomeIcon = () => (
 export function Navbar() {
 	const pathname = usePathname();
 	return (
-		<aside className="-ml-[8px] mb-8 tracking-tight">
-			<div className="lg:sticky lg:top-20">
-				<nav
-					className="flex flex-row items-start relative px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
-					id="nav"
-				>
-					<div className="flex flex-row items-center space-x-0 pr-10">
-						<ShinyButton
-							path="/"
-							icon={<HomeIcon />}
-							className="home-button"
-							ariaLabel="home"
-						/>
-						{Object.entries(navItems).map(([path, { name }]) => {
-							return <ShinyButton key={path} path={path} name={name} />;
-						})}
-					</div>
-				</nav>
-
-				{/* Home button active indicator */}
-				{pathname == "/" && (
-					<div
-						className="h-0.5 w-11 ml-2 rounded-md"
-						style={{ backgroundColor: "var(--button-active)" }}
+		<div className="navBar">
+			<nav
+				className="flex flex-row items-start relative px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
+				id="nav"
+			>
+				<div className="flex flex-row items-center space-x-0 pr-10">
+					<ShinyButton
+						path="/"
+						icon={<HomeIcon />}
+						className="home-button !mr-0"
+						ariaLabel="home"
 					/>
-				)}
-			</div>
-		</aside>
+
+					{Object.entries(navItems).map(([path, { name }]) => {
+						return <ShinyButton key={path} path={path} name={name} />;
+					})}
+				</div>
+			</nav>
+
+			{/* Home button active indicator */}
+			<div
+				className="h-1 w-11 ml-2 rounded-md -mb-1 -translate-y-1"
+				style={{
+					backgroundColor:
+						pathname == "/" ? "var(--button-active)" : "transparent",
+				}}
+			/>
+		</div>
 	);
 }

@@ -15,10 +15,11 @@
 	--sh-jsxliterals: #6266d1;
 	--sh-property: #e25a1c;
 	--sh-entity: #e25a1c;
-	--button-active: #bbb;
-	--button-shine: #555;
+	--button-active: #aaa;
+	--button-shine: #333;
 	--shine-width: 100vw;
-	--shine-background: #6662;
+	--shine-background: #aaa2;
+	--nav-bar-background: #ccc9;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,6 +30,8 @@
 		--sh-string: #0fa295;
 		--button-active: #555;
 		--button-shine: #aaa;
+		--nav-bar-background: #151515cc;
+		--shine-background: #222;
 	}
 	html {
 		color-scheme: dark;
@@ -175,16 +178,16 @@ table {
 	margin-right: 0.5rem;
 	overflow: hidden;
 	border-radius: 0.375rem;
+	box-shadow: 0 5px 20px hsl(0deg 0% 0% / 0.2);
 }
 
 .shinyButton.touch-active {
 	background-color: var(--shine-background);
-	color: rgb(38 38 38);
 }
 
 @media (prefers-color-scheme: dark) {
-	.shinyButton.touch-active {
-		color: rgb(229 229 229);
+	.shinyButton {
+		box-shadow: 0 10px 30px hsl(0deg 0% 40% / 0.2);
 	}
 }
 
@@ -197,7 +200,12 @@ table {
 	height: var(--shine-width);
 	background: radial-gradient(var(--button-shine), transparent 65%);
 	opacity: 0;
-	transition: opacity 0.2s, width 50ms, height 50ms, top 50ms, left 50ms;
+	transition:
+		opacity 0.2s,
+		width 50ms,
+		height 50ms,
+		top 50ms,
+		left 50ms;
 }
 
 .shinyButton.home-button {
@@ -209,7 +217,7 @@ table {
 }
 
 .shinyButton.home-button::after {
-	background: radial-gradient(black, transparent 65%);
+	background: radial-gradient(black, #5555 50%);
 }
 
 @media (hover: hover) {
@@ -235,7 +243,25 @@ table {
 .font-momo-display {
 	font-family: var(--font-momo-display);
 }
-
+code {
+	font-family: var(--font-fira-mono);
+}
 h1 {
 	@apply mb-2;
+}
+
+.navBar {
+	@apply lg:sticky lg:top-10 bg-[var(--nav-bar-background)] px-2 rounded-lg -ml-[8px] mb-12 tracking-tight z-20 backdrop-blur-md;
+	box-shadow:
+		0 1px 1px hsl(0deg 0% 0% / 0.075),
+		0 2px 2px hsl(0deg 0% 0% / 0.075),
+		0 4px 4px hsl(0deg 0% 0% / 0.075),
+		0 8px 8px hsl(0deg 0% 0% / 0.075),
+		0 16px 16px hsl(0deg 0% 0% / 0.075);
+	-webkit-box-shadow:
+		0 1px 1px hsl(0deg 0% 0% / 0.075),
+		0 2px 2px hsl(0deg 0% 0% / 0.075),
+		0 4px 4px hsl(0deg 0% 0% / 0.075),
+		0 8px 8px hsl(0deg 0% 0% / 0.075),
+		0 16px 16px hsl(0deg 0% 0% / 0.075);
 }
