@@ -28,7 +28,7 @@ export function Navbar() {
 					<ShinyButton
 						path="/"
 						icon={<HomeIcon />}
-						className="home-button !mr-0"
+						className="home-button !mr-5"
 						ariaLabel="home"
 					/>
 

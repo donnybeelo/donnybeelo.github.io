@@ -213,13 +213,14 @@ table {
 .shinyButton.home-button {
 	mask: url("/favicon.png");
 	mask-size: 40px 40px;
-	mask-position: 8px 4px;
 	mask-repeat: no-repeat;
 	background: var(--button-active);
+	padding: 0;
+	margin: 4px 8px;
 }
 
 .shinyButton.home-button::after {
-	background: radial-gradient(black, #5555 50%);
+	background: radial-gradient(#5555, black 20%);
 }
 
 @media (hover: hover) {
@@ -228,6 +229,9 @@ table {
 	}
 	.shinyButton:hover {
 		background-color: var(--shine-background);
+	}
+	.shinyButton.home-button:hover {
+		filter: brightness(0.9);
 	}
 }
 

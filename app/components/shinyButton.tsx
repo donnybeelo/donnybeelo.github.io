@@ -64,7 +64,8 @@ export const ShinyButton = ({
 		if (!button) return 1;
 		const height = button.offsetHeight;
 		const width = button.offsetWidth;
-		return Math.max(width, height) * 1.5;
+		const multiplier = button.classList.contains("home-button") ? 5.0 : 1.5;
+		return Math.max(width, height) * multiplier;
 	}
 
 	function mouseMoveEvent(e: MouseEvent): void {
