@@ -74,7 +74,7 @@ function Posts({
 									{post.metadata.summary}
 								</p>
 							</div>
-							<div className="flex-shrink-0 ml-2 -mr-1 text-neutral-400">
+							<div className="flex-shrink-0 ml-2 mt-1 text-neutral-400">
 								<RightArrowIcon />
 							</div>
 						</div>
