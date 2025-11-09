@@ -3,6 +3,7 @@ import { CustomMDX } from "app/components/mdx";
 import { formatDate, getBlogPosts } from "@/posts/utils";
 import { baseUrl } from "@/src/sitemap";
 import { BackButton } from "app/components/backButton";
+import { Metadata } from "next";
 
 export async function generateStaticParams() {
 	let posts = getBlogPosts();
@@ -12,7 +13,9 @@ export async function generateStaticParams() {
 	}));
 }
 
-export async function generateMetadata({ params }: PageProps<"/blog/[slug]">) {
+export async function generateMetadata({
+	params,
+}: PageProps<"/blog/[slug]">): Promise<Metadata | undefined> {
 	let { slug } = await params;
 
 	let post = getBlogPosts().find((post) => post.slug === slug);

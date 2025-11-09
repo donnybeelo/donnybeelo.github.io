@@ -38,7 +38,7 @@ function CustomLink(props: React.ComponentProps<"a">) {
 	return (
 		<ShinyButton
 			path={props.href}
-			className="!p-0 !m-0 !px-0.5 !-mx-0.5 !rounded-xs inline-block align-bottom"
+			className="!p-0 !m-0 !px-0.5 !rounded-xs inline-block align-bottom"
 		>
 			{props.children}
 		</ShinyButton>
@@ -87,7 +87,7 @@ function createHeading(level: number) {
 					className: "anchor",
 				}),
 			],
-			children
+			children,
 		);
 	};
 

@@ -164,12 +164,12 @@ export const ShinyButton = ({
 
 	const commonProps = {
 		className:
-			"transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer " +
+			"transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 -z-0 " +
 			(isTouched === 2
 				? "touch-active "
 				: isTouched === 1
-				? "touch-going "
-				: "") +
+					? "touch-going "
+					: "") +
 			className,
 		style: {
 			backgroundColor:

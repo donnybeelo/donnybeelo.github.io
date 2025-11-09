@@ -1,6 +1,7 @@
 import { BlogPosts } from "app/components/posts";
+import type { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: "Blog",
 	description: "A collection of my thoughts.",
 };

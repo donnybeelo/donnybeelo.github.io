@@ -4,6 +4,7 @@ import { formatDate, getProjectPosts } from "@/posts/utils";
 import { baseUrl } from "@/src/sitemap";
 import { ShinyButton } from "app/components/shinyButton";
 import { BackButton } from "app/components/backButton";
+import { Metadata } from "next";
 
 export async function generateStaticParams() {
 	let posts = getProjectPosts();
@@ -15,7 +16,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
 	params,
-}: PageProps<"/projects/[slug]">) {
+}: PageProps<"/projects/[slug]">): Promise<Metadata | undefined> {
 	let { slug } = await params;
 
 	let post = getProjectPosts().find((post) => post.slug === slug);
@@ -96,11 +97,7 @@ export default async function Blog({ params }: PageProps<"/projects/[slug]">) {
 				<h1 className="title font-semibold text-2xl tracking-tighter">
 					{post.metadata.title}
 				</h1>
-				<ShinyButton
-					path={post.metadata.repoUrl}
-					name="link to project"
-					external
-				/>
+				<ShinyButton path={post.metadata.repoUrl} name="github repo" external />
 			</div>
 			<div className="flex justify-between items-center mt-2 mb-8 text-sm">
 				<p className="text-sm text-neutral-600 dark:text-neutral-400">

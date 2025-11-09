@@ -2,6 +2,26 @@ import Link from "next/link";
 import { formatDate, getBlogPosts, getProjectPosts } from "@/posts/utils";
 import { ShinyButton } from "./shinyButton";
 
+function RightArrowIcon() {
+	return (
+		<svg
+			width="16"
+			height="16"
+			viewBox="0 0 12 12"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<path
+				d="M4.5 2L7.5 6L4.5 10"
+				stroke="currentColor"
+				strokeWidth="1.5"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+			/>
+		</svg>
+	);
+}
+
 export function BlogPosts() {
 	let allBlogs = getBlogPosts();
 
@@ -46,13 +66,16 @@ function Posts({
 								{formatDate(post.metadata.publishedAt, false)}
 							</p>
 							<div className="inline-block w-[2px] !mx-2 bg-neutral-300 dark:bg-neutral-700 flex-shrink-0" />
-							<div className="flex flex-col">
+							<div className="flex flex-col flex-1">
 								<p className="text-neutral-900 dark:text-neutral-100 tracking-tight">
 									{post.metadata.title}
 								</p>
 								<p className="text-neutral-600 dark:text-neutral-400 font-fira-mono overflow-ellipsis md:inline-flex">
 									{post.metadata.summary}
 								</p>
+							</div>
+							<div className="flex-shrink-0 ml-2 -mr-1 text-neutral-400">
+								<RightArrowIcon />
 							</div>
 						</div>
 					</ShinyButton>
