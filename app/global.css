@@ -220,7 +220,7 @@ table {
 }
 
 .shinyButton.home-button::after {
-	background: radial-gradient(#5555, black 20%);
+	background: radial-gradient(transparent, black 17.5%);
 }
 
 @media (hover: hover) {
@@ -229,9 +229,6 @@ table {
 	}
 	.shinyButton:hover {
 		background-color: var(--shine-background);
-	}
-	.shinyButton.home-button:hover {
-		filter: brightness(0.9);
 	}
 }
 

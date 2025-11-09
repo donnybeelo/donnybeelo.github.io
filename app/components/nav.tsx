@@ -40,10 +40,12 @@ export function Navbar() {
 
 			{/* Home button active indicator */}
 			<div
-				className="h-1 w-11 ml-2 rounded-md -mb-1 -translate-y-1"
+				className="h-1 w-11 ml-2 rounded-md -mb-1 -translate-y-1.5"
 				style={{
-					backgroundColor:
-						pathname == "/" ? "var(--button-active)" : "transparent",
+					backgroundImage:
+						pathname == "/"
+							? "linear-gradient(var(--button-active), hsl(from var(--button-active) h s calc(l / 2.5))"
+							: "none",
 				}}
 			/>
 		</div>
