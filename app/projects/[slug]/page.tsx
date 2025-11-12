@@ -1,11 +1,8 @@
 import { notFound } from "next/navigation";
-import { CustomMDX } from "app/components/mdx";
-import { formatDate, getProjectPosts } from "@/posts/utils";
+import { getProjectPosts } from "@/posts/utils";
 import { baseUrl } from "@/src/sitemap";
-import { ShinyButton } from "app/components/shinyButton";
-import { BackButton } from "app/components/backButton";
-import { ImageContainer } from "app/components/imageContainer";
 import { Metadata } from "next";
+import PostDetail from "@/app/components/postDetail";
 
 export async function generateStaticParams() {
 	let posts = getProjectPosts();
@@ -43,7 +40,7 @@ export async function generateMetadata({
 			description,
 			type: "article",
 			publishedTime,
-			url: `${baseUrl}/blog/${post.slug}`,
+			url: `${baseUrl}/projects/${post.slug}`,
 			images: [
 				{
 					url: ogImage,
@@ -69,51 +66,5 @@ export default async function Project({
 		notFound();
 	}
 
-	return (
-		<section>
-			<script
-				type="application/ld+json"
-				suppressHydrationWarning
-				dangerouslySetInnerHTML={{
-					__html: JSON.stringify({
-						"@context": "https://schema.org",
-						"@type": "BlogPosting",
-						headline: post.metadata.title,
-						datePublished: post.metadata.publishedAt,
-						dateModified: post.metadata.publishedAt,
-						description: post.metadata.summary,
-						image: post.metadata.image
-							? `${baseUrl}${post.metadata.image}`
-							: `/og?title=${encodeURIComponent(post.metadata.title)}`,
-						url: `${baseUrl}/blog/${post.slug}`,
-						author: {
-							"@type": "Person",
-							name: "My Portfolio",
-						},
-					}),
-				}}
-			/>
-
-			<BackButton />
-
-			<ImageContainer
-				src={post.metadata.image}
-				fill={post.metadata.fillImage == "true"}
-			/>
-			<div className="flex justify-between items-center">
-				<h1 className="title font-semibold text-2xl tracking-tighter">
-					{post.metadata.title}
-				</h1>
-				<ShinyButton path={post.metadata.repoUrl} name="github repo" external />
-			</div>
-			<div className="flex justify-between items-center mt-2 mb-8 text-sm">
-				<p className="text-sm text-neutral-600 dark:text-neutral-400">
-					{formatDate(post.metadata.publishedAt)}
-				</p>
-			</div>
-			<article className="prose">
-				<CustomMDX source={post.content} />
-			</article>
-		</section>
-	);
+	return <PostDetail post={post} type="project" />;
 }
