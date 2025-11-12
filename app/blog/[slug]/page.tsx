@@ -4,6 +4,7 @@ import { formatDate, getBlogPosts } from "@/posts/utils";
 import { baseUrl } from "@/src/sitemap";
 import { BackButton } from "app/components/backButton";
 import { Metadata } from "next";
+import { ImageContainer } from "@/app/components/imageContainer";
 
 export async function generateStaticParams() {
 	let posts = getBlogPosts();
@@ -28,6 +29,7 @@ export async function generateMetadata({
 		publishedAt: publishedTime,
 		summary: description,
 		image,
+		fillImage,
 	} = post.metadata;
 	let ogImage = image
 		? image
@@ -92,6 +94,10 @@ export default async function Blog({ params }: PageProps<"/blog/[slug]">) {
 
 			<BackButton />
 
+			<ImageContainer
+				src={post.metadata.image}
+				fill={post.metadata.fillImage == "true"}
+			/>
 			<h1 className="title font-semibold text-2xl tracking-tighter">
 				{post.metadata.title}
 			</h1>

@@ -4,6 +4,7 @@ import { formatDate, getProjectPosts } from "@/posts/utils";
 import { baseUrl } from "@/src/sitemap";
 import { ShinyButton } from "app/components/shinyButton";
 import { BackButton } from "app/components/backButton";
+import { ImageContainer } from "app/components/imageContainer";
 import { Metadata } from "next";
 
 export async function generateStaticParams() {
@@ -58,7 +59,9 @@ export async function generateMetadata({
 	};
 }
 
-export default async function Blog({ params }: PageProps<"/projects/[slug]">) {
+export default async function Project({
+	params,
+}: PageProps<"/projects/[slug]">) {
 	const { slug } = await params;
 	let post = getProjectPosts().find((post) => post.slug === slug);
 
@@ -93,6 +96,10 @@ export default async function Blog({ params }: PageProps<"/projects/[slug]">) {
 
 			<BackButton />
 
+			<ImageContainer
+				src={post.metadata.image}
+				fill={post.metadata.fillImage == "true"}
+			/>
 			<div className="flex justify-between items-center">
 				<h1 className="title font-semibold text-2xl tracking-tighter">
 					{post.metadata.title}

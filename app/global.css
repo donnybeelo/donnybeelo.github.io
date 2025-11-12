@@ -254,7 +254,7 @@ h1 {
 }
 
 .navBar {
-	@apply lg:sticky lg:top-10 bg-[var(--nav-bar-background)] px-2 rounded-lg -ml-[8px] mb-12 tracking-tight z-20 backdrop-blur-md;
+	@apply lg:sticky lg:top-10 bg-(--nav-bar-background) px-2 rounded-lg -ml-[8px] mb-12 tracking-tight z-20 backdrop-blur-md;
 	box-shadow:
 		0 1px 1px hsl(0deg 0% 0% / 0.075),
 		0 2px 2px hsl(0deg 0% 0% / 0.075),

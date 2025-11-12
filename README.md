@@ -17,5 +17,5 @@ bun prod
 ## Build for production
 
 ```bash
-bun build
+bun run build
 ```

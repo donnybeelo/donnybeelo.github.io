@@ -32,7 +32,7 @@ bun dev
 To create a production build, run:
 
 ```bash
-bun build
+bun run build
 ```
 
 ## Project-Specific Conventions
