@@ -21,7 +21,7 @@ export function Navbar() {
 	return (
 		<div className="navBar">
 			<nav
-				className="flex flex-row items-start relative px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
+				className="flex flex-row items-start relative px-0 pb-0 overflow-auto"
 				id="nav"
 			>
 				<div className="flex flex-row items-center space-x-0 pr-10">

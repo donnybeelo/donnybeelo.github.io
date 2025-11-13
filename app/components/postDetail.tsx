@@ -4,6 +4,7 @@ import { baseUrl } from "@/src/sitemap";
 import { BackButton } from "app/components/backButton";
 import { ImageContainer } from "@/app/components/imageContainer";
 import { ShinyButton } from "app/components/shinyButton";
+import Typer from "./typer";
 
 type Post = {
 	metadata: {
@@ -62,24 +63,18 @@ export default function PostDetail({
 				fill={post.metadata.fillImage === "true"}
 			/>
 
-			{type === "project" ? (
-				<div className="flex justify-between items-center">
-					<h1 className="title font-semibold text-2xl tracking-tighter">
-						{post.metadata.title}
-					</h1>
-					{post.metadata.repoUrl && (
-						<ShinyButton
-							path={post.metadata.repoUrl}
-							name="github repo"
-							external
-						/>
-					)}
-				</div>
-			) : (
-				<h1 className="title font-semibold text-2xl tracking-tighter">
+			<div className="flex justify-between items-center">
+				<Typer className="title font-semibold text-2xl tracking-tighter">
 					{post.metadata.title}
-				</h1>
-			)}
+				</Typer>
+				{post.metadata.repoUrl && (
+					<ShinyButton
+						path={post.metadata.repoUrl}
+						name="github repo"
+						external
+					/>
+				)}
+			</div>
 
 			<div className="flex justify-between items-center mt-2 mb-8 text-sm">
 				<p className="text-sm text-neutral-600 dark:text-neutral-400">
