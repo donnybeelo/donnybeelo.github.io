@@ -1,7 +1,7 @@
 // import Link from "next/link";
 import Image, { ImageProps } from "next/image";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
-import { highlight } from "sugar-high";
+import hljs from "highlight.js";
 import React from "react";
 import { ShinyButton } from "./shinyButton";
 
@@ -53,7 +53,8 @@ function Code({ children, ...props }: React.ComponentProps<"code">) {
 	if (typeof children !== "string") {
 		return <code {...props}>{children}</code>;
 	}
-	let codeHTML = highlight(children);
+	const codeHTML = hljs.highlightAuto(children).value;
+
 	return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
 }
 

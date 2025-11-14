@@ -23,6 +23,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
+	@import "highlight.js/styles/github-dark.css";
 	:root {
 		--sh-class: #4c97f8;
 		--sh-identifier: white;
@@ -37,6 +38,9 @@
 	html {
 		color-scheme: dark;
 	}
+}
+@media (prefers-color-scheme: light) {
+	@import "highlight.js/styles/github.css";
 }
 
 html {

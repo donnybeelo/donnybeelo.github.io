@@ -4,18 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "prod":  "next build --turbopack && trap 'rm -rf out' INT; npx serve@latest out",
+    "prod": "next build --turbopack && trap 'rm -rf out' INT; npx serve@latest out",
     "build": "next build --turbopack",
     "start": "npx serve@latest out",
     "lint": "biome check",
     "format": "biome format --write"
   },
   "dependencies": {
+    "highlight.js": "^11.11.1",
     "next": "15.5.4",
     "next-mdx-remote": "^5.0.0",
     "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "sugar-high": "^0.9.3"
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
