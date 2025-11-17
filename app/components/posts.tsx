@@ -58,7 +58,7 @@ function Posts({
 				.map((post) => (
 					<ShinyButton
 						key={post.slug}
-						className="flex flex-col space-y-1 mb-4 shinyButton md:w-fit w-full"
+						className="flex flex-col space-y-1 !mb-4 shinyButton md:w-fit w-full"
 						path={`/${url}/${post.slug}`}
 					>
 						<div className="w-full flex flex-row space-x-0 md:space-x-2">
