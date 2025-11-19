@@ -4,6 +4,10 @@ import { Istok_Web } from "next/font/google";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { usePrefersReducedMotion } from "@/app/animationLayer";
+
+let lastTabDirection: "forward" | "backward" | "click" = "click";
+const prefersReducedMotion = usePrefersReducedMotion();
 
 function ArrowIcon() {
 	return (
@@ -55,6 +59,14 @@ export const ShinyButton = ({
 	function updateButtonVars(clientX: number, clientY: number) {
 		if (!buttonRef.current) return;
 		const { x, y } = buttonRef.current.getBoundingClientRect();
+		if (prefersReducedMotion) {
+			const rect = buttonRef.current.getBoundingClientRect();
+			const centerX = rect.width / 2;
+			const centerY = rect.height / 2;
+			buttonRef.current.style.setProperty("--x", String(centerX));
+			buttonRef.current.style.setProperty("--y", String(centerY));
+			return;
+		}
 		buttonRef.current.style.setProperty("--x", String(clientX - x));
 		buttonRef.current.style.setProperty("--y", String(clientY - y));
 	}
@@ -69,6 +81,7 @@ export const ShinyButton = ({
 	}
 
 	function mouseMoveEvent(e: MouseEvent): void {
+		lastTabDirection = "click";
 		updateButtonVars(e.clientX, e.clientY);
 		const button = buttonRef.current;
 		if (!button) return;
@@ -76,6 +89,7 @@ export const ShinyButton = ({
 	}
 
 	function touchMoveEvent(e: TouchEvent): void {
+		lastTabDirection = "click";
 		if (e.touches && e.touches.length > 0) {
 			const touch = e.touches[0];
 			updateButtonVars(touch.clientX, touch.clientY);
@@ -115,6 +129,44 @@ export const ShinyButton = ({
 		button.style.setProperty("--shine-width", `${getShineWidth()}px`);
 	}
 
+	async function handleFocus(): Promise<void> {
+		const button = buttonRef.current;
+		if (!button || lastTabDirection === "click") return;
+		const rect = button.getBoundingClientRect();
+		const centerX = rect.width / 2;
+		const centerY = rect.height / 2;
+
+		if (document.activeElement === button) {
+			button.style.setProperty("--x", String(centerX));
+			button.style.setProperty("--y", String(centerY));
+			button.style.setProperty("--shine-width", `${getShineWidth()}px`);
+		}
+	}
+
+	async function handleBlur(): Promise<void> {
+		const button = buttonRef.current;
+		if (!button) return;
+		if (lastTabDirection != "click") {
+			const rect = button.getBoundingClientRect();
+			const centerX = rect.width / 2;
+			const centerY = rect.height / 2;
+			button.style.setProperty("--y", String(centerY));
+
+			const offset = rect.width; // 25% of width to left/right
+			if (lastTabDirection === "forward") {
+				button.style.setProperty("--x", String(centerX + offset));
+			} else {
+				button.style.setProperty("--x", String(centerX - offset));
+			}
+		}
+	}
+
+	async function handleKeyDown(e: KeyboardEvent): Promise<void> {
+		if (e.key === "Tab") {
+			lastTabDirection = e.shiftKey ? "backward" : "forward";
+		}
+	}
+
 	useEffect(() => {
 		const button = buttonRef.current;
 		if (button) {
@@ -129,9 +181,11 @@ export const ShinyButton = ({
 			button.addEventListener("touchcancel", touchEndEvent);
 			button.addEventListener("mousedown", mouseDownEvent);
 			button.addEventListener("mouseup", mouseUpEvent);
-		}
-		return () => {
-			if (button) {
+			button.addEventListener("focus", handleFocus);
+			button.addEventListener("blur", handleBlur);
+			window.addEventListener("keydown", handleKeyDown);
+
+			return () => {
 				button.removeEventListener("mouseenter", mouseMoveEvent);
 				button.removeEventListener("mousemove", mouseMoveEvent);
 				button.removeEventListener("touchmove", touchMoveEvent);
@@ -140,8 +194,11 @@ export const ShinyButton = ({
 				button.removeEventListener("touchcancel", touchEndEvent);
 				button.removeEventListener("mousedown", mouseDownEvent);
 				button.removeEventListener("mouseup", mouseUpEvent);
-			}
-		};
+				button.removeEventListener("focus", handleFocus);
+				button.removeEventListener("blur", handleBlur);
+				window.removeEventListener("keydown", handleKeyDown);
+			};
+		}
 	}, []);
 
 	useEffect(() => {

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 	metadataBase: new URL(baseUrl),
 	title: {
 		default: "Daniel Elia",
-		template: "%s | Daniel Elia",
+		template: "%s - Daniel Elia",
 	},
 	description: "This is my portfolio.",
 	icons: {

@@ -48,7 +48,9 @@ html {
 }
 
 .animation-layer {
-	animation: fade-in 0.2s ease-in-out;
+	@media (prefers-reduced-motion: no-preference) {
+		animation: fade-in 0.2s ease-in-out;
+	}
 }
 
 @keyframes fade-in {
@@ -176,6 +178,7 @@ table {
 	text-wrap: balance;
 	font-family: var(--font-momo-display);
 	letter-spacing: normal;
+	font-size: 2rem;
 }
 
 .shinyButton {
@@ -187,7 +190,8 @@ table {
 	box-shadow: 0 5px 20px hsl(0deg 0% 0% / 0.2);
 }
 
-.shinyButton.touch-active {
+.shinyButton.touch-active,
+.shinyButton:focus-visible {
 	background-color: var(--shine-background);
 }
 
@@ -206,21 +210,26 @@ table {
 	height: var(--shine-width);
 	background: radial-gradient(var(--button-shine), transparent 65%);
 	opacity: 0;
-	transition:
-		opacity 0.2s,
-		width 50ms,
-		height 50ms,
-		top 50ms,
-		left 50ms;
+}
+
+.shinyButton::after {
+	@media (prefers-reduced-motion: no-preference) {
+		transition:
+			opacity 0.2s,
+			width 50ms,
+			height 50ms,
+			top 50ms,
+			left 50ms;
+	}
 }
 
 .shinyButton.home-button {
 	mask: url("/favicon.png");
-	mask-size: 40px 40px;
+	mask-size: contain;
 	mask-repeat: no-repeat;
-	background: var(--button-active);
 	padding: 0;
 	margin: 4px 8px;
+	background: none !important;
 }
 
 .shinyButton.home-button::after {
@@ -237,7 +246,8 @@ table {
 }
 
 .shinyButton.touch-active::after,
-.shinyButton.touch-going::after {
+.shinyButton.touch-going::after,
+.shinyButton:focus-visible::after {
 	opacity: 0.4;
 }
 

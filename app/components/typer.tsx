@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePrefersReducedMotion } from "@/app/animationLayer";
 
 const DEFAULT_CURSOR = "|";
 
@@ -15,19 +16,30 @@ export default function Typer({
 	cursorChar?: string;
 	speed?: number;
 }) {
+	const prefersReducedMotion = usePrefersReducedMotion();
+
 	const [output, setOutput] = useState("");
 	const outputRef = useRef("");
 	const [cursor, setCursor] = useState(cursorChar);
 	const [startBlinking, setStartBlinking] = useState(false);
 
-	// ms between characters
+	// If speed is 0, derive from length
 	if (speed === 0) {
 		speed = children.length / 1.5;
 	}
 	const msPerChar = (1 / speed) * 1000;
 
-	// Typing effect
+	// Typing effect (disabled when reduced motion is preferred)
 	useEffect(() => {
+		// If user prefers reduced motion, just show the full text immediately.
+		if (prefersReducedMotion) {
+			outputRef.current = children;
+			setOutput(children);
+			setCursor("");
+			setStartBlinking(false);
+			return;
+		}
+
 		outputRef.current = "";
 		setOutput("");
 		setStartBlinking(false);
@@ -46,49 +58,43 @@ export default function Typer({
 		}, msPerChar);
 
 		return () => clearInterval(interval);
-		// include msPerChar so changing speed resets the effect
-	}, [children, cursorChar, msPerChar]);
+	}, [children, cursorChar, msPerChar, prefersReducedMotion]);
 
-	// Cursor blinking after typing completes
+	// Cursor blinking after typing completes (disabled when reduced motion)
 	useEffect(() => {
-		if (!startBlinking) return;
+		if (!startBlinking || prefersReducedMotion) return;
 		const cursorInterval = setInterval(() => {
 			setCursor((prev) => (prev === cursorChar ? " " : cursorChar));
 		}, 500);
 		return () => clearInterval(cursorInterval);
-	}, [startBlinking, cursorChar]);
+	}, [startBlinking, cursorChar, prefersReducedMotion]);
+
+	// For assistive tech, we expose ONLY the final text, no animation
+	const finalAccessibleText = `${children}${cursorChar}`;
 
 	return (
-		<div
-			// wrapper must be relative so the visible overlay can be absolutely positioned.
-			style={{ position: "relative", display: "block" }}
-		>
+		<div style={{ position: "relative", display: "block" }}>
 			{/* Hidden (space-reserving) final text */}
+			<p
+				className={className}
+				style={{
+					visibility: "hidden", // hides visually but still takes up layout space
+					margin: 0,
+					whiteSpace: "pre-wrap",
+				}}
+			>
+				{finalAccessibleText}
+			</p>
+
+			{/* Visible typing overlay (purely visual, hidden from SRs) */}
 			<p
 				className={className}
 				aria-hidden="true"
 				style={{
-					visibility: "hidden", // hides visually but still takes up layout space
-					margin: 0,
-					whiteSpace: "pre-wrap", // preserve whitespace while allowing wrapping
-				}}
-			>
-				{children}
-				{cursorChar}
-			</p>
-
-			{/* Visible typing overlay */}
-			<p
-				className={className}
-				aria-live="polite"
-				aria-atomic="true"
-				style={{
 					position: "absolute",
-					inset: 0, // top:0; right:0; bottom:0; left:0;
+					inset: 0,
 					margin: 0,
 					whiteSpace: "pre-wrap",
-					// ensure the visible layer sits on top of the hidden one
-					pointerEvents: "none",
 				}}
 			>
 				{output}

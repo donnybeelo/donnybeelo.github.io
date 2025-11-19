@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ShinyButton } from "./shinyButton";
+import { usePrefersReducedMotion } from "../animationLayer";
 
 export function ImageContainer({
 	src,
@@ -13,6 +14,7 @@ export function ImageContainer({
 	const overlayRef = useRef<HTMLDivElement>(null);
 	const [isOpen, setIsOpen] = useState(false);
 	const hasPushedRef = useRef(false);
+	const prefersReducedMotion = usePrefersReducedMotion();
 
 	const closeModal = () => {
 		setIsOpen(false);
@@ -63,7 +65,7 @@ export function ImageContainer({
 			</ShinyButton>
 			<div
 				ref={overlayRef}
-				className={`fixed inset-0  flex items-center justify-center z-50 transition-opacity duration-300 ease-in-out ${isOpen ? "opacity-100" : "opacity-0"} ${!isOpen ? "pointer-events-none" : ""}`}
+				className={`fixed inset-0  flex items-center justify-center z-50 ${!prefersReducedMotion ? "transition-opacity duration-300 ease-in-out" : ""} ${isOpen ? "opacity-100" : "opacity-0"} ${!isOpen ? "pointer-events-none" : ""}`}
 				onClick={closeModal}
 				tabIndex={-1}
 				onKeyDown={(e) => {
@@ -75,7 +77,7 @@ export function ImageContainer({
 			>
 				<img
 					src={src}
-					className={`max-w-full max-h-full object-contain transition-transform duration-300 ease-in-out ${isOpen ? "scale-100" : "scale-95"}`}
+					className={`max-w-full max-h-full object-contain ${!prefersReducedMotion ? "transition-transform duration-300 ease-in-out" : ""} ${!prefersReducedMotion && isOpen ? "scale-100" : "scale-95"}`}
 					onClick={(e) => e.stopPropagation()}
 				/>
 			</div>
