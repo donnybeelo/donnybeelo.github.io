@@ -13,7 +13,7 @@ const navItems = {
 };
 
 const HomeIcon = () => (
-	<img src="/favicon.png" alt="home" className="w-10 h-10" />
+	<img src="/icons/favicon.png" alt="home" className="w-10 h-10" />
 );
 
 export function Navbar() {

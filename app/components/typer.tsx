@@ -60,15 +60,6 @@ export default function Typer({
 		return () => clearInterval(interval);
 	}, [children, cursorChar, msPerChar, prefersReducedMotion]);
 
-	// Cursor blinking after typing completes (disabled when reduced motion)
-	useEffect(() => {
-		if (!startBlinking || prefersReducedMotion) return;
-		const cursorInterval = setInterval(() => {
-			setCursor((prev) => (prev === cursorChar ? " " : cursorChar));
-		}, 500);
-		return () => clearInterval(cursorInterval);
-	}, [startBlinking, cursorChar, prefersReducedMotion]);
-
 	// For assistive tech, we expose ONLY the final text, no animation
 	const finalAccessibleText = `${children}${cursorChar}`;
 
@@ -80,7 +71,8 @@ export default function Typer({
 				style={{
 					visibility: "hidden", // hides visually but still takes up layout space
 					margin: 0,
-					whiteSpace: "pre-wrap",
+					whiteSpace: "normal",
+					wordBreak: "break-word",
 				}}
 			>
 				{finalAccessibleText}
@@ -94,11 +86,18 @@ export default function Typer({
 					position: "absolute",
 					inset: 0,
 					margin: 0,
-					whiteSpace: "pre-wrap",
+					whiteSpace: "normal",
+					wordBreak: "break-word",
 				}}
 			>
 				{output}
-				{cursor}
+				<span
+					className={
+						startBlinking && !prefersReducedMotion ? "cursor-blink" : ""
+					}
+				>
+					{cursor}
+				</span>
 			</p>
 		</div>
 	);

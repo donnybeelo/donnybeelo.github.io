@@ -20,6 +20,7 @@
 	--shine-width: 100vw;
 	--shine-background: #aaa2;
 	--nav-bar-background: #ccc9;
+	--transitions: opacity 200ms, width 50ms, height 50ms;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -175,7 +176,6 @@ table {
 }
 
 .title {
-	text-wrap: balance;
 	font-family: var(--font-momo-display);
 	letter-spacing: normal;
 	font-size: 2rem;
@@ -214,17 +214,12 @@ table {
 
 .shinyButton::after {
 	@media (prefers-reduced-motion: no-preference) {
-		transition:
-			opacity 0.2s,
-			width 50ms,
-			height 50ms,
-			top 50ms,
-			left 50ms;
+		transition: var(--transitions);
 	}
 }
 
 .shinyButton.home-button {
-	mask: url("/favicon.png");
+	mask: url("/icons/favicon.png");
 	mask-size: contain;
 	mask-repeat: no-repeat;
 	padding: 0;
@@ -296,5 +291,20 @@ h1 {
 			0 4px 4px hsl(0deg 0% 30% / 0.075),
 			0 8px 8px hsl(0deg 0% 30% / 0.075),
 			0 16px 16px hsl(0deg 0% 30% / 0.075);
+	}
+}
+
+.cursor-blink {
+	animation: blink 1s infinite;
+}
+
+@keyframes blink {
+	0%,
+	50% {
+		opacity: 1;
+	}
+	51%,
+	100% {
+		opacity: 0;
 	}
 }

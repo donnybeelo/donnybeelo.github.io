@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 	},
 	description: "This is my portfolio.",
 	icons: {
-		icon: "/favicon.png",
+		icon: "/icons/favicon.png",
 	},
 	openGraph: {
 		title: "Daniel Elia",
@@ -39,13 +39,13 @@ export const metadata: Metadata = {
 };
 
 const momo = localFont({
-	src: "../public/MomoTrustSans.ttf",
+	src: "../public/fonts/MomoTrustSans.ttf",
 	variable: "--font-momo",
 	display: "swap",
 });
 
 const momoDisplay = localFont({
-	src: "../public/MomoTrustDisplay.ttf",
+	src: "../public/fonts/MomoTrustDisplay.ttf",
 	variable: "--font-momo-display",
 	display: "swap",
 });

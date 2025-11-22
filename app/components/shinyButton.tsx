@@ -1,6 +1,5 @@
 "use client";
 
-import { Istok_Web } from "next/font/google";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -120,6 +119,10 @@ export const ShinyButton = ({
 	async function mouseDownEvent(): Promise<void> {
 		const button = buttonRef.current;
 		if (!button) return;
+		button.style.setProperty(
+			"--transitions",
+			"opacity 0.2s, width 50ms, height 50ms, top 50ms, left 50ms",
+		);
 		button.style.setProperty("--shine-width", `${getShineWidth() / 1.75}px`);
 	}
 
@@ -127,6 +130,14 @@ export const ShinyButton = ({
 		const button = buttonRef.current;
 		if (!button) return;
 		button.style.setProperty("--shine-width", `${getShineWidth()}px`);
+		setTimeout(
+			() =>
+				button.style.setProperty(
+					"--transitions",
+					"opacity 0.2s, width 50ms, height 50ms",
+				),
+			150,
+		);
 	}
 
 	async function handleFocus(): Promise<void> {
@@ -222,7 +233,7 @@ export const ShinyButton = ({
 
 	const commonProps = {
 		className:
-			"transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 -z-0 " +
+			"transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 -z-0 min-w-fit " +
 			(isTouched === 2
 				? "touch-active "
 				: isTouched === 1
