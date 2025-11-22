@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { usePrefersReducedMotion } from "@/app/animationLayer";
+import { usePrefersReducedMotion } from "app/animationLayer";
 
 let lastTabDirection: "forward" | "backward" | "click" = "click";
 const prefersReducedMotion = usePrefersReducedMotion();
@@ -85,6 +85,10 @@ export const ShinyButton = ({
 		const button = buttonRef.current;
 		if (!button) return;
 		button.style.setProperty("--shine-width", `${getShineWidth()}px`);
+		button.style.setProperty(
+			"--transitions",
+			"opacity 0.2s, width 50ms, height 50ms",
+		);
 	}
 
 	function touchMoveEvent(e: TouchEvent): void {
@@ -130,14 +134,6 @@ export const ShinyButton = ({
 		const button = buttonRef.current;
 		if (!button) return;
 		button.style.setProperty("--shine-width", `${getShineWidth()}px`);
-		setTimeout(
-			() =>
-				button.style.setProperty(
-					"--transitions",
-					"opacity 0.2s, width 50ms, height 50ms",
-				),
-			150,
-		);
 	}
 
 	async function handleFocus(): Promise<void> {

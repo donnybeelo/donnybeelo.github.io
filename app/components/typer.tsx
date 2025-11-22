@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { usePrefersReducedMotion } from "@/app/animationLayer";
+import { usePrefersReducedMotion } from "app/animationLayer";
 
 const DEFAULT_CURSOR = "|";
 

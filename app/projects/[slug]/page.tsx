@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { getProjectPosts } from "@/posts/utils";
 import { baseUrl } from "@/src/sitemap";
 import { Metadata } from "next";
-import PostDetail from "@/app/components/postDetail";
+import PostDetail from "app/components/postDetail";
 
 export async function generateStaticParams() {
 	let posts = getProjectPosts();

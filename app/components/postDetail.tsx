@@ -2,11 +2,11 @@ import { CustomMDX } from "app/components/mdx";
 import { formatDate } from "@/posts/utils";
 import { baseUrl } from "@/src/sitemap";
 import { BackButton } from "app/components/backButton";
-import { ImageContainer } from "@/app/components/imageContainer";
+import { ImageContainer } from "app/components/imageContainer";
 import { ShinyButton } from "app/components/shinyButton";
 import Typer from "./typer";
-import githubIconWhite from "@/public/icons/github-mark-white.svg";
-import githubIconBlack from "@/public/icons/github-mark.svg";
+import githubIconWhite from "public/icons/github-mark-white.svg";
+import githubIconBlack from "public/icons/github-mark.svg";
 
 type Post = {
 	metadata: {
