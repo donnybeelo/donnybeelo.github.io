@@ -5,8 +5,7 @@ import { BackButton } from "app/components/backButton";
 import { ImageContainer } from "app/components/imageContainer";
 import { ShinyButton } from "app/components/shinyButton";
 import Typer from "./typer";
-import githubIconWhite from "public/icons/github-mark-white.svg";
-import githubIconBlack from "public/icons/github-mark.svg";
+import githubIcon from "public/icons/github-mark.svg";
 
 type Post = {
 	metadata: {
@@ -75,13 +74,9 @@ export default function PostDetail({
 						name="github repo"
 						icon={
 							<img
-								src={
-									post.metadata.fillImage === "true"
-										? githubIconBlack.src
-										: githubIconWhite.src
-								}
+								src={githubIcon.src}
 								alt="GitHub"
-								className="h-4 w-4 dark:invert-0 invert"
+								className="w-4 dark:invert-0 invert"
 							/>
 						}
 					/>

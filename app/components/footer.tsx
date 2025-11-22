@@ -1,4 +1,8 @@
+"use client";
+
 import { ShinyButton } from "./shinyButton";
+import githubIcon from "public/icons/github-mark.svg";
+import linkedinIcon from "public/icons/LinkedIn_icon.svg";
 
 const footerItems: Record<
 	string,
@@ -12,12 +16,12 @@ const footerItems: Record<
 	linkedin: {
 		name: "linkedin",
 		url: "https://www.linkedin.com/in/danielelia",
-		external: true,
+		icon: linkedinIcon.src,
 	},
 	github: {
 		name: "github",
 		url: "https://github.com/donnybeelo",
-		external: true,
+		icon: githubIcon.src,
 	},
 };
 
@@ -32,7 +36,14 @@ export default function Footer() {
 							path={url}
 							name={name}
 							external={external ?? false}
-							icon={icon ?? undefined}
+							icon={
+								icon ? (
+									<img
+										src={icon as string}
+										className="w-4 dark:invert-0 invert"
+									/>
+								) : undefined
+							}
 						/>
 					);
 				})}
