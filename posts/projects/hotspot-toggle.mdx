@@ -17,83 +17,18 @@ This project started in August 2025 and has evolved from a JavaScript-based proo
 ## Features
 
 - **Quick Settings Integration**: Toggle your phone's hotspot directly from the GNOME Shell Quick Settings menu
-- **Automatic Wi-Fi Connection**: Automatically connects to your phone's hotspot network when enabled
+- **Automatic Wi-Fi Connection**: Automatically connects to your phone's hotspot network as fast as possible
 - **Visual Indicator**: Status indicator shows when connected to the hotspot network
-- **Bluetooth-Based Control**: Uses Bluetooth connectivity to communicate with your Android device
-- **Smart Connection Detection**: Intelligently checks if already connected to avoid unnecessary operations
-- **Retry Logic**: Automatic retries for Wi-Fi connections with exponential backoff
-- **Settings UI**: Easy-to-use preferences window for configuring Bluetooth MAC address and Wi-Fi SSID
-- **Localization Support**: Currently supports English and Russian translations
-
-## Technical Details
-
-The extension is built using:
-
-- **TypeScript**: Type-safe implementation for better maintainability
-- **GNOME Shell Extension APIs**: Uses GJS (GNOME JavaScript) bindings
-- **NetworkManager**: Integration via `nmcli` for Wi-Fi connection management
-- **BlueZ D-Bus API**: Direct communication with Bluetooth stack for device management
-- **Automate Flow**: Requires the [Automate flow](https://llamalab.com/automate/community/flows/50803) to be running on the Android device
-
-## Requirements
-
-- **GNOME Shell**: Version 45–49 (tested up to GNOME 48)
-- **NetworkManager**: With `nmcli` command-line tool
-- **Android Device**: With the [Automate flow](https://llamalab.com/automate/community/flows/50803) installed and running
-
-## Installation
-
-### Via GNOME Extensions Website
-
-Install directly from [GNOME Extensions](https://extensions.gnome.org/extension/8508/hotspot-toggle/).
-
-### Manual Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/donnybeelo/gnome-extensions-hotspot-toggle.git
-   cd gnome-extensions-hotspot-toggle
-   ```
-
-2. Build and install:
-
-   ```bash
-   make install
-   ```
-
-3. Enable the extension using GNOME Extensions app or `gnome-extensions` CLI.
-
-## Usage
-
-### Initial Setup
-
-1. **Pair Your Devices**: Ensure your Linux machine and Android phone are paired via Bluetooth.
-
-2. **Configure Automate Flow**:
-
-   - Install the [Automate flow](https://llamalab.com/automate/community/flows/50803) on your Android device
-   - In the Automate app, set the Bluetooth device to your machine
-   - Start the flow
-
-3. **Configure the Extension**:
-
-   - Open GNOME Extensions app
-   - Find "Hotspot Toggle" and click the settings (cogwheel) icon
-   - Enter your phone's Bluetooth MAC address (format: `00:11:22:33:44:55`)
-   - Enter the SSID of your phone's hotspot network
-
-4. **Connect to Hotspot**: Once configured, connect to the hotspot at least once manually to save the password in NetworkManager.
+- **Bluetooth-Based Control**: Uses Bluetooth connectivity to communicate with your Android device, unlike GSConnect
+- **Settings UI**: Easy to configure, so you can get going with no programming knowledge necessary
 
 ## Development & Evolution
 
-Since its initial release, the project underwent several small but impactful improvements:
+I created this extension out of jealousy for macOS users who can toggle their iPhone's hotspot from the menu bar. Having to turn my hotspot on from my phone and manually connect to the Wi-Fi network felt clunky and long-winded for a process I do almost daily.
 
-- **Initial Version** (August 2025): Basic JavaScript implementation with Bluetooth-based hotspot toggling
-- **TypeScript Migration**: Converted to TypeScript for better type safety and maintainability
-- **Error Handling**: Added comprehensive error handling and user notifications
-- **Connection Logic**: Improved Wi-Fi connection detection and management to avoid unnecessary operations
-- **Localization**: Added gettext support and Russian translation
+My initial solution was to use an Automate flow on my phone which detects my laptop connecting to it via Bluetooth, which toggles mobile hotspot on and off. Conveniently the Bluetooth tethering toggle in Ubuntu quick settings connects to my phone via Bluetooth, fails to establish a Bluetooth tether (since my phone switches off Bluetooth tethering automatically), then disconnects, after which my laptop eventually connects to the Wi-Fi hotspot automatically.
+
+I thought this was strangely elegant, but janky. I figured other people had the same issue I had, so I created this extension to make the process more deliberate, reliable and snappier, whilst also using the project as a vessel to familiarise myself with Gjs. Overall it was a fun learning experience, and gives me confidence to make more GNOME Extensions in the future.
 
 ## Future Improvements
 
@@ -109,4 +44,4 @@ However, I may implement more features in the future, those being:
 
 ## Contributing
 
-Contributions are welcome! The project is open source and available on GitHub using the link next to the title. If you encounter issues or have feature requests, please open an issue on the repository.
+Contributions are welcome! The project is open source and available on GitHub using the link at the top of this post. At the moment I'm primarily looking for help with translations at the moment (I refuse to use any form of machine translation like LibreTranslate, at that point most non-native English speakers would understand my English better than whatever translation it would come up with). 
