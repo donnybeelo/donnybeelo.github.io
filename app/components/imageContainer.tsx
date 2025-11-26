@@ -56,11 +56,11 @@ export function ImageContainer({
 		<>
 			<ShinyButton
 				onClick={() => setIsOpen(true)}
-				className="!h-60 flex justify-center rounded-lg shadow-lg !mb-6 cursor-pointer w-full"
+				className="!h-60 flex justify-center !mx-auto !mb-6 w-fit !p-2"
 			>
 				<img
 					src={src}
-					className={`w-max h-max max-h-full max-w-full ${fill ? "object-cover" : "object-contain"} z-10 rounded-lg`}
+					className={`h-max ${fill ? "object-cover min-w-full min-h-full overflow-hidden " : "object-contain w-fit max-h-full  max-w-full"} z-10 rounded-lg`}
 				/>
 			</ShinyButton>
 			<div

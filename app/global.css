@@ -193,10 +193,7 @@ table {
 .shinyButton.touch-active,
 .shinyButton:focus-visible {
 	background-color: var(--shine-background);
-}
-
-@media (prefers-color-scheme: dark) {
-	.shinyButton {
+	@media (prefers-color-scheme: dark) {
 		box-shadow: 0 10px 25px hsl(0deg 0% 50% / 0.2);
 	}
 }
@@ -237,6 +234,9 @@ table {
 	}
 	.shinyButton:hover {
 		background-color: var(--shine-background);
+		@media (prefers-color-scheme: dark) {
+			box-shadow: 0 10px 25px hsl(0deg 0% 50% / 0.2);
+		}
 	}
 }
 
