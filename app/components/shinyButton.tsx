@@ -172,7 +172,7 @@ export const ShinyButton = ({
 			const centerY = rect.height / 2;
 			button.style.setProperty("--y", String(centerY));
 
-			const offset = rect.width; // 25% of width to left/right
+			const offset = rect.width;
 			if (lastTabDirection === "forward") {
 				button.style.setProperty("--x", String(centerX + offset));
 			} else {
