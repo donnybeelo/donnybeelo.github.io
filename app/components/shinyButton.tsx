@@ -54,6 +54,7 @@ export const ShinyButton = ({
 	const buttonRef = useRef<HTMLElement | null>(null);
 	const [isTouched, setIsTouched] = useState(0);
 	let touchStartTime: number | null = null; // Track the start time of the touch
+	const transitions = useRef("");
 
 	function updateButtonVars(clientX: number, clientY: number) {
 		if (!buttonRef.current) return;
@@ -85,10 +86,8 @@ export const ShinyButton = ({
 		const button = buttonRef.current;
 		if (!button) return;
 		button.style.setProperty("--shine-width", `${getShineWidth()}px`);
-		button.style.setProperty(
-			"--transitions",
-			"opacity 0.2s, width 50ms, height 50ms",
-		);
+		button.style.setProperty("--transitions", transitions.current);
+		button.style.removeProperty("--no-shadow");
 	}
 
 	function touchMoveEvent(e: TouchEvent): void {
@@ -125,15 +124,17 @@ export const ShinyButton = ({
 		if (!button) return;
 		button.style.setProperty(
 			"--transitions",
-			"opacity 0.2s, width 50ms, height 50ms, top 50ms, left 50ms",
+			transitions.current + ",top 50ms,left 50ms",
 		);
 		button.style.setProperty("--shine-width", `${getShineWidth() / 1.75}px`);
+		button.style.setProperty("--no-shadow", "none");
 	}
 
 	async function mouseUpEvent(): Promise<void> {
 		const button = buttonRef.current;
 		if (!button) return;
 		button.style.setProperty("--shine-width", `${getShineWidth()}px`);
+		button.style.removeProperty("--no-shadow");
 	}
 
 	async function handleFocus(): Promise<void> {
@@ -191,6 +192,8 @@ export const ShinyButton = ({
 			button.addEventListener("focus", handleFocus);
 			button.addEventListener("blur", handleBlur);
 			window.addEventListener("keydown", handleKeyDown);
+			transitions.current =
+				getComputedStyle(button).getPropertyValue("--transitions");
 
 			return () => {
 				button.removeEventListener("mouseenter", mouseMoveEvent);
@@ -229,7 +232,7 @@ export const ShinyButton = ({
 
 	const commonProps = {
 		className:
-			"transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 -z-0 min-w-fit " +
+			"hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 -z-0 min-w-fit " +
 			(isTouched === 2
 				? "touch-active "
 				: isTouched === 1

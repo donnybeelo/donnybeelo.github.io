@@ -188,14 +188,18 @@ table {
 	border-radius: 0.375rem;
 	background-color: var(--button-background, #0000);
 	box-shadow: 0 5px 20px hsl(0deg 0% 0% / 0.2);
+	@media (prefers-color-scheme: dark) {
+		box-shadow: none;
+	}
 }
 
 .shinyButton.touch-active,
 .shinyButton:focus-visible {
 	background-color: var(--shine-background);
 	@media (prefers-color-scheme: dark) {
-		box-shadow: 0 10px 25px hsl(0deg 0% 50% / 0.2);
+		box-shadow: var(--no-shadow, 0 10px 25px hsl(0deg 0% 50% / 0.2));
 	}
+	box-shadow: var(--no-shadow, 0 5px 20px hsl(0deg 0% 0% / 0.2));
 }
 
 .shinyButton::after {
@@ -207,9 +211,6 @@ table {
 	height: var(--shine-width);
 	background: radial-gradient(var(--button-shine), transparent 65%);
 	opacity: 0;
-}
-
-.shinyButton::after {
 	@media (prefers-reduced-motion: no-preference) {
 		transition: var(--transitions);
 	}
@@ -235,8 +236,9 @@ table {
 	.shinyButton:hover {
 		background-color: var(--shine-background);
 		@media (prefers-color-scheme: dark) {
-			box-shadow: 0 10px 25px hsl(0deg 0% 50% / 0.2);
+			box-shadow: var(--no-shadow, 0 10px 25px hsl(0deg 0% 50% / 0.2));
 		}
+		box-shadow: var(--no-shadow, 0 5px 20px hsl(0deg 0% 0% / 0.2));
 	}
 }
 
