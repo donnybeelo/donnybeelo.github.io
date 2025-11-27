@@ -179,10 +179,7 @@ export const ShinyButton = ({
 				button.style.setProperty("--x", String(centerX - offset));
 			}
 
-			setTimeout(() => {
-				button.style.setProperty("--x", String(centerX));
-				button.style.setProperty("--y", String(centerY));
-			}, 200);
+			setTimeout(() => button.style.setProperty("--x", String(centerX)), 200);
 		}
 	}
 
