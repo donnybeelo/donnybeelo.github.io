@@ -139,6 +139,10 @@ export const ShinyButton = ({
 			if (path)
 				button.style.setProperty("background-color", "var(--button-active)");
 		}, 50);
+		setTimeout(() => {
+			if (!path?.startsWith("/"))
+				button.style.removeProperty("background-color");
+		}, 1000);
 	}
 
 	async function handleFocus(): Promise<void> {
