@@ -196,10 +196,10 @@ table {
 .shinyButton.touch-active,
 .shinyButton:focus-visible {
 	background-color: var(--shine-background);
+	box-shadow: var(--no-shadow, 0 5px 20px hsl(0deg 0% 0% / 0.2));
 	@media (prefers-color-scheme: dark) {
 		box-shadow: var(--no-shadow, 0 10px 25px hsl(0deg 0% 50% / 0.2));
 	}
-	box-shadow: var(--no-shadow, 0 5px 20px hsl(0deg 0% 0% / 0.2));
 }
 
 .shinyButton::after {
@@ -235,10 +235,10 @@ table {
 	}
 	.shinyButton:hover {
 		background-color: var(--shine-background);
+		box-shadow: var(--no-shadow, 0 5px 20px hsl(0deg 0% 0% / 0.2));
 		@media (prefers-color-scheme: dark) {
 			box-shadow: var(--no-shadow, 0 10px 25px hsl(0deg 0% 50% / 0.2));
 		}
-		box-shadow: var(--no-shadow, 0 5px 20px hsl(0deg 0% 0% / 0.2));
 	}
 }
 
