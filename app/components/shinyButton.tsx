@@ -134,7 +134,11 @@ export const ShinyButton = ({
 		const button = buttonRef.current;
 		if (!button) return;
 		button.style.setProperty("--shine-width", `${getShineWidth()}px`);
-		button.style.removeProperty("--no-shadow");
+		setTimeout(() => {
+			button.style.removeProperty("--no-shadow");
+			if (path)
+				button.style.setProperty("background-color", "var(--button-active)");
+		}, 50);
 	}
 
 	async function handleFocus(): Promise<void> {
