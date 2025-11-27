@@ -153,6 +153,10 @@ export const ShinyButton = ({
 		const centerY = rect.height / 2;
 
 		if (document.activeElement === button) {
+			button.style.setProperty(
+				"--transitions",
+				transitions.current + ",top 200ms,left 200ms",
+			);
 			button.style.setProperty("--x", String(centerX));
 			button.style.setProperty("--y", String(centerY));
 			button.style.setProperty("--shine-width", `${getShineWidth()}px`);
@@ -174,6 +178,11 @@ export const ShinyButton = ({
 			} else {
 				button.style.setProperty("--x", String(centerX - offset));
 			}
+
+			setTimeout(() => {
+				button.style.setProperty("--x", String(centerX));
+				button.style.setProperty("--y", String(centerY));
+			}, 200);
 		}
 	}
 
@@ -240,7 +249,7 @@ export const ShinyButton = ({
 
 	const commonProps = {
 		className:
-			"hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 -z-0 min-w-fit " +
+			"flex items-center gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 min-w-fit " +
 			(isTouched === 2
 				? "touch-active "
 				: isTouched === 1
