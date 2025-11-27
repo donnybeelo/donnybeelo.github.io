@@ -250,6 +250,7 @@ export const ShinyButton = ({
 		style: {
 			backgroundColor:
 				path === "/" + pathname.split("/")[1] ? "var(--button-active)" : "",
+			transition: "background-color 150ms, box-shadow 100ms",
 			...style,
 		},
 		"aria-label": ariaLabel,
