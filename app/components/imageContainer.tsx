@@ -56,16 +56,16 @@ export function ImageContainer({
 		<>
 			<ShinyButton
 				onClick={() => setIsOpen(true)}
-				className="!h-60 flex justify-center !mx-auto !mb-6 w-fit !p-2"
+				className={`${fill ? "max-h-60" : ""} flex justify-center !mx-auto !mb-6 w-fit !p-2 h-fit`}
 			>
 				<img
 					src={src}
-					className={`h-max ${fill ? "object-cover min-w-full min-h-full overflow-hidden " : "object-contain w-fit max-h-full  max-w-full"} z-10 rounded-lg`}
+					className={`${fill ? "object-cover min-w-full min-h-full overflow-hidden " : "max-h-60 object-contain w-fit max-w-full"} z-10 h-full  max-w-full"} z-10 rounded-lg`}
 				/>
 			</ShinyButton>
 			<div
 				ref={overlayRef}
-				className={`fixed inset-0  flex items-center justify-center z-50 ${!prefersReducedMotion ? "transition-opacity duration-300 ease-in-out" : ""} ${isOpen ? "opacity-100" : "opacity-0"} ${!isOpen ? "pointer-events-none" : ""}`}
+				className={`fixed inset-0 flex items-center justify-center z-50 ${!prefersReducedMotion ? "transition-opacity duration-300 ease-in-out" : ""} ${isOpen ? "opacity-100" : "opacity-0"} ${!isOpen ? "pointer-events-none" : ""}`}
 				onClick={closeModal}
 				tabIndex={-1}
 				onKeyDown={(e) => {
