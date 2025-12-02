@@ -202,6 +202,20 @@ table {
 	}
 }
 
+.shinyButton.shinyLink {
+	display: inline;
+	box-shadow: none !important;
+}
+
+.shinyButton.shinyLink::after {
+	display: none;
+}
+
+.shinyButton.shinyLink.touch-active,
+.shinyButton.shinyLink:focus-visible {
+	background-color: var(--no-shadow, var(--button-active));
+}
+
 .shinyButton::after {
 	content: "";
 	position: absolute;
@@ -239,6 +253,9 @@ table {
 		@media (prefers-color-scheme: dark) {
 			box-shadow: var(--no-shadow, 0 10px 25px hsl(0deg 0% 50% / 0.2));
 		}
+	}
+	.shinyButton.shinyLink:hover {
+		background-color: var(--no-shadow, var(--button-active));
 	}
 }
 
