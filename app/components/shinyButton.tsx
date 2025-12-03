@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "app/animationLayer";
 
@@ -52,9 +52,19 @@ export const ShinyButton = ({
 	}
 
 	const buttonRef = useRef<HTMLElement | null>(null);
+	const router = useRouter();
 	const [isTouched, setIsTouched] = useState(0);
 	let touchStartTime: number | null = null; // Track the start time of the touch
 	const transitions = useRef("");
+
+	async function handleButtonPush() {
+		await new Promise((resolve) => setTimeout(resolve, 75));
+		if (path) {
+			router.push(path);
+		} else if (onClick) {
+			onClick();
+		}
+	}
 
 	function updateButtonVars(clientX: number, clientY: number) {
 		if (!buttonRef.current) return;
@@ -244,48 +254,30 @@ export const ShinyButton = ({
 		}
 	}, []);
 
-	const commonProps = {
-		className:
-			"flex items-center gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 min-w-fit " +
-			(isTouched === 2
-				? "touch-active "
-				: isTouched === 1
-					? "touch-going "
-					: "") +
-			className,
-		style: {
-			backgroundColor:
-				path === "/" + pathname.split("/")[1] ? "var(--button-active)" : "",
-			transition: "background-color 150ms, box-shadow 50ms",
-			...style,
-		},
-		"aria-label": ariaLabel,
-	};
-
-	if (path) {
-		return (
-			<Link
-				key={path}
-				href={path}
-				ref={buttonRef as React.RefObject<HTMLAnchorElement>}
-				{...commonProps}
-			>
-				{external && ArrowIcon()}
-				{icon}
-				{name ? name : children}
-			</Link>
-		);
-	} else {
-		return (
-			<button
-				onClick={onClick!}
-				ref={buttonRef as React.RefObject<HTMLButtonElement>}
-				{...commonProps}
-			>
-				{external && ArrowIcon()}
-				{icon}
-				{name ? name : children}
-			</button>
-		);
-	}
+	return (
+		<button
+			onClick={handleButtonPush}
+			ref={buttonRef as React.RefObject<HTMLButtonElement>}
+			className={
+				"flex items-center text-left gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 min-w-fit " +
+				(isTouched === 2
+					? "touch-active "
+					: isTouched === 1
+						? "touch-going "
+						: "") +
+				className
+			}
+			style={{
+				backgroundColor:
+					path === "/" + pathname.split("/")[1] ? "var(--button-active)" : "",
+				transition: "background-color 150ms, box-shadow 50ms",
+				...style,
+			}}
+			aria-label={ariaLabel}
+		>
+			{external && ArrowIcon()}
+			{icon}
+			{name ? name : children}
+		</button>
+	);
 };

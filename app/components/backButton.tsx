@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { ShinyButton } from "./shinyButton";
 import { usePathname } from "next/navigation";
 
