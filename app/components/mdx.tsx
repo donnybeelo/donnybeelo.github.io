@@ -38,7 +38,7 @@ function CustomLink(props: React.ComponentProps<"a">) {
 	return (
 		<ShinyButton
 			path={props.href}
-			className="shinyLink !p-0 !m-0 !mr-0.5 !rounded-xs inline-block align-bottom"
+			className="shinyLink !p-0 !m-0 !rounded-xs inline-block align-bottom"
 		>
 			{props.children}
 		</ShinyButton>
