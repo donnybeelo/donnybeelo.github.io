@@ -193,15 +193,17 @@ table {
 	}
 }
 
+/*Styling for mobile*/
 .shinyButton.touch-active,
 .shinyButton:focus-visible {
 	background-color: var(--shine-background);
-	box-shadow: var(--no-shadow, 0 5px 20px hsl(0deg 0% 0% / 0.2));
+	box-shadow: 0 5px 20px hsl(0deg 0% 0% / 0.2);
 	@media (prefers-color-scheme: dark) {
-		box-shadow: var(--no-shadow, 0 10px 25px hsl(0deg 0% 50% / 0.2));
+		box-shadow: 0 10px 25px hsl(0deg 0% 50% / 0.2);
 	}
 }
 
+/*Styling specifically for links within posts*/
 .shinyButton.shinyLink {
 	display: inline;
 	box-shadow: none !important;
@@ -215,11 +217,14 @@ table {
 	display: none;
 }
 
+/*Styling of links in posts for mobile*/
 .shinyButton.shinyLink.touch-active,
+.shinyButton.shinyLink.touch-going,
 .shinyButton.shinyLink:focus-visible {
-	background-color: var(--no-shadow, var(--button-active));
+	background-color: var(--button-active);
 }
 
+/*Shiny part of shinyButton*/
 .shinyButton::after {
 	content: "";
 	position: absolute;
@@ -234,6 +239,7 @@ table {
 	}
 }
 
+/*Styling specifically for the sandwich*/
 .shinyButton.home-button {
 	mask: url("/icons/favicon.png");
 	mask-size: contain;
@@ -242,11 +248,11 @@ table {
 	margin: 4px 8px;
 	background: none !important;
 }
-
 .shinyButton.home-button::after {
 	background: radial-gradient(transparent, black 17.5%);
 }
 
+/*Styling for desktop*/
 @media (hover: hover) {
 	.shinyButton:hover::after {
 		opacity: 0.4;
@@ -263,6 +269,7 @@ table {
 	}
 }
 
+/*Styling of shiny bit for mobile*/
 .shinyButton.touch-active::after,
 .shinyButton.touch-going::after,
 .shinyButton:focus-visible::after {
