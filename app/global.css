@@ -118,11 +118,11 @@ html {
 }
 
 .prose h1 {
-	@apply text-4xl font-medium tracking-tight mt-6 mb-2;
+	@apply text-3xl font-medium tracking-tight mt-6 mb-2;
 }
 
 .prose h2 {
-	@apply text-xl font-medium tracking-tight mt-6 mb-2;
+	@apply text-2xl font-medium tracking-tight mt-6 mb-2;
 }
 
 .prose h3 {
