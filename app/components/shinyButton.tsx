@@ -34,6 +34,7 @@ export const ShinyButton = ({
 	className = undefined,
 	style = undefined,
 	ariaLabel = name,
+	openInstantly = false,
 	children = null,
 }: {
 	path?: string;
@@ -44,6 +45,7 @@ export const ShinyButton = ({
 	className?: string;
 	style?: React.CSSProperties;
 	ariaLabel?: string;
+	openInstantly?: boolean;
 	children?: React.ReactNode;
 }) => {
 	const pathname = usePathname();
@@ -58,7 +60,7 @@ export const ShinyButton = ({
 	const transitions = useRef("");
 
 	async function handleButtonPush() {
-		await new Promise((resolve) => setTimeout(resolve, 75));
+		if (!openInstantly) await new Promise((resolve) => setTimeout(resolve, 75));
 		if (path) {
 			router.push(path);
 		} else if (onClick) {

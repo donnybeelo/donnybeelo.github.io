@@ -33,7 +33,9 @@ export function Navbar() {
 					/>
 
 					{Object.entries(navItems).map(([path, { name }]) => {
-						return <ShinyButton key={path} path={path} name={name} />;
+						return (
+							<ShinyButton key={path} path={path} name={name} openInstantly />
+						);
 					})}
 				</div>
 			</nav>
