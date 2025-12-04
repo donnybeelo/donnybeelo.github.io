@@ -30,6 +30,7 @@ export function Navbar() {
 						icon={<HomeIcon />}
 						className="home-button !mr-5"
 						ariaLabel="home"
+						openInstantly
 					/>
 
 					{Object.entries(navItems).map(([path, { name }]) => {
