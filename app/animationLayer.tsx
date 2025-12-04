@@ -15,7 +15,7 @@ export default function AnimationLayer({
 	children: React.ReactNode;
 }) {
 	return (
-		<div key={usePathname()} className="animation-layer">
+		<div key={usePathname()} className="animationLayer">
 			{children}
 		</div>
 	);

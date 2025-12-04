@@ -88,7 +88,7 @@ export const ShinyButton = ({
 		if (!button) return 1;
 		const height = button.offsetHeight;
 		const width = button.offsetWidth;
-		const multiplier = button.classList.contains("home-button") ? 5.0 : 1.5;
+		const multiplier = button.classList.contains("homeButton") ? 5.0 : 1.5;
 		return Math.max(width, height) * multiplier;
 	}
 

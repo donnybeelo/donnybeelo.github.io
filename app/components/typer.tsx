@@ -93,7 +93,7 @@ export default function Typer({
 				{output}
 				<span
 					className={
-						startBlinking && !prefersReducedMotion ? "cursor-blink" : ""
+						startBlinking && !prefersReducedMotion ? "cursorBlink" : ""
 					}
 				>
 					{cursor}

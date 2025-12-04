@@ -48,21 +48,6 @@ html {
 	min-width: 360px;
 }
 
-.animation-layer {
-	@media (prefers-reduced-motion: no-preference) {
-		animation: fade-in 0.2s ease-in-out;
-	}
-}
-
-@keyframes fade-in {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
-}
-
 .prose .anchor {
 	@apply absolute invisible no-underline;
 
@@ -176,7 +161,7 @@ table {
 }
 
 .title {
-	font-family: var(--font-momo-display);
+	font-family: var(--fontMomoDisplay);
 	letter-spacing: normal;
 	font-size: 2rem;
 }
@@ -240,7 +225,7 @@ table {
 }
 
 /*Styling specifically for the sandwich*/
-.shinyButton.home-button {
+.shinyButton.homeButton {
 	mask: url("/icons/favicon.png");
 	mask-size: contain;
 	mask-repeat: no-repeat;
@@ -248,7 +233,7 @@ table {
 	margin: 4px 8px;
 	background: none !important;
 }
-.shinyButton.home-button::after {
+.shinyButton.homeButton::after {
 	background: radial-gradient(transparent, black 17.5%);
 }
 
@@ -276,17 +261,17 @@ table {
 	opacity: 0.4;
 }
 
-.font-fira-mono {
-	font-family: var(--font-fira-mono);
+.fontFiraMono {
+	font-family: var(--fontFiraMono);
 }
-.font-momo {
-	font-family: var(--font-momo);
+.fontMomo {
+	font-family: var(--fontMomo);
 }
-.font-momo-display {
-	font-family: var(--font-momo-display);
+.fontMomoDisplay {
+	font-family: var(--fontMomoDisplay);
 }
 code {
-	font-family: var(--font-fira-mono);
+	font-family: var(--fontFiraMono);
 }
 h1 {
 	@apply mb-2;
@@ -324,7 +309,7 @@ h1 {
 	}
 }
 
-.cursor-blink {
+.cursorBlink {
 	animation: blink 1s infinite;
 }
 
@@ -336,5 +321,20 @@ h1 {
 	51%,
 	100% {
 		opacity: 0;
+	}
+}
+
+.animationLayer {
+	@media (prefers-reduced-motion: no-preference) {
+		animation: fade-in 0.2s ease-in-out;
+	}
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
 	}
 }

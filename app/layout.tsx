@@ -40,20 +40,20 @@ export const metadata: Metadata = {
 
 const momo = localFont({
 	src: "../public/fonts/MomoTrustSans.ttf",
-	variable: "--font-momo",
+	variable: "--fontMomo",
 	display: "swap",
 });
 
 const momoDisplay = localFont({
 	src: "../public/fonts/MomoTrustDisplay.ttf",
-	variable: "--font-momo-display",
+	variable: "--fontMomoDisplay",
 	display: "swap",
 });
 
 const firaMono = Fira_Mono({
 	subsets: ["latin"],
 	weight: ["400", "700"],
-	variable: "--font-fira-mono",
+	variable: "--fontFiraMono",
 	display: "swap",
 });
 
@@ -67,7 +67,7 @@ export default function RootLayout({
 			lang="en"
 			className={`${momo.variable} ${firaMono.variable} ${momoDisplay.variable} text-black bg-white dark:text-white dark:bg-black`}
 		>
-			<body className="font-momo antialiased max-w-3xl mt-8 mx-auto">
+			<body className="fontMomo antialiased max-w-3xl mt-8 mx-auto">
 				<main className="flex-auto min-w-0 mt-6 flex flex-col mx-6">
 					<Navbar />
 					<AnimationLayer>{children}</AnimationLayer>
