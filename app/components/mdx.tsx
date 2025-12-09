@@ -36,10 +36,7 @@ function Table({ data }: TableProps) {
 
 function CustomLink(props: React.ComponentProps<"a">) {
 	return (
-		<ShinyButton
-			path={props.href}
-			className="shinyLink !p-0 !m-0 !rounded-xs inline-block align-bottom"
-		>
+		<ShinyButton path={props.href} inline>
 			{props.children}
 		</ShinyButton>
 	);

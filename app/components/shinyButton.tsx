@@ -35,6 +35,7 @@ export const ShinyButton = ({
 	style = undefined,
 	ariaLabel = name,
 	openInstantly = false,
+	inline = false,
 	children = null,
 }: {
 	path?: string;
@@ -46,6 +47,7 @@ export const ShinyButton = ({
 	style?: React.CSSProperties;
 	ariaLabel?: string;
 	openInstantly?: boolean;
+	inline?: boolean;
 	children?: React.ReactNode;
 }) => {
 	const pathname = usePathname();
@@ -261,30 +263,52 @@ export const ShinyButton = ({
 		}
 	}, []);
 
-	return (
-		<button
-			onClick={handleButtonPush}
-			ref={buttonRef as React.RefObject<HTMLButtonElement>}
-			className={
-				"flex items-center text-left gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 min-w-fit " +
-				(isTouched === 2
-					? "touch-active "
-					: isTouched === 1
-						? "touch-going "
-						: "") +
-				className
-			}
-			style={{
-				backgroundColor:
-					path === "/" + pathname.split("/")[1] ? "var(--button-active)" : "",
-				transition: "background-color 150ms, box-shadow 50ms",
-				...style,
-			}}
-			aria-label={ariaLabel}
-		>
-			{external && ArrowIcon()}
-			{icon}
-			{name ? name : children}
-		</button>
-	);
+	const commonProps = {
+		className:
+			"flex items-center text-left gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 min-w-fit " +
+			(isTouched === 2
+				? "touch-active "
+				: isTouched === 1
+					? "touch-going "
+					: "") +
+			(inline
+				? "shinyLink !p-0 !m-0 !rounded-xs inline-block align-bottom"
+				: "") +
+			className,
+		style: {
+			backgroundColor:
+				path === "/" + pathname.split("/")[1] ? "var(--button-active)" : "",
+			transition: "background-color 150ms, box-shadow 50ms",
+			...style,
+		},
+		"aria-label": ariaLabel,
+	};
+
+	if (inline) {
+		return (
+			<Link
+				key={path!}
+				href={{}}
+				onClick={handleButtonPush!}
+				ref={buttonRef as React.RefObject<HTMLAnchorElement>}
+				{...commonProps}
+			>
+				{external && ArrowIcon()}
+				{icon}
+				{name ? name : children}
+			</Link>
+		);
+	} else {
+		return (
+			<button
+				onClick={handleButtonPush!}
+				ref={buttonRef as React.RefObject<HTMLButtonElement>}
+				{...commonProps}
+			>
+				{external && ArrowIcon()}
+				{icon}
+				{name ? name : children}
+			</button>
+		);
+	}
 };
