@@ -97,9 +97,13 @@ export const ShinyButton = ({
 		updateButtonVars(e.clientX, e.clientY);
 		const button = buttonRef.current;
 		if (!button) return;
-		button.style.setProperty("--shine-width", `${getShineWidth()}px`);
-		button.style.setProperty("--transitions", transitions.current);
-		button.style.removeProperty("--no-shadow");
+		if ((e.buttons & 1) === 0) {
+			button.style.setProperty("--shine-width", `${getShineWidth()}px`);
+
+			button.style.setProperty("--transitions", transitions.current);
+
+			button.style.removeProperty("--no-shadow");
+		}
 	}
 
 	function touchMoveEvent(e: TouchEvent): void {
@@ -148,6 +152,7 @@ export const ShinyButton = ({
 		button.style.setProperty("--shine-width", `${getShineWidth()}px`);
 		setTimeout(() => {
 			button.style.removeProperty("--no-shadow");
+			button.style.setProperty("--transitions", transitions.current);
 			if (path)
 				button.style.setProperty("background-color", "var(--button-active)");
 		}, 50);
