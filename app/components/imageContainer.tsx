@@ -56,7 +56,7 @@ export function ImageContainer({
 		<>
 			<ShinyButton
 				onClick={() => setIsOpen(true)}
-				className={`${fill ? "max-h-60" : ""} flex justify-center !mx-auto !mb-6 w-fit !p-2 h-fit`}
+				className={`${fill ? "max-h-60" : ""} flex justify-center mx-auto! mb-6! w-fit p-2! h-fit`}
 			>
 				<img
 					src={src}

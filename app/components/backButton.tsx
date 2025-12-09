@@ -39,7 +39,7 @@ export const BackButton = () => {
 
 	return (
 		<ShinyButton
-			className="!mb-6"
+			className="mb-6!"
 			onClick={handleBack}
 			name="back"
 			icon={<BackArrowIcon />}
