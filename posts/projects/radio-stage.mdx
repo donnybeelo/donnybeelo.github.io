@@ -1,0 +1,33 @@
+---
+title: "RadioStage"
+publishedAt: "2025-05-01"
+summary: "My final-year project focused on designing a specialised voice communication software application for live radio theatre productions."
+repoUrl: "https://github.com/donnybeelo/radio-stage"
+image: "/projects/radio-stage.png"
+---
+
+The RadioStage app is a bespoke software solution for remote live radio theatre productions. General communication platforms like Zoom and Discord lack the granular audio control and minimal latency essential for seamless remote collaboration and performance in this artistic context.
+
+I also wanted to explore real-time audio transmission technologies, particularly WebRTC, which is widely used in video conferencing but less so in specialised applications like this. I also used this project as a means to perform qualitative user research and user-guided design.
+
+
+## Core Functionality and Design
+
+The application's design was tailored to the unique workflow of remote radio play direction and performance. Key functional objectives included:
+
+* Role-Based Access: Implementing distinct roles for the Director and Actor.
+* Stage Management: Providing separate 'onstage' and 'offstage' audio states to control which audio contributed to the main output mix.
+* Director Talkback: Enabling a director-only channel to communicate privately with actors without the audio being included in the main broadcast output.
+* Low-Latency Performance: Ensuring real-time audio transmission was minimised to support natural interaction. The target was a mouth-to-ear latency of less than 500ms.
+
+## Implementation
+
+I built the frontend using React Native with Expo for cross-platform compatibility. The backend was developed in Go for high performance and efficient concurrency management. In order to transmit audio data between audience members, actors and directors, WebRTC was used for low-latency, peer-to-peer audio transmission, and WebSocket for signalling and control. The server was deployed and hosted on a Google Compute Engine VM.
+
+Evaluation demonstrated the application successfully met its low-latency requirement. Testing yielded average mouth-to-ear latencies of 219ms in a local network and 414ms when using a US-based VM. Both results were within the 500ms target threshold, which even though it wasn't the main goal I'm very happy about achieving solely since it feels like it can be used .
+
+## Project Reflection
+
+One of the most significant learning experiences was the initial use of WebSocket for audio transmission, which proved to be a really dumb idea, since it wasn't designed for real-time communication (I can't think of a single protocol fit for that purpose…). This approach resulted in a noticeable lag, averaging about 1.5 seconds, and silent gaps, rendering it unsatisfactory for real-time communication. After looking into the problem, I found WebRTC, which natively supports real-time communication. Switching to WebRTC significantly improved performance, reducing latency and eliminating audio gaps.
+
+Overall, RadioStage was a rewarding project that allowed me to explore real-time audio technologies and user-centred design in a specialised context. The application effectively addressed the needs of remote radio theatre productions, providing a tailored solution that general-purpose platforms could not offer.

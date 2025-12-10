@@ -1,0 +1,28 @@
+---
+title: "Spack Dependency Builder"
+publishedAt: "2024-01-16"
+summary: "An R and Python package recipe builder for Spack, a package manager for high-performance computing environments."
+repoUrl: "https://github.com/wtsi-hgi/r-spack-recipe-builder"
+---
+
+During my time at the Human Genetics Informatics team at Sanger Institute, we hosted an environment manager internally, called SoftPack. This allowed anyone in the company to create and share the environments they used for certain analyses, making it easy to reproduce results and share setups with colleagues. SoftPack was built on top of [Spack](https://spack.io/), a powerful package manager designed for high-performance computing environments.
+
+One of the challenges we faced was the lack of support for R packages in Spack. If someone wanted to include an R package in their environment that wasn't available in SoftPack, they'd have to email us and wait for us to create a Spack recipe for that package. This process was inefficient, and most of all, medial. Creating Spack recipes for R packages was a trivial process, requiring only the package page on CRAN to create, with a less than 1% chance of anything going wrong (ignoring human error).
+
+We concluded that we could automate this process, so that creating an R package recipe would be as simple as passing the package name to a script, turning a 5-10 minute job into a 3 second one.
+
+## The initial idea
+
+I created the Spack Dependency Builder, a command-line tool written in Python that generates Spack recipes for R packages from CRAN and Bioconductor. The tool fetches package metadata through the CRAN page itself, "parses" the HTML through string comparisons and constructs the necessary Spack recipe files for itself and its dependencies.
+
+I was able to put a first prototype together quite quickly, and it worked reasonably well. But soon after we found that CRAN and Bioconductor exposes their entire database in the form of `cranLibrary.rds` and `VIEWS`, we realised we didn't have to stop at making Spack recipes based on user requests, we could make recipes for all R packages.
+
+## Scaling up
+
+I modified the tool to download and parse the entire CRAN and Bioconductor package databases, generating Spack recipes for all packages. This involved handling dependencies, versions, and ensuring that the generated recipes were compatible with Spack's requirements. The tool was designed to be extensible, allowing for future support of Python packages as well; this however didn't come to fruition before my time at Sanger concluded.
+
+The final tool was able to generate Spack recipes for over 20,000 R packages, significantly expanding the available packages in SoftPack. This allowed users to create environments with a much wider range of R packages without needing to wait for manual recipe creation, reducing the number of roadblocks for creating environments. This then offsprung project named ubeR, an environment consisting of every R package available on CRAN and Bioconductor, intended to be used as a sandbox for testing purposes.
+
+## Reflection
+
+The Spack Dependency Builder was a successful project that addressed a specific need within our team. By automating the creation of Spack recipes for R packages, we were able to significantly improve the efficiency of our environment management process. The tool not only saved time but also empowered users to create their own environments without relying on manual intervention. The project also provided valuable experience in working with package management systems and automating repetitive tasks, skills that I now use frequently.
