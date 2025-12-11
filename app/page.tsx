@@ -8,10 +8,10 @@ export default function Page() {
 			<p className="mb-2 text-5xl font-semibold tracking-tighter">
 				Daniel Elia
 			</p>
-			<p>
+			<Typer>
 				I'm a developer based in Birmingham with a passion for making simple,
 				effective and beautiful user experiences.
-			</p>
+			</Typer>
 		</div>
 	);
 }
