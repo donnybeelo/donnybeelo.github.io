@@ -51,6 +51,7 @@ export const ShinyButton = ({
 	children?: React.ReactNode;
 }) => {
 	const pathname = usePathname();
+	const clicked = useRef(false);
 	if (!path && !onClick) {
 		return null;
 	}
@@ -62,6 +63,7 @@ export const ShinyButton = ({
 	const transitions = useRef("");
 
 	async function handleButtonPush() {
+		if (!clicked.current) return;
 		if (!openInstantly) await new Promise((resolve) => setTimeout(resolve, 75));
 		if (path) {
 			router.push(path);
@@ -100,12 +102,28 @@ export const ShinyButton = ({
 		const button = buttonRef.current;
 		if (!button) return;
 		if ((e.buttons & 1) === 0) {
+			clicked.current = false;
 			button.style.setProperty("--shine-width", `${getShineWidth()}px`);
-
 			button.style.setProperty("--transitions", transitions.current);
-
 			button.style.removeProperty("--no-shadow");
+		} else {
+			button.style.setProperty(
+				"--transitions",
+				transitions.current + ",top 50ms,left 50ms",
+			);
+			button.style.setProperty("--shine-width", `${getShineWidth() / 1.75}px`);
+			button.style.setProperty("--no-shadow", "none");
 		}
+	}
+
+	async function mouseLeaveEvent(): Promise<void> {
+		const button = buttonRef.current;
+		if (!button) return;
+		clicked.current = false;
+		await new Promise((resolve) => setTimeout(resolve, 200));
+		const { width, height } = button.getBoundingClientRect();
+		button.style.setProperty("--x", String(width / 2));
+		button.style.setProperty("--y", String(height / 2));
 	}
 
 	function touchMoveEvent(e: TouchEvent): void {
@@ -138,6 +156,7 @@ export const ShinyButton = ({
 	}
 
 	async function mouseDownEvent(): Promise<void> {
+		clicked.current = true;
 		const button = buttonRef.current;
 		if (!button) return;
 		button.style.setProperty(
@@ -155,7 +174,7 @@ export const ShinyButton = ({
 		setTimeout(() => {
 			button.style.removeProperty("--no-shadow");
 			button.style.setProperty("--transitions", transitions.current);
-			if (path)
+			if (clicked.current)
 				button.style.setProperty("background-color", "var(--button-active)");
 		}, 50);
 		setTimeout(() => {
@@ -215,6 +234,7 @@ export const ShinyButton = ({
 			button.style.setProperty("--x", String(width / 2));
 			button.style.setProperty("--y", String(height / 2));
 			button.addEventListener("mouseenter", mouseMoveEvent);
+			button.addEventListener("mouseleave", mouseLeaveEvent);
 			button.addEventListener("mousemove", mouseMoveEvent);
 			button.addEventListener("touchmove", touchMoveEvent);
 			button.addEventListener("touchstart", touchStartEvent);
