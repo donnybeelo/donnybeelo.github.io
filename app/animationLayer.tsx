@@ -1,5 +1,8 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+
 // Small hook to respect prefers-reduced-motion
 export function usePrefersReducedMotion(): boolean {
 	if (typeof window === "undefined") return false;
@@ -7,15 +10,19 @@ export function usePrefersReducedMotion(): boolean {
 	return mediaQuery.matches;
 }
 
-import { usePathname } from "next/navigation";
-
 export default function AnimationLayer({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const pathname = usePathname();
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
+
 	return (
-		<div key={usePathname()} className="animationLayer">
+		<div key={pathname} className="animationLayer">
 			{children}
 		</div>
 	);
