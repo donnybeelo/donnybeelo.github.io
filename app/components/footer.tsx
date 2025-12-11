@@ -34,14 +34,28 @@ export default function Footer() {
 	const updateMargin = useCallback(() => {
 		const documentHeight = document.documentElement.scrollHeight;
 		const viewportHeight = window.innerHeight;
-		setShouldHaveMargin(documentHeight > viewportHeight);
-	}, []);
+		setShouldHaveMargin(
+			documentHeight > viewportHeight + (shouldHaveMargin ? 64 : 0),
+		);
+	}, [shouldHaveMargin]);
 
 	useEffect(() => {
 		updateMargin();
 
 		window.addEventListener("resize", updateMargin);
-		return () => window.removeEventListener("resize", updateMargin);
+
+		// Use ResizeObserver to detect when content size changes
+		const resizeObserver = new ResizeObserver(() => {
+			updateMargin();
+		});
+
+		// Observe the body for size changes
+		resizeObserver.observe(document.body);
+
+		return () => {
+			window.removeEventListener("resize", updateMargin);
+			resizeObserver.disconnect();
+		};
 	}, [updateMargin]);
 
 	useEffect(() => {
