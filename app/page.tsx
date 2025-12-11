@@ -10,7 +10,7 @@ export default function Page() {
 			</p>
 			<p>
 				I'm a developer based in Birmingham with a passion for making simple,
-				effective and functional user experiences.
+				effective and beautiful user experiences.
 			</p>
 		</div>
 	);

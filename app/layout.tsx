@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 	},
 	openGraph: {
 		title: "Daniel Elia",
-		description: "My website filled with wonderful black-and-white whimsy!",
+		description: "I'm a developer based in Birmingham with a passion for making simple, effective and beautiful user experiences.",
 		url: baseUrl,
 		siteName: "donnybeelo",
 		locale: "en_GB",
