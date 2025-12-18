@@ -68,6 +68,9 @@ export default function RootLayout({
 			lang="en"
 			className={`${momo.variable} ${firaMono.variable} ${momoDisplay.variable} text-black bg-white dark:text-white dark:bg-black`}
 		>
+			<head>
+				<meta name="google-site-verification" content="cAMk5v21nH2-yXJt3nPCjjdPSWECBoZm75aAK8tvQIo" />
+			</head>
 			<body className="fontMomo antialiased max-w-3xl mt-8 mx-auto">
 				<main className="flex-auto min-w-0 mt-6 flex flex-col mx-6">
 					<Navbar />
