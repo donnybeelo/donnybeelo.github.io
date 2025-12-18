@@ -1,6 +1,6 @@
 import { CustomMDX } from "app/components/mdx";
 import { formatDate } from "@/posts/utils";
-import { baseUrl } from "@/src/sitemap";
+import { baseUrl } from "@/app/sitemap";
 import { BackButton } from "app/components/backButton";
 import { ImageContainer } from "app/components/imageContainer";
 import { ShinyButton } from "app/components/shinyButton";

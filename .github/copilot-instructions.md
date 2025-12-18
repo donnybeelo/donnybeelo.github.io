@@ -46,7 +46,7 @@ bun run build
 
 - **MDX**: Used for rendering rich content in blog posts and project pages.
 - **Next.js Routing**: Dynamic routes are used extensively for blog and project pages.
-- **Sitemap Generation**: The `src/sitemap.ts` script generates the sitemap for SEO purposes.
+- **Sitemap Generation**: The `app/sitemap.ts` script generates the sitemap for SEO purposes.
 
 ## Examples
 

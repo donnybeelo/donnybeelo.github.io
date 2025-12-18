@@ -1,8 +1,9 @@
 import { getBlogPosts, getProjectPosts } from "@/posts/utils";
-import { getBaseUrl } from "@/app/robots.txt/route";
+
+export const baseUrl =
+	process.env.NEXT_PUBLIC_BASE_URL || "https://donnybeelo.github.io";
 
 export default async function sitemap() {
-	const baseUrl = await getBaseUrl();
 	let blogs = getBlogPosts().map((post) => ({
 		url: `${baseUrl}/blog/${post.slug}`,
 		lastModified: post.metadata.publishedAt,

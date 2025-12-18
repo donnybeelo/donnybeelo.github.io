@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "NEXT_PUBLIC_BASE_URL=http://localhost:3000 next dev --turbopack",
     "prod": "next build --turbopack && trap 'rm -rf out' INT; npx serve@latest out",
     "build": "next build --turbopack",
     "start": "npx serve@latest out",
