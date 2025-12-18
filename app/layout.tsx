@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import { Fira_Mono } from "next/font/google";
 import { Navbar } from "./components/nav";
 import Footer from "./components/footer";
-import { baseUrl } from "@/src/sitemap";
+import { baseUrl } from "@/app/sitemap";
 import AnimationLayer from "./animationLayer";
 
 export const metadata: Metadata = {

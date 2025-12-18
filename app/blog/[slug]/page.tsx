@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getBlogPosts } from "@/posts/utils";
-import { baseUrl } from "@/src/sitemap";
+import { baseUrl } from "@/app/sitemap";
 import { Metadata } from "next";
 import PostDetail from "app/components/postDetail";
 

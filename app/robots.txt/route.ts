@@ -1,9 +1,14 @@
-import { baseUrl } from "@/src/sitemap";
+import { headers } from "next/headers";
 
-export const dynamic = "force-static";
+export async function getBaseUrl() {
+	const headersList = await headers();
+	const host = headersList.get("host") || "donnybeelo.github.io";
+	const protocol = host.includes("localhost") ? "http" : "https";
+	return `${protocol}://${host}`;
+}
 
 export async function GET() {
-	const sitemap = `${baseUrl}/sitemap.xml`;
+	const sitemap = `${await getBaseUrl()}/sitemap.xml`;
 
 	const content = `User-agent: *
 Sitemap: ${sitemap}
