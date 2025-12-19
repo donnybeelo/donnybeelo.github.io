@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "NEXT_PUBLIC_BASE_URL=http://localhost:3000 bun run postbuild && next dev --turbopack",
 		"prod": "bun run build && trap 'rm -rf out' INT; npx serve@latest out",
-		"build": "next build --turbopack && bun run postbuild",
+		"build": "next build --turbopack",
 		"postbuild": "bun run scripts/generate-static-files.ts",
 		"start": "npx serve@latest out",
 		"lint": "biome check",
