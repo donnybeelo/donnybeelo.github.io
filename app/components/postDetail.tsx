@@ -64,7 +64,7 @@ export default function PostDetail({
 				fill={post.metadata.fillImage === "true"}
 			/>
 
-			<div className="flex justify-between items-center">
+			<div className="flex justify-between items-end-safe">
 				<Typer className="title font-semibold text-2xl tracking-tighter">
 					{post.metadata.title}
 				</Typer>
@@ -72,10 +72,10 @@ export default function PostDetail({
 					<ShinyButton
 						path={post.metadata.repoUrl}
 						name="github repo"
+						className="mb-1!"
 						icon={
 							<img
 								src={githubIcon.src}
-								alt="GitHub"
 								className="w-4 dark:invert-0 invert"
 							/>
 						}

@@ -285,7 +285,8 @@ export const ShinyButton = ({
 
 	const commonProps = {
 		className:
-			"flex items-center text-left gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 min-w-fit " +
+			className +
+			" flex items-center text-left gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 min-w-fit " +
 			(isTouched === 2
 				? "touch-active "
 				: isTouched === 1
@@ -293,8 +294,7 @@ export const ShinyButton = ({
 					: "") +
 			(inline
 				? "shinyLink !p-0 !m-0 !rounded-xs inline-block align-bottom"
-				: "") +
-			className,
+				: ""),
 		style: {
 			backgroundColor:
 				path === "/" + pathname.split("/")[1] ? "var(--button-active)" : "",
