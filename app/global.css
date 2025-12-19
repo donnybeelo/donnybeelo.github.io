@@ -261,8 +261,8 @@ table {
 	opacity: 0.4;
 }
 
-.fontFiraMono {
-	font-family: var(--fontFiraMono);
+.fontFiraCode {
+	font-family: var(--fontFiraCode);
 }
 .fontMomo {
 	font-family: var(--fontMomo);
@@ -271,7 +271,7 @@ table {
 	font-family: var(--fontMomoDisplay);
 }
 code {
-	font-family: var(--fontFiraMono);
+	font-family: var(--fontFiraCode);
 }
 h1 {
 	@apply mb-2;
