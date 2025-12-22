@@ -21,6 +21,8 @@
 	--shine-background: #aaa2;
 	--nav-bar-background: #eee9;
 	--transitions: opacity 200ms, width 50ms, height 50ms;
+
+	min-width: 400px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -326,7 +328,13 @@ h1 {
 
 .animationLayer {
 	@media (prefers-reduced-motion: no-preference) {
-		animation: fade-in 0.2s ease-in-out;
+		animation: fade-in 125ms ease-in-out;
+	}
+}
+
+.animationLayer.fade-out {
+	@media (prefers-reduced-motion: no-preference) {
+		animation: fade-out 125ms ease-in-out forwards;
 	}
 }
 
@@ -336,5 +344,14 @@ h1 {
 	}
 	to {
 		opacity: 1;
+	}
+}
+
+@keyframes fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
 	}
 }

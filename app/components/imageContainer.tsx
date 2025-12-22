@@ -25,13 +25,6 @@ export function ImageContainer({
 	};
 
 	useEffect(() => {
-		if (isOpen && !hasPushedRef.current) {
-			window.history.pushState(null, "", window.location.href);
-			hasPushedRef.current = true;
-		}
-	}, [isOpen]);
-
-	useEffect(() => {
 		const handlePopState = () => {
 			if (isOpen) {
 				setIsOpen(false);
@@ -43,29 +36,52 @@ export function ImageContainer({
 	}, [isOpen]);
 
 	useEffect(() => {
-		if (isOpen && overlayRef.current) {
-			overlayRef.current.focus();
+		if (isOpen) {
+			document.body.style.overflow = "hidden";
+			if (overlayRef.current) {
+				overlayRef.current.focus();
+			}
+			if (!hasPushedRef.current) {
+				window.history.pushState(null, "", window.location.href);
+				hasPushedRef.current = true;
+			}
+		} else {
+			document.body.style.overflow = "scroll";
 		}
 	}, [isOpen]);
 
 	if (!src) {
 		return null;
 	}
+	// Preload the image as early as possible
+	useEffect(() => {
+		if (src) {
+			const link = document.createElement("link");
+			link.rel = "preload";
+			link.as = "image";
+			link.href = src;
+			document.head.appendChild(link);
+
+			return () => {
+				document.head.removeChild(link);
+			};
+		}
+	}, [src]);
 
 	return (
 		<>
 			<ShinyButton
 				onClick={() => setIsOpen(true)}
-				className={`${fill ? "max-h-60" : ""} flex justify-center mx-auto! mb-6! w-fit p-2! h-fit`}
+				className={`${fill ? "max-h-60" : ""} flex justify-center mx-auto! mb-6! w-fit p-2! h-fit ${isOpen ? "bg-(--button-active)!" : ""}`}
 			>
 				<img
 					src={src}
-					className={`${fill ? "object-cover min-w-full min-h-full overflow-hidden " : "max-h-60 object-contain w-fit max-w-full"} z-10 h-full  max-w-full"} z-10 rounded-lg`}
+					className={`${fill ? "object-cover min-w-full min-h-full overflow-hidden " : "max-h-60 object-contain w-fit max-w-full"} z-10 rounded-lg`}
 				/>
 			</ShinyButton>
 			<div
 				ref={overlayRef}
-				className={`fixed inset-0 flex items-center justify-center z-50 ${!prefersReducedMotion ? "transition-opacity duration-300 ease-in-out" : ""} ${isOpen ? "opacity-100" : "opacity-0"} ${!isOpen ? "pointer-events-none" : ""}`}
+				className={`fixed inset-0 flex items-center justify-center z-50 scroll- ${!prefersReducedMotion ? "transition-opacity duration-300 ease-in-out" : ""} ${isOpen ? "opacity-100" : "opacity-0"} ${!isOpen ? "pointer-events-none" : ""}`}
 				onClick={closeModal}
 				tabIndex={-1}
 				onKeyDown={(e) => {
@@ -77,7 +93,7 @@ export function ImageContainer({
 			>
 				<img
 					src={src}
-					className={`max-w-full max-h-full object-contain ${!prefersReducedMotion ? "transition-transform duration-300 ease-in-out" : ""} ${!prefersReducedMotion && isOpen ? "scale-100" : "scale-95"}`}
+					className={`max-w-[90%] max-h-[90%] object-contain ${!prefersReducedMotion ? "transition-transform duration-300 ease-in-out" : ""} ${!prefersReducedMotion && isOpen ? "scale-100" : "scale-95"}`}
 					onClick={(e) => e.stopPropagation()}
 				/>
 			</div>

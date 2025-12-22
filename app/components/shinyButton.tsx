@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, startTransition } from "react";
 import { usePrefersReducedMotion } from "app/animationLayer";
 
 let lastTabDirection: "forward" | "backward" | "click" = "click";
@@ -64,12 +64,39 @@ export const ShinyButton = ({
 
 	async function handleButtonPush() {
 		if (!clicked.current) return;
-		if (!openInstantly) await new Promise((resolve) => setTimeout(resolve, 75));
-		if (path) {
-			router.push(path);
-		} else if (onClick) {
-			onClick();
+		if (path === pathname) return;
+
+		const animationLayer = document.querySelector(".animationLayer");
+
+		if (
+			!path ||
+			prefersReducedMotion ||
+			!animationLayer ||
+			path.startsWith("https://")
+		) {
+			if (!openInstantly)
+				await new Promise((resolve) => setTimeout(resolve, 50));
+			startTransition(() => {
+				if (onClick) {
+					onClick!();
+				} else if (path) {
+					router.push(path);
+				}
+			});
+			return;
 		}
+
+		if (!openInstantly) await new Promise((resolve) => setTimeout(resolve, 50));
+		animationLayer.classList.add("fade-out");
+
+		// Navigate to new page
+		startTransition(() => {
+			if (path) {
+				router.push(path);
+			} else if (onClick) {
+				onClick();
+			}
+		});
 	}
 
 	function updateButtonVars(clientX: number, clientY: number) {
@@ -174,11 +201,11 @@ export const ShinyButton = ({
 		setTimeout(() => {
 			button.style.removeProperty("--no-shadow");
 			button.style.setProperty("--transitions", transitions.current);
-			if (clicked.current)
+			if (clicked.current && path)
 				button.style.setProperty("background-color", "var(--button-active)");
 		}, 50);
 		setTimeout(() => {
-			if (!path?.startsWith("/"))
+			if (path && !path.startsWith("/"))
 				button.style.removeProperty("background-color");
 		}, 1000);
 	}
@@ -297,7 +324,9 @@ export const ShinyButton = ({
 				: ""),
 		style: {
 			backgroundColor:
-				path === "/" + pathname.split("/")[1] ? "var(--button-active)" : "",
+				path === "/" + pathname.split("/")[1] && name != "back"
+					? "var(--button-active)"
+					: "",
 			transition: "background-color 150ms, box-shadow 50ms",
 			...style,
 		},
@@ -308,8 +337,11 @@ export const ShinyButton = ({
 		return (
 			<Link
 				key={path!}
-				href={{}}
-				onClick={handleButtonPush!}
+				href={path || ""}
+				onClick={(e) => {
+					e.preventDefault();
+					handleButtonPush();
+				}}
 				ref={buttonRef as React.RefObject<HTMLAnchorElement>}
 				{...commonProps}
 			>

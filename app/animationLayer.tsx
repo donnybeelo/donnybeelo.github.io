@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 // Small hook to respect prefers-reduced-motion
 export function usePrefersReducedMotion(): boolean {
@@ -16,13 +16,19 @@ export default function AnimationLayer({
 	children: React.ReactNode;
 }) {
 	const pathname = usePathname();
+	const containerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
+
+		// Remove fade-out class when new page mounts
+		if (containerRef.current) {
+			containerRef.current.classList.remove("fade-out");
+		}
 	}, [pathname]);
 
 	return (
-		<div key={pathname} className="animationLayer">
+		<div ref={containerRef} key={pathname} className="animationLayer">
 			{children}
 		</div>
 	);

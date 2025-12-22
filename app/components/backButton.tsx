@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { ShinyButton } from "./shinyButton";
 import { usePathname } from "next/navigation";
 
@@ -23,24 +22,13 @@ function BackArrowIcon() {
 }
 
 export const BackButton = () => {
-	const router = useRouter();
 	const pathname = usePathname();
-
-	console.log("Current pathname:", pathname);
-
-	const handleBack = () => {
-		const segments = pathname.split("/");
-		console.log("Path segments:", segments);
-		segments.pop();
-		const upPath = segments.join("/");
-		console.log("Navigating up to:", upPath || "/");
-		router.push(upPath);
-	};
+	const upPath = pathname.split("/").slice(0,-1).join("/");
 
 	return (
 		<ShinyButton
 			className="mb-6!"
-			onClick={handleBack}
+			path={upPath || "/"}
 			name="back"
 			icon={<BackArrowIcon />}
 		/>
