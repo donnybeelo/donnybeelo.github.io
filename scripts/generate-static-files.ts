@@ -38,7 +38,7 @@ ${allUrls
 
 function generateRobotsTxt() {
 	return `User-agent: *
-Allow: /
+Disallow: 
 Sitemap: ${baseUrl}/sitemap.xml
 `;
 }
