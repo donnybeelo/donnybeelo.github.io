@@ -134,10 +134,6 @@ export const ShinyButton = ({
 			button.style.setProperty("--transitions", transitions.current);
 			button.style.removeProperty("--no-shadow");
 		} else {
-			button.style.setProperty(
-				"--transitions",
-				transitions.current + ",top 50ms,left 50ms",
-			);
 			button.style.setProperty("--shine-width", `${getShineWidth() / 1.75}px`);
 			button.style.setProperty("--no-shadow", "none");
 		}
@@ -190,6 +186,10 @@ export const ShinyButton = ({
 			"--transitions",
 			transitions.current + ",top 50ms,left 50ms",
 		);
+		setTimeout(
+			() => button.style.setProperty("--transitions", transitions.current),
+			50,
+		);
 		button.style.setProperty("--shine-width", `${getShineWidth() / 1.75}px`);
 		button.style.setProperty("--no-shadow", "none");
 	}
@@ -197,6 +197,10 @@ export const ShinyButton = ({
 	async function mouseUpEvent(): Promise<void> {
 		const button = buttonRef.current;
 		if (!button) return;
+		button.style.setProperty(
+			"--transitions",
+			transitions.current + ",top 50ms,left 50ms",
+		);
 		button.style.setProperty("--shine-width", `${getShineWidth()}px`);
 		setTimeout(() => {
 			button.style.removeProperty("--no-shadow");
