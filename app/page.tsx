@@ -13,7 +13,7 @@ export default function Page() {
 			</Typer>
 			<img
 				src={bauhaus.src}
-				className="absolute right-0 -translate-y-5 h-[calc(100vh-22rem)] md:h-[calc(100vh-17rem)] grayscale dark:invert select-none pointer-events-none animate-[float_6s_ease-in-out_infinite,opacity-pulse_7.7s_ease-in-out_infinite]"
+				className="absolute right-0 -translate-y-5 h-[calc(100vh-22rem)] md:h-[calc(100vh-17rem)] grayscale dark:invert select-none pointer-events-none animate-[float_6s_ease-in-out_infinite,opacity-pulse_7.7s_ease-in-out_infinite,fadeIn_3.85s_ease-in]"
 			/>
 			<style>{`
 				@keyframes float {
@@ -26,18 +26,18 @@ export default function Page() {
 				}
 				@keyframes opacity-pulse {
 					0%, 100% {
-						opacity: 0.08;
-					}
-					50% {
 						opacity: 0.05;
 					}
-				}
-				@keyframes float {
-					0%, 100% {
-						transform: translateY(0);
-					}
 					50% {
-						transform: translateY(1rem);
+						opacity: 0.08;
+					}
+				}
+				@keyframes fadeIn {
+					0% {
+						opacity: 0;
+					}
+					100% {
+						opacity: 0.08;
 					}
 				}
 			`}</style>
