@@ -317,7 +317,7 @@ export const ShinyButton = ({
 	const commonProps = {
 		className:
 			className +
-			" flex items-center text-left gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 min-w-fit " +
+			" flex items-center text-left gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 min-w-fit backdrop-blur-md " +
 			(isTouched === 2
 				? "touch-active "
 				: isTouched === 1
