@@ -4,7 +4,7 @@ import bauhaus from "@/public/bauhaus.svg";
 export default function Page() {
 	return (
 		<div className="h-[calc(100vh-22rem)] md:h-[calc(100vh-17rem)] flex flex-col justify-center items-start relative">
-			<p className="mb-2 text-5xl font-semibold tracking-tighter">
+			<p className="mb-2 text-5xl font-semibold tracking-tighter fontMomoDisplay">
 				Daniel Elia
 			</p>
 			<Typer>

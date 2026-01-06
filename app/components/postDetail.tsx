@@ -82,7 +82,7 @@ export default function PostDetail({
 
 			<div className="flex gap-2 items-center mt-2 mb-8 text-sm">
 				<p className="text-neutral-800 dark:text-neutral-200">by Daniel Elia</p>
-				<p>-</p>
+				<p className="text-neutral-700 dark:text-neutral-300">-</p>
 				<p className="text-sm text-neutral-600 dark:text-neutral-400">
 					{formatDate(post.metadata.publishedAt)}
 				</p>
