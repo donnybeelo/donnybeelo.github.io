@@ -13,7 +13,7 @@ export default function Page() {
 			</Typer>
 			<img
 				src={bauhaus.src}
-				className="absolute right-0 -translate-y-5 h-[calc(100vh-22rem)] md:h-[calc(100vh-17rem)] grayscale dark:invert select-none pointer-events-none animate-[float_6s_ease-in-out_infinite,opacity-pulse_3.7s_ease-in-out_infinite]"
+				className="absolute right-0 -translate-y-5 h-[calc(100vh-22rem)] md:h-[calc(100vh-17rem)] grayscale dark:invert select-none pointer-events-none animate-[float_6s_ease-in-out_infinite,opacity-pulse_7.7s_ease-in-out_infinite]"
 			/>
 			<style>{`
 				@keyframes float {
