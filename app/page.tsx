@@ -1,5 +1,6 @@
 import Typer from "./components/typer";
 import bauhaus from "@/public/bauhaus.svg";
+import bauhausDark from "@/public/bauhaus-dark.svg";
 
 export default function Page() {
 	return (
@@ -11,10 +12,16 @@ export default function Page() {
 				I'm a developer based in Birmingham with a passion for making simple,
 				effective and beautiful user experiences.
 			</Typer>
-			<img
-				src={bauhaus.src}
-				className="absolute inset-x-0 md:left-auto md:right-0 mx-auto h-[calc(100vh-22rem)] md:h-[calc(100vh-17rem)] grayscale dark:invert select-none pointer-events-none animate-[float_6s_ease-in-out_infinite,opacity-pulse_7.7s_ease-in-out_infinite,fadeIn_3.85s_ease-in]"
-			/>
+			{[
+				{ src: bauhaus.src, visibility: "dark:invisible visible" },
+				{ src: bauhausDark.src, visibility: "invisible dark:visible" },
+			].map(({ src, visibility }) => (
+				<img
+					key={src}
+					src={src}
+					className={`${visibility} absolute inset-x-0 md:left-auto md:right-0 mx-auto h-[calc(100vh-22rem)] md:h-[calc(100vh-17rem)] grayscale select-none pointer-events-none animate-[float_6s_ease-in-out_infinite,opacity-pulse_7.7s_ease-in-out_infinite,fadeIn_3.85s_ease-in]`}
+				/>
+			))}
 			<style>{`
 				@keyframes float {
 					0%, 100% {
@@ -26,10 +33,10 @@ export default function Page() {
 				}
 				@keyframes opacity-pulse {
 					0%, 100% {
-						opacity: 0.05;
+						opacity: 0.03;
 					}
 					50% {
-						opacity: 0.08;
+						opacity: 0.06;
 					}
 				}
 				@keyframes fadeIn {
@@ -37,7 +44,7 @@ export default function Page() {
 						opacity: 0;
 					}
 					100% {
-						opacity: 0.08;
+						opacity: 0.06;
 					}
 				}
 			`}</style>
