@@ -1,5 +1,4 @@
 // import Link from "next/link";
-import Image, { ImageProps } from "next/image";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import hljs from "highlight.js";
 import React from "react";
@@ -41,10 +40,6 @@ function CustomLink(props: React.ComponentProps<"a">) {
 			{props.children}
 		</ShinyButton>
 	);
-}
-
-function RoundedImage(props: ImageProps) {
-	return <Image className="rounded-lg" {...props} />;
 }
 
 function Code({ children, ...props }: React.ComponentProps<"code">) {
