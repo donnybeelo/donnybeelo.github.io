@@ -4,6 +4,7 @@ import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import hljs from "highlight.js";
 import React from "react";
 import { ShinyButton } from "./shinyButton";
+import { ImageContainer } from "./imageContainer";
 
 interface TableProps {
 	data: {
@@ -101,7 +102,7 @@ let components = {
 	h4: createHeading(4),
 	h5: createHeading(5),
 	h6: createHeading(6),
-	Image: RoundedImage,
+	Image: ImageContainer,
 	a: CustomLink,
 	code: Code,
 	Table,

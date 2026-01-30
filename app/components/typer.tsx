@@ -10,11 +10,13 @@ export default function Typer({
 	className,
 	cursorChar = DEFAULT_CURSOR,
 	speed = 0,
+	action,
 }: {
 	children: string;
 	className?: string;
 	cursorChar?: string;
 	speed?: number;
+	action?: () => void;
 }) {
 	const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -53,7 +55,10 @@ export default function Typer({
 			if (index >= children.length) {
 				clearInterval(interval);
 				// start blinking after a short delay so you see the final character
-				setTimeout(() => setStartBlinking(true), 200);
+				setTimeout(() => {
+					setStartBlinking(true);
+					if (action) action();
+				}, 200);
 			}
 		}, msPerChar);
 

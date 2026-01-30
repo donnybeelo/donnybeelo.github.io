@@ -263,6 +263,11 @@ table {
 	opacity: 0.4;
 }
 
+.aboutButton {
+	transition: opacity 100ms ease-in-out !important;
+	margin-top: 1rem;
+}
+
 .fontFiraCode {
 	font-family: var(--fontFiraCode);
 }
@@ -353,5 +358,32 @@ h1 {
 	}
 	to {
 		opacity: 0;
+	}
+}
+
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0.5rem);
+	}
+	50% {
+		transform: translateY(2.5rem);
+	}
+}
+@keyframes opacity-pulse {
+	0%,
+	100% {
+		opacity: 0.03;
+	}
+	50% {
+		opacity: 0.06;
+	}
+}
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 0.06;
 	}
 }

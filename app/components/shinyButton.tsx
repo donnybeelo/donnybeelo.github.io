@@ -61,6 +61,7 @@ export const ShinyButton = ({
 	const [isTouched, setIsTouched] = useState(0);
 	let touchStartTime: number | null = null; // Track the start time of the touch
 	const transitions = useRef("");
+	const transitionAddition = ",top 50ms,left 50ms";
 
 	async function handleButtonPush() {
 		if (!clicked.current) return;
@@ -184,7 +185,7 @@ export const ShinyButton = ({
 		if (!button) return;
 		button.style.setProperty(
 			"--transitions",
-			transitions.current + ",top 50ms,left 50ms",
+			transitions.current + transitionAddition,
 		);
 		setTimeout(
 			() => button.style.setProperty("--transitions", transitions.current),
@@ -199,7 +200,7 @@ export const ShinyButton = ({
 		if (!button) return;
 		button.style.setProperty(
 			"--transitions",
-			transitions.current + ",top 50ms,left 50ms",
+			transitions.current + transitionAddition,
 		);
 		button.style.setProperty("--shine-width", `${getShineWidth()}px`);
 		setTimeout(() => {
@@ -317,7 +318,7 @@ export const ShinyButton = ({
 	const commonProps = {
 		className:
 			className +
-			" flex items-center text-left gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 min-w-fit backdrop-blur-md " +
+			" flex items-center text-left gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 min-w-fit backdrop-blur-sm " +
 			(isTouched === 2
 				? "touch-active "
 				: isTouched === 1

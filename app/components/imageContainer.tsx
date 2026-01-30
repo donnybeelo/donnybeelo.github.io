@@ -7,9 +7,11 @@ import { usePrefersReducedMotion } from "../animationLayer";
 export function ImageContainer({
 	src,
 	fill,
+	className,
 }: {
 	src?: string;
 	fill?: boolean;
+	className?: string;
 }) {
 	const overlayRef = useRef<HTMLDivElement>(null);
 	const [isOpen, setIsOpen] = useState(false);
@@ -72,11 +74,11 @@ export function ImageContainer({
 		<>
 			<ShinyButton
 				onClick={() => setIsOpen(true)}
-				className={`${fill ? "max-h-60" : ""} flex justify-center mx-auto! mb-6! w-fit p-2! h-fit ${isOpen ? "bg-(--button-active)!" : ""}`}
+				className={`${fill ? "max-h-60" : ""} flex justify-center w-fit h-fit ${isOpen ? "bg-(--button-active)!" : ""} ${className ? className : "mx-auto! mb-6! p-2!"}`}
 			>
 				<img
 					src={src}
-					className={`${fill ? "object-cover min-w-full min-h-full overflow-hidden " : "max-h-60 object-contain w-fit max-w-full"} z-10 rounded-lg`}
+					className={`${fill ? "object-cover min-w-full min-h-full overflow-hidden " : "max-h-60 object-contain w-fit max-w-full"}  rounded-md`}
 				/>
 			</ShinyButton>
 			<div
