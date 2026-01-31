@@ -203,9 +203,9 @@ export const ShinyButton = ({
 			"--transitions",
 			transitions.current + transitionAddition,
 		);
-		requestAnimationFrame(() => {
+		setTimeout(() => {
 			button.style.setProperty("--shine-width", `${getShineWidth()}px`);
-		});
+		}, 5);
 		setTimeout(() => {
 			button.style.removeProperty("--no-shadow");
 			button.style.setProperty("--transitions", transitions.current);
