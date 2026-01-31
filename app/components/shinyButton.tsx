@@ -64,7 +64,7 @@ export const ShinyButton = ({
 	const transitionAddition = ",top 50ms,left 50ms";
 
 	async function handleButtonPush() {
-		if (!clicked.current) return;
+		if (lastTabDirection === "click" && !clicked.current) return;
 		if (path === pathname) return;
 
 		const animationLayer = document.querySelector(".animationLayer");
@@ -140,14 +140,15 @@ export const ShinyButton = ({
 		}
 	}
 
-	async function mouseLeaveEvent(): Promise<void> {
+	function mouseLeaveEvent(): void {
 		const button = buttonRef.current;
 		if (!button) return;
 		clicked.current = false;
-		await new Promise((resolve) => setTimeout(resolve, 200));
-		const { width, height } = button.getBoundingClientRect();
-		button.style.setProperty("--x", String(width / 2));
-		button.style.setProperty("--y", String(height / 2));
+		setTimeout(() => {
+			const { width, height } = button.getBoundingClientRect();
+			button.style.setProperty("--x", String(width / 2));
+			button.style.setProperty("--y", String(height / 2));
+		}, 200);
 	}
 
 	function touchMoveEvent(e: TouchEvent): void {
@@ -179,7 +180,7 @@ export const ShinyButton = ({
 		setIsTouched(0);
 	}
 
-	async function mouseDownEvent(): Promise<void> {
+	function mouseDownEvent(): void {
 		clicked.current = true;
 		const button = buttonRef.current;
 		if (!button) return;
@@ -195,14 +196,16 @@ export const ShinyButton = ({
 		button.style.setProperty("--no-shadow", "none");
 	}
 
-	async function mouseUpEvent(): Promise<void> {
+	function mouseUpEvent(): void {
 		const button = buttonRef.current;
 		if (!button) return;
 		button.style.setProperty(
 			"--transitions",
 			transitions.current + transitionAddition,
 		);
-		button.style.setProperty("--shine-width", `${getShineWidth()}px`);
+		requestAnimationFrame(() => {
+			button.style.setProperty("--shine-width", `${getShineWidth()}px`);
+		});
 		setTimeout(() => {
 			button.style.removeProperty("--no-shadow");
 			button.style.setProperty("--transitions", transitions.current);
@@ -215,7 +218,7 @@ export const ShinyButton = ({
 		}, 1000);
 	}
 
-	async function handleFocus(): Promise<void> {
+	function handleFocus(): void {
 		const button = buttonRef.current;
 		if (!button || lastTabDirection === "click") return;
 		const rect = button.getBoundingClientRect();
@@ -233,7 +236,7 @@ export const ShinyButton = ({
 		}
 	}
 
-	async function handleBlur(): Promise<void> {
+	function handleBlur(): void {
 		const button = buttonRef.current;
 		if (!button) return;
 		if (lastTabDirection != "click") {
@@ -253,7 +256,7 @@ export const ShinyButton = ({
 		}
 	}
 
-	async function handleKeyDown(e: KeyboardEvent): Promise<void> {
+	function handleKeyDown(e: KeyboardEvent): void {
 		if (e.key === "Tab") {
 			lastTabDirection = e.shiftKey ? "backward" : "forward";
 		}
