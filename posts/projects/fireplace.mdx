@@ -1,0 +1,27 @@
+---
+title: "Fireplace TUI"
+publishedAt: "2026-01-21"
+summary: "An animated ASCII fireplace that runs in the terminal"
+repoUrl: "https://github.com/donnybeelo/fireplace"
+image: "/projects/fireplace.png"
+---
+
+I created this project out of a lack of options; I want a fireplace to run in the terminal on my computer for the sake of atmosphere. I assumed there would be loads of choice, or at least one obvious choice. Unfortunately, I've found nothing satisfactory.
+
+## So I told the AI to do it 
+
+I wanted to see how far I can go purely vibecoding a solution, and Gemini 3 Pro got quite far; AI models are notoriously bad at drawing, and yet it did very well with generating a convincing fire using Golang and [the tcell library](https://github.com/gdamore/tcell). I managed to go from an empty directory to a solution I'd be happy to use within 5 minutes.
+
+What it couldn't do was practically anything else. I asked it to generate convincing kindling for the fire to burn from, and it went very wrong.
+
+Here are all the ways it went wrong that I bothered to screenshot:
+
+<Image src="/projects/bad-fireplace.png" />
+
+This process was extremely painful, and required highly specific prompting in order to get a result that looked satisfying. For anyone interested, I told the model to always point a particular piece of kindling towards a centre point, with some random variance.
+
+After I got there, the last thing I asked the model to do was to generate a bash script that plays fireplace sounds using [SoX](https://en.wikipedia.org/wiki/SoX). It did well with the generation of specific `play` lines, but required human intervention to get the balance just right. The result sounds quite realistic, more realistic than I expected, and very functional as relaxing background noise.
+
+## Conclusion
+
+In the end, I got what I wanted, and although I had to jump through a lot of hoops to get there, it didn't feel like hard work, which was the outcome I hoped. AI is, of course, an amazing tool for speeding up your work, but it's not perfect in all use cases just yet. Maybe prompting AI models to generate a fireplace in the terminal could be a good test for a model's intelligence? Watch this space.
