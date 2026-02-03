@@ -321,15 +321,15 @@ export const ShinyButton = ({
 	const commonProps = {
 		className:
 			className +
-			" flex items-center text-left gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 min-w-fit backdrop-blur-sm " +
+			" flex items-center text-left gap-2 relative py-1 px-2 m-1 w-fit h-fit shinyButton cursor-pointer dark:outline dark:outline-neutral-800 min-w-fit " +
 			(isTouched === 2
 				? "touch-active "
 				: isTouched === 1
 					? "touch-going "
 					: "") +
 			(inline
-				? "shinyLink !p-0 !m-0 !rounded-xs inline-block align-bottom"
-				: ""),
+				? "shinyLink !p-0 !m-0 !rounded-xs inline-block align-bottom "
+				: " backdrop-blur-sm "),
 		style: {
 			backgroundColor:
 				path === "/" + pathname.split("/")[1] && name != "back"
