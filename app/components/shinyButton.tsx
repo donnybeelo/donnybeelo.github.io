@@ -90,7 +90,7 @@ export const ShinyButton = ({
 			path.startsWith("https://")
 		) {
 			if (!openInstantly)
-				await new Promise((resolve) => setTimeout(resolve, 50));
+				await new Promise((resolve) => setTimeout(resolve, 75));
 			startTransition(() => {
 				if (onClick) {
 					onClick!();
@@ -101,9 +101,10 @@ export const ShinyButton = ({
 			return;
 		}
 
-		if (!openInstantly) await new Promise((resolve) => setTimeout(resolve, 50));
+		if (!openInstantly) await new Promise((resolve) => setTimeout(resolve, 75));
 		animationLayer.classList.add("fade-out");
-
+		await new Promise((resolve) => setTimeout(resolve, 100));
+		
 		// Navigate to new page
 		startTransition(() => {
 			if (path) {
@@ -234,7 +235,6 @@ export const ShinyButton = ({
 			middleClickHandled.current = false;
 			clearActiveState();
 			window.open(path, "_blank", "noopener,noreferrer");
-			return;
 		}
 		const button = buttonRef.current;
 		if (!button) return;
