@@ -100,6 +100,13 @@ export const ShinyButton = ({
 		});
 	}
 
+	function handleAuxClick(e: React.MouseEvent<HTMLElement>): void {
+		if (e.button !== 1) return;
+		if (!path) return;
+		e.preventDefault();
+		window.open(path, "_blank", "noopener,noreferrer");
+	}
+
 	function updateButtonVars(clientX: number, clientY: number) {
 		if (!buttonRef.current) return;
 		const { x, y } = buttonRef.current.getBoundingClientRect();
@@ -129,7 +136,7 @@ export const ShinyButton = ({
 		updateButtonVars(e.clientX, e.clientY);
 		const button = buttonRef.current;
 		if (!button) return;
-		if ((e.buttons & 1) === 0) {
+		if ((e.buttons & 1) === 0 && (e.buttons & 4) === 0) {
 			clicked.current = false;
 			button.style.setProperty("--shine-width", `${getShineWidth()}px`);
 			button.style.setProperty("--transitions", transitions.current);
@@ -362,6 +369,7 @@ export const ShinyButton = ({
 		return (
 			<button
 				onClick={handleButtonPush!}
+				onAuxClick={handleAuxClick}
 				ref={buttonRef as React.RefObject<HTMLButtonElement>}
 				{...commonProps}
 			>
