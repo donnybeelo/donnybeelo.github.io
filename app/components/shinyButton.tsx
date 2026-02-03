@@ -52,6 +52,7 @@ export const ShinyButton = ({
 }) => {
 	const pathname = usePathname();
 	const clicked = useRef(false);
+	const middleClickHandled = useRef(false);
 	if (!path && !onClick) {
 		return null;
 	}
@@ -63,7 +64,20 @@ export const ShinyButton = ({
 	const transitions = useRef("");
 	const transitionAddition = ",top 50ms,left 50ms";
 
-	async function handleButtonPush() {
+	function clearActiveState() {
+		clicked.current = false;
+		if (buttonRef.current) {
+			buttonRef.current.style.removeProperty("background-color");
+		}
+	}
+
+	async function handleButtonPush(e?: React.MouseEvent<HTMLElement>) {
+		if (e && (e.metaKey || e.ctrlKey) && path) {
+			e.preventDefault();
+			clearActiveState();
+			window.open(path, "_blank", "noopener,noreferrer");
+			return;
+		}
 		if (lastTabDirection === "click" && !clicked.current) return;
 		if (path === pathname) return;
 
@@ -103,7 +117,12 @@ export const ShinyButton = ({
 	function handleAuxClick(e: React.MouseEvent<HTMLElement>): void {
 		if (e.button !== 1) return;
 		if (!path) return;
+		if (middleClickHandled.current) {
+			middleClickHandled.current = false;
+			return;
+		}
 		e.preventDefault();
+		clearActiveState();
 		window.open(path, "_blank", "noopener,noreferrer");
 	}
 
@@ -187,7 +206,13 @@ export const ShinyButton = ({
 		setIsTouched(0);
 	}
 
-	function mouseDownEvent(): void {
+	function mouseDownEvent(e: MouseEvent): void {
+		if (e.button === 1 && path) {
+			e.preventDefault();
+			middleClickHandled.current = true;
+		} else {
+			middleClickHandled.current = false;
+		}
 		clicked.current = true;
 		const button = buttonRef.current;
 		if (!button) return;
@@ -203,7 +228,14 @@ export const ShinyButton = ({
 		button.style.setProperty("--no-shadow", "none");
 	}
 
-	function mouseUpEvent(): void {
+	function mouseUpEvent(e: MouseEvent): void {
+		if (middleClickHandled.current && e.button === 1 && path) {
+			e.preventDefault();
+			middleClickHandled.current = false;
+			clearActiveState();
+			window.open(path, "_blank", "noopener,noreferrer");
+			return;
+		}
 		const button = buttonRef.current;
 		if (!button) return;
 		button.style.setProperty(
@@ -355,8 +387,9 @@ export const ShinyButton = ({
 				href={path || ""}
 				onClick={(e) => {
 					e.preventDefault();
-					handleButtonPush();
+					handleButtonPush(e);
 				}}
+				onAuxClick={handleAuxClick!}
 				ref={buttonRef as React.RefObject<HTMLAnchorElement>}
 				{...commonProps}
 			>
@@ -368,8 +401,9 @@ export const ShinyButton = ({
 	} else {
 		return (
 			<button
+				type="button"
 				onClick={handleButtonPush!}
-				onAuxClick={handleAuxClick}
+				onAuxClick={handleAuxClick!}
 				ref={buttonRef as React.RefObject<HTMLButtonElement>}
 				{...commonProps}
 			>
