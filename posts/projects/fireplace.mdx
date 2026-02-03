@@ -16,12 +16,18 @@ What it couldn't do was practically anything else. I asked it to generate convin
 
 Here are all the ways it went wrong that I bothered to screenshot:
 
-<Image src="/projects/bad-fireplace.png" />
+<Image src="/projects/bad-fireplace.png" alt="Screenshots of AI-generated ASCII kindling gone wrong" />
 
 This process was extremely painful, and required highly specific prompting in order to get a result that looked satisfying. For anyone interested, I told the model to always point a particular piece of kindling towards a centre point, with some random variance.
 
 After I got there, the last thing I asked the model to do was to generate a bash script that plays fireplace sounds using [SoX](https://en.wikipedia.org/wiki/SoX). It did well with the generation of specific `play` lines, but required human intervention to get the balance just right. The result sounds quite realistic, more realistic than I expected, and very functional as relaxing background noise.
 
+I then gave the model the script and told it to rewrite it in Go, in which it failed miserably. It did choose a suitable audio library, and was successful in generating cracks and pops at random intervals, but it ended up sounding very obviously non-organic, defeating the purpose of the feature entirely. Thankfully with some heavy prompting to tune the sound profile and manual intervention to adjust the gain (the initial output was redlining my speakers at 50% volume), I got a result that I'm even happier with than the bash script.
+
+<div style={{ display: "flex", justifyContent: "center" }}>
+<video src="/projects/fireplace.mp4" width="400" controls loop />
+</div>
+
 ## Conclusion
 
-In the end, I got what I wanted, and although I had to jump through a lot of hoops to get there, it didn't feel like hard work, which was the outcome I hoped. AI is, of course, an amazing tool for speeding up your work, but it's not perfect in all use cases just yet. Maybe prompting AI models to generate a fireplace in the terminal could be a good test for a model's intelligence? Watch this space.
+In the end, I got what I wanted, and although I had to jump through a lot of hoops to get there, it didn't feel like hard work, which was the outcome I hoped. AI is, of course, an amazing tool for speeding up your work, but it's not perfect in all use cases just yet. Maybe prompting AI models to generate a fireplace in the terminal could be a good test for a model's intelligence? Could be something to think about…
