@@ -12,7 +12,7 @@ export default function Page() {
 			<h1 className="font-semibold text-2xl tracking-tighter">Blog</h1>
 			<p className="mb-8">
 				My thoughts and opinions that I feel passionate about enough to write a
-				blog post for. Most likely software related.
+				blog post for, most likely software related.
 			</p>
 			<BlogPosts />
 		</section>
