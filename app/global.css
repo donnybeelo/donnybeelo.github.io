@@ -133,7 +133,7 @@ html {
 }
 
 .prose li {
-	@apply my-1;	
+	@apply my-1;
 }
 
 .prose > :first-child {

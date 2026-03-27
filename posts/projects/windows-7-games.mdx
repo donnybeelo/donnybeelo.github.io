@@ -3,7 +3,7 @@ title: "Windows 7 Games on Linux"
 publishedAt: "2026-01-20"
 summary: "A port of the classic Windows 7 games suite to run natively on Linux using Wine."
 repoUrl: "https://github.com/donnybeelo/windows7GamesForLinux"
-image: "/projects/solitaire.png"
+image: "/projects/solitaire.webp"
 ---
 
 I love Solitaire. Possibly borderline addicted to it, and I certainly owe my improving mental health to it. I have a soft spot for the classic Windows XP version of Solitaire, with the satisfying glitchy bouncing cards after winning a game after playing for 3 hours straight after school. The Windows 7 version takes 2nd place, though. It's more refined with better graphics, sound effects and a more modern UI, all of which simultaneously make it feel like a step down from the low poly feel of the Windows XP version. However, Microsoft removed all of these in favour of an ad-supported micro-transaction-ridden utopia, with horrible scaling to taste.
@@ -14,7 +14,7 @@ Thankfully, someone made an installer for the old Windows 7 games for the later 
 
 So, I decided to deal with the devil, and with the installer of dubious origin, I had Solitaire running on my machine under Wine. This came with a few issues; the sound files were not being played back properly, if they played at all, the menus had no text, and many features simply didn't work, like the hint button, undoing moves or even the options menu to change the theme.
 
-<Image src="/projects/bad-solitaire.png" />
+<Image src="/projects/bad-solitaire.webp" />
 
 The latter two issues were a result of the same problem; Wine doesn't read MUI language files when running an executable, which is where each game stores its text for menus and UI elements. This was made apparent to me from a forum thread on the WineHQ forums, with the solution being to embed the MUI file into the executable using Resource Hacker. This fixed all the text issues, as well as bringing back the menu bar, which in turn fixed the keyboard shortcuts not working!
 

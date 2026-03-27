@@ -3,7 +3,7 @@ import { CustomMDX } from "../components/mdx";
 import Typer from "../components/typer";
 
 const content = `
-<Image className="float-end w-70 mt-0! ml-5! p-2!" src="/me.jpg" />
+<Image className="float-end w-70 mt-0! ml-5! p-2!" src="/me.webp" />
 I'm a Computer Science graduate from the University of York based in Birmingham,
 experienced in full-stack development, UI/UX design, and cloud computing,
 working with organisations such as Sanger Institute and Genes & Health.
