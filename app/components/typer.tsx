@@ -94,6 +94,7 @@ export default function Typer({
 					whiteSpace: "normal",
 					wordBreak: "break-word",
 				}}
+				data-reader-mode-hide="true"
 			>
 				{output}
 				<span

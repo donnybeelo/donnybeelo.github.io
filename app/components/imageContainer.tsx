@@ -78,7 +78,7 @@ export function ImageContainer({
 			>
 				<img
 					src={src}
-					className={`${fill ? "object-cover min-w-full min-h-full overflow-hidden " : "max-h-60 object-contain w-fit max-w-full"}  rounded-md`}
+					className={`${fill ? "object-cover min-w-full min-h-full overflow-hidden " : "max-h-60 object-contain w-auto max-w-full"}  rounded-md`}
 				/>
 			</ShinyButton>
 			<div

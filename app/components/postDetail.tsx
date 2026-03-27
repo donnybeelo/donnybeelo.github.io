@@ -51,7 +51,7 @@ export default function PostDetail({
 						url,
 						author: {
 							"@type": "Person",
-							name: "My Portfolio",
+							name: "Daniel Elia",
 						},
 					}),
 				}}
@@ -80,12 +80,14 @@ export default function PostDetail({
 				)}
 			</div>
 
-			<div className="flex gap-2 items-center mt-2 mb-8 text-sm">
-				<p className="text-neutral-800 dark:text-neutral-200">by Daniel Elia</p>
-				<p className="text-neutral-700 dark:text-neutral-400">-</p>
-				<p className="text-sm text-neutral-500">
+			<div className="mt-2 mb-8 text-sm" aria-hidden="true" data-reader-mode-hide="true">
+				<span className="text-neutral-800 dark:text-neutral-200">
+					by Daniel Elia
+				</span>
+				<span className="text-neutral-700 dark:text-neutral-400"> - </span>
+				<span className="text-sm text-neutral-500">
 					{formatDate(post.metadata.publishedAt)}
-				</p>
+				</span>
 			</div>
 			<article className="prose">
 				<CustomMDX source={post.content} />
