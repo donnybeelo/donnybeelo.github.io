@@ -15,7 +15,7 @@
 	--sh-jsxliterals: #6266d1;
 	--sh-property: #e25a1c;
 	--sh-entity: #e25a1c;
-	--button-active: #aaa;
+	--button-active: #7777;
 	--button-shine: #333;
 	--shine-width: 100vw;
 	--shine-background: #aaa2;
@@ -32,7 +32,6 @@
 		--sh-identifier: white;
 		--sh-keyword: #f47067;
 		--sh-string: #0fa295;
-		--button-active: #555;
 		--button-background: #ccc1;
 		--button-shine: #aaa;
 		--nav-bar-background: #151515bb;
@@ -168,8 +167,8 @@ table {
 
 .title {
 	font-family: var(--fontMomoDisplay);
-	letter-spacing: normal;
 	font-size: 2rem;
+	letter-spacing: normal;
 }
 
 .shinyButton {
@@ -280,6 +279,7 @@ table {
 }
 .fontMomoDisplay {
 	font-family: var(--fontMomoDisplay);
+	letter-spacing: -1px;
 }
 code {
 	font-family: var(--fontFiraCode);

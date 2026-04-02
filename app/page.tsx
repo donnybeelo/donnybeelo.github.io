@@ -11,9 +11,9 @@ export default function Page() {
 	
 	return (
 		<div className="h-[calc(100vh-22rem)] md:h-[calc(100vh-17rem)] flex flex-col justify-center items-start relative">
-			<p className="mb-2 text-5xl font-semibold tracking-tighter fontMomoDisplay">
+			<h1 className="mb-2 text-5xl font-semibold tracking-tighter fontMomoDisplay">
 				Daniel Elia
-			</p>
+			</h1>
 			<Typer action={() => setDone(true)}>
 				I'm a developer based in Birmingham with a passion for making simple,
 				effective and beautiful user experiences.
