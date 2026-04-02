@@ -14,17 +14,9 @@ The extension works by establishing a Bluetooth connection with your Android dev
 
 This project started in August 2025 and has evolved from a JavaScript-based proof-of-concept to a fully-featured TypeScript extension with robust error handling, connection management, and localization support.
 
-## Features
-
-- <u>Quick Settings Integration</u>: Toggle your phone's hotspot directly from the GNOME Shell Quick Settings menu
-- <u>Automatic Wi-Fi Connection</u>: Automatically connects to your phone's hotspot network as fast as possible
-- <u>Visual Indicator</u>: Status indicator shows when connected to the hotspot network
-- <u>Bluetooth-Based Control</u>: Uses Bluetooth connectivity to communicate with your Android device, unlike GSConnect
-- <u>Settings UI</u>: Easy to configure, so you can get going with no programming knowledge necessary
-
 ## Development & Evolution
 
-I created this extension out of jealousy for macOS users who can toggle their iPhone's hotspot from the menu bar. Having to turn my hotspot on from my phone and manually connect to the Wi-Fi network felt clunky and long-winded for a process I do almost daily.
+I created this extension since I was jealous of macOS' ability to toggle an iPhone's personal hotspot from the menu bar. Having to turn my hotspot on from my phone and manually connect to the Wi-Fi network felt clunky and long-winded for a process I do almost daily.
 
 My initial solution was to use an Automate flow on my phone which detects my laptop connecting to it via Bluetooth, which toggles mobile hotspot on and off. Conveniently the Bluetooth tethering toggle in Ubuntu quick settings connects to my phone via Bluetooth, fails to establish a Bluetooth tether (since my phone switches off Bluetooth tethering automatically), then disconnects, after which my laptop eventually connects to the Wi-Fi hotspot automatically.
 

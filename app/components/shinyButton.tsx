@@ -104,7 +104,7 @@ export const ShinyButton = ({
 		if (!openInstantly) await new Promise((resolve) => setTimeout(resolve, 75));
 		animationLayer.classList.add("fade-out");
 		await new Promise((resolve) => setTimeout(resolve, 100));
-		
+
 		// Navigate to new page
 		startTransition(() => {
 			if (path) {
@@ -159,7 +159,6 @@ export const ShinyButton = ({
 		if ((e.buttons & 1) === 0 && (e.buttons & 4) === 0) {
 			clicked.current = false;
 			button.style.setProperty("--shine-width", `${getShineWidth()}px`);
-			button.style.setProperty("--transitions", transitions.current);
 			button.style.removeProperty("--no-shadow");
 		} else {
 			button.style.setProperty("--shine-width", `${getShineWidth() / 1.75}px`);
@@ -267,8 +266,9 @@ export const ShinyButton = ({
 		if (document.activeElement === button) {
 			button.style.setProperty(
 				"--transitions",
-				transitions.current + ",top 200ms,left 200ms",
+				transitions.current + transitionAddition,
 			);
+			setTimeout(() => button.style.setProperty("--transitions", transitions.current), 500);
 			button.style.setProperty("--x", String(centerX));
 			button.style.setProperty("--y", String(centerY));
 			button.style.setProperty("--shine-width", `${getShineWidth()}px`);

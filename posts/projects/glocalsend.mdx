@@ -1,0 +1,23 @@
+---
+title: "GLocalSend"
+publishedAt: "2026-03-31"
+summary: "A GNOME Shell extension that brings LocalSend into Quick Settings for nearby file and text sharing."
+repoUrl: "https://github.com/donnybeelo/gnome-extensions-glocalsend"
+image: "/projects/glocalsend.png"
+---
+
+I created GLocalSend as a more native-feeling way to use LocalSend on Linux systems running GNOME shell. LocalSend is a fantastic tool for sharing files and text between devices on the same network, but since I use it so often, having my only desktop option be a Flutter app felt clunky and out of place with the rest of the system. 
+
+I wanted to be able to share files and text between my devices without feeling like I'm leaving my desktop environment, through UI elements that are native to GNOME. This could've taken the form of a GTK4 app that replicates the functionality of the Flutter app, but I chose to make a quick settings toggle instead, which is what GSConnect does for KDE Connect.
+
+## Development
+
+I first attempted to blindly use the LocalSend app and simply build around that for the GNOME extension, so the project could remain as simple as possible. Unfortunately, as of writing, the LocalSend app doesn't have a CLI, with the only option being a CLI written in Rust made by a member of the community. This won't work, since expecting users to install a separate CLI tool maintained outside of the LocalSend project would render the extension inaccessible to casual users. This left me with one option; to reimplement LocalSend in TypeScript within the extension itself. 
+
+[The LocalSend team created a repo which explains how their protocol work](https://github.com/localsend/protocol), which I fed to GPT 5.4 mini to generate a TypeScript file that implements the protocol. After that, the rest of the extension was relatively straightforward to implement with Copilot interjecting to help with the boilerplate code, and within an hour I had text sharing fully-functional.
+
+The biggest challenge was allowing the user to select files to send from within the extension, since invoking `FileChooserNative` at the shell level causes GNOME to crash. The only way to invoke the file picker is by going through a DBus proxy, which took me several hours to figure out. I then had to call the `OpenFile` method on the proxy and subscribe to the `response` signal in order to get the file paths back from the file picker, only then can I pass the file paths to the `sendFilesToPeer` method in the LocalSend TypeScript implementation.
+
+## Conclusion
+
+Overall, I'm very happy with how this extension turned out. It feels much more native and seamless than using the LocalSend Flutter app on desktop, and it has all the same functionality, at least the functionality I use. The extension is currently pending review by the GNOME extensions team, but you can check out the code on GitHub using the link at the top of this post.
