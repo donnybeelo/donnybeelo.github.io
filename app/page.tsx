@@ -15,7 +15,7 @@ export default function Page() {
 				Daniel Elia
 			</h1>
 			<Typer action={() => setDone(true)}>
-				I'm a developer based in Birmingham with a passion for making simple,
+				I'm a software engineer based in Birmingham with a passion for making simple,
 				effective and beautiful user experiences.
 			</Typer>
 			<ShinyButton name="about me" className={`aboutButton opacity-${done ? "100" : "0"}`} path="/about"></ShinyButton>
