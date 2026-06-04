@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState, startTransition } from "react";
 import { usePrefersReducedMotion } from "app/animationLayer";
+import { recordInternalNavigation } from "./internalNavigationHistory";
 
 let lastTabDirection: "forward" | "backward" | "click" = "click";
 const prefersReducedMotion = usePrefersReducedMotion();
@@ -95,6 +96,9 @@ export const ShinyButton = ({
 				if (onClick) {
 					onClick!();
 				} else if (path) {
+					if (path.startsWith("/")) {
+						recordInternalNavigation(path);
+					}
 					router.push(path);
 				}
 			});
@@ -108,6 +112,9 @@ export const ShinyButton = ({
 		// Navigate to new page
 		startTransition(() => {
 			if (path) {
+				if (path.startsWith("/")) {
+					recordInternalNavigation(path);
+				}
 				router.push(path);
 			} else if (onClick) {
 				onClick();

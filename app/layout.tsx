@@ -5,6 +5,7 @@ import { Navbar } from "./components/nav";
 import Footer from "./components/footer";
 import AnimationLayer from "./animationLayer";
 import { baseUrl } from "./config";
+import { InternalNavigationHistoryInitializer } from "./components/internalNavigationHistoryInitializer";
 
 export const metadata: Metadata = {
 	metadataBase: new URL(baseUrl),
@@ -73,6 +74,7 @@ export default function RootLayout({
 				/>
 			</head>
 			<body className="fontMomo antialiased max-w-3xl mt-8 mx-auto">
+				<InternalNavigationHistoryInitializer />
 				<main className="flex-auto min-w-0 mt-6 flex flex-col mx-6">
 					<Navbar />
 					<AnimationLayer>{children}</AnimationLayer>

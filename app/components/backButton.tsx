@@ -1,7 +1,9 @@
 "use client";
 
-import { ShinyButton } from "./shinyButton";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { ShinyButton } from "./shinyButton";
+import { hasPreviousInternalPage } from "./internalNavigationHistory";
 
 function BackArrowIcon() {
 	return (
@@ -22,15 +24,19 @@ function BackArrowIcon() {
 }
 
 export const BackButton = () => {
+	const [canGoBack, setCanGoBack] = useState(false);
 	const pathname = usePathname();
-	const upPath = pathname.split("/").slice(0,-1).join("/");
+
+	useEffect(() => {
+		setCanGoBack(hasPreviousInternalPage());
+	}, [pathname]);
 
 	return (
 		<ShinyButton
-			className="mb-6!"
-			path={upPath || "/"}
+			className={`${canGoBack ? "mb-6!" : "h-0! p-0! opacity-0"} transition-all! duration-300`}
 			name="back"
 			icon={<BackArrowIcon />}
+			onClick={() => window.history.back()}
 		/>
 	);
 };
