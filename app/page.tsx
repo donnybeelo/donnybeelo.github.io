@@ -18,7 +18,7 @@ export default function Page() {
 				I'm a software engineer based in Birmingham with a passion for making simple,
 				effective and beautiful user experiences.
 			</Typer>
-			<ShinyButton name="about me" className={`aboutButton opacity-${done ? "100" : "0"}`} path="/about"></ShinyButton>
+			<ShinyButton name="about me" className={`aboutButton ${done ? "opacity-100" : "opacity-0 h-0! p-0! my-6!"}`} path="/about"></ShinyButton>
 			{[
 				{ src: bauhaus.src, visibility: "dark:invisible visible" },
 				{ src: bauhausDark.src, visibility: "invisible dark:visible" },
@@ -26,7 +26,7 @@ export default function Page() {
 				<img
 					key={src}
 					src={src}
-					className={`${visibility} absolute -z-10 inset-x-0 md:left-auto md:right-0 mx-auto h-[calc(100vh-22rem)] md:h-[calc(100vh-17rem)] grayscale select-none pointer-events-none animate-[float_6s_ease-in-out_infinite,opacity-pulse_7.7s_ease-in-out_infinite,fadeIn_3.85s_ease-in]`}
+					className={`${visibility} absolute -z-10 inset-x-0 md:left-auto md:right-0 mx-auto h-[calc(100vh-22rem)] max-h-140 md:h-[calc(100vh-17rem)] grayscale select-none pointer-events-none animate-[float_6s_ease-in-out_infinite,opacity-pulse_7.7s_ease-in-out_infinite,fadeIn_3.85s_ease-in]`}
 				/>
 			))}
 		</div>
