@@ -62,6 +62,7 @@ export default function PostDetail({
 			<ImageContainer
 				src={post.metadata.image}
 				fill={post.metadata.fillImage === "true"}
+				maxheight
 			/>
 
 			<div className="flex justify-between items-end-safe">

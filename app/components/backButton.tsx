@@ -27,16 +27,23 @@ export const BackButton = () => {
 	const [canGoBack, setCanGoBack] = useState(false);
 	const pathname = usePathname();
 
+	const handleBackButton = () => {
+		if (canGoBack) {
+			setCanGoBack(false)
+			setTimeout(() => window.history.back(), 150);
+		}
+	}
+
 	useEffect(() => {
 		setCanGoBack(hasPreviousInternalPage());
 	}, [pathname]);
 
 	return (
 		<ShinyButton
-			className={`${canGoBack ? "mb-6!" : "h-0! p-0! opacity-0"} transition-all! duration-300`}
+			className={`${canGoBack ? "mb-6! h-8!" : "h-0! py-0! px-0! opacity-0 mb-0!"} transition-[height,padding,opacity]! duration-300 ease-out`}
 			name="back"
 			icon={<BackArrowIcon />}
-			onClick={() => window.history.back()}
+			onClick={handleBackButton}
 		/>
 	);
 };
