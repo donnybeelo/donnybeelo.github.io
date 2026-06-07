@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ShinyButton } from "./shinyButton";
 import { hasPreviousInternalPage } from "./internalNavigationHistory";
+import { usePrefersReducedMotion } from "../animationLayer";
 
 function BackArrowIcon() {
 	return (
@@ -26,10 +27,15 @@ function BackArrowIcon() {
 export const BackButton = () => {
 	const [canGoBack, setCanGoBack] = useState(false);
 	const pathname = usePathname();
+	const prefersReducedMotion = usePrefersReducedMotion();
 
 	const handleBackButton = () => {
 		if (canGoBack) {
-			setCanGoBack(false)
+			setCanGoBack(false);
+			const animationLayer = document.querySelector(".animationLayer");
+			if (animationLayer && !prefersReducedMotion) {
+				animationLayer.classList.add("fade-out");
+			}
 			setTimeout(() => window.history.back(), 150);
 		}
 	}
