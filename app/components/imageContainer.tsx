@@ -19,6 +19,8 @@ export function ImageContainer({
 	const [isOpen, setIsOpen] = useState(false);
 	const hasPushedRef = useRef(false);
 	const prefersReducedMotion = usePrefersReducedMotion();
+	const [isLoaded, setIsLoaded] = useState(false);
+	const imgRef = useRef<HTMLImageElement>(null);
 
 	const closeModal = () => {
 		setIsOpen(false);
@@ -29,17 +31,19 @@ export function ImageContainer({
 	};
 
 	useEffect(() => {
+    // Check if the image is already cached and finished loading
+    if (imgRef.current && imgRef.current.complete) {
+      setIsLoaded(true);
+    }
+  }, []);
+
+	useEffect(() => {
 		const handlePopState = () => {
 			if (isOpen) {
 				setIsOpen(false);
 				hasPushedRef.current = false;
 			}
 		};
-		window.addEventListener("popstate", handlePopState);
-		return () => window.removeEventListener("popstate", handlePopState);
-	}, [isOpen]);
-
-	useEffect(() => {
 		if (isOpen) {
 			document.body.style.overflow = "hidden";
 			if (overlayRef.current) {
@@ -52,6 +56,8 @@ export function ImageContainer({
 		} else {
 			document.body.style.overflow = "scroll";
 		}
+		window.addEventListener("popstate", handlePopState);
+		return () => window.removeEventListener("popstate", handlePopState);
 	}, [isOpen]);
 
 	if (!src) {
@@ -76,11 +82,13 @@ export function ImageContainer({
 		<>
 			<ShinyButton
 				onClick={() => setIsOpen(true)}
-				className={`${fill ? "max-h-60" : ""} flex justify-center w-fit ${maxheight ? "h-60" : "h-fit"} ${isOpen ? "bg-(--button-active)!" : ""} ${className ? className : "mx-auto! mb-6! p-2!"}`}
+				className={`max-h-60 flex justify-center w-fit ${maxheight ? "h-60" : "h-fit"} ${isOpen ? "bg-(--button-active)!" : ""} ${className ? className : "mx-auto! mb-6! p-2!"} ${isLoaded ? "scale-x-100" : "scale-x-0 pointer-events-none"} transition-all! duration-200 ease-out`}
 			>
 				<img
+					ref={imgRef}
 					src={src}
-					className={`${fill ? "object-cover min-w-full min-h-full overflow-hidden " : "max-h-60 object-contain w-auto max-w-full"}  rounded-md`}
+					className={`${fill ? "object-cover min-w-full min-h-full overflow-hidden " : "max-h-60 object-contain w-auto py-2 max-w-full"} ${maxheight ? "h-60" : "h-fit"} ${isLoaded ? "opacity-100" : "opacity-0"} transition-opacity! duration-500 delay-200 ease-out rounded-md`}
+					onLoad={() => setIsLoaded(true)}
 				/>
 			</ShinyButton>
 			<div
