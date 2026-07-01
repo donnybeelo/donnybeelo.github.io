@@ -6,6 +6,7 @@ import { ImageContainer } from "app/components/imageContainer";
 import { ShinyButton } from "app/components/shinyButton";
 import Typer from "./typer";
 import githubIcon from "public/icons/github-mark.svg";
+import gnomeIcon from "public/icons/gnome.svg";
 
 type Post = {
 	metadata: {
@@ -14,6 +15,8 @@ type Post = {
 		summary: string;
 		image?: string;
 		repoUrl?: string;
+		installUrl?: string;
+		installSource?: string;
 		fillImage?: string;
 	};
 	slug: string;
@@ -65,30 +68,50 @@ export default function PostDetail({
 				maxheight
 			/>
 
-			<div className="flex justify-between items-end-safe">
-				<Typer className="title font-semibold text-2xl tracking-tighter">
-					{post.metadata.title}
-				</Typer>
-				{post.metadata.repoUrl && (
-					<ShinyButton
-						path={post.metadata.repoUrl}
-						name="github repo"
-						className="mb-1!"
-						icon={
-							<img src={githubIcon.src} className="w-4 dark:invert-0 invert" />
-						}
-					/>
-				)}
-			</div>
-
-			<div className="mt-2 mb-8 text-sm" aria-hidden="true" data-reader-mode-hide="true">
-				<span className="text-neutral-800 dark:text-neutral-200">
-					by Daniel Elia
-				</span>
-				<span className="text-neutral-700 dark:text-neutral-400"> - </span>
-				<span className="text-sm text-neutral-500">
-					{formatDate(post.metadata.publishedAt)}
-				</span>
+			<div className="flex justify-between items-end-safe mb-8">
+				<div>
+					<Typer className="title font-semibold text-2xl tracking-tighter">
+						{post.metadata.title}
+					</Typer>
+					<div
+						className="mt-2 text-sm"
+						aria-hidden="true"
+						data-reader-mode-hide="true"
+					>
+						<span className="text-neutral-800 dark:text-neutral-200">
+							by Daniel Elia
+						</span>
+						<span className="text-neutral-700 dark:text-neutral-400"> - </span>
+						<span className="text-sm text-neutral-500">
+							{formatDate(post.metadata.publishedAt)}
+						</span>
+					</div>
+				</div>
+				<div className="flex flex-col items-end-safe">
+					{post.metadata.installUrl && (
+						<ShinyButton
+							path={post.metadata.installUrl}
+							name={"install from " + post.metadata.installSource}
+							className="mb-1!"
+							icon={
+								<img src={gnomeIcon.src} className="w-4 dark:invert-0 invert" />
+							}
+						/>
+					)}
+					{post.metadata.repoUrl && (
+						<ShinyButton
+							path={post.metadata.repoUrl}
+							name="github repo"
+							className="mb-1!"
+							icon={
+								<img
+									src={githubIcon.src}
+									className="w-4 dark:invert-0 invert"
+								/>
+							}
+						/>
+					)}
+				</div>
 			</div>
 			<article className="prose">
 				<CustomMDX source={post.content} />
