@@ -237,6 +237,11 @@ table {
 	padding: 0;
 	margin: 4px 8px;
 	background: none !important;
+	scale: var(--scale, 1);
+}
+.shinyButton.homeButton.touch-active,
+.shinyButton.homeButton.touch-going {
+	scale: 0.9;
 }
 .shinyButton.homeButton::after {
 	background: radial-gradient(transparent, black 17.5%);

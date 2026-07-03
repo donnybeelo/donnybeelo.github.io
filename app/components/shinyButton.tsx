@@ -136,17 +136,18 @@ export const ShinyButton = ({
 
 	function updateButtonVars(clientX: number, clientY: number) {
 		if (!buttonRef.current) return;
-		const { x, y } = buttonRef.current.getBoundingClientRect();
+		const { x, y, width, height } = buttonRef.current.getBoundingClientRect();
 		if (prefersReducedMotion) {
-			const rect = buttonRef.current.getBoundingClientRect();
-			const centerX = rect.width / 2;
-			const centerY = rect.height / 2;
+			const centerX = width / 2;
+			const centerY = height / 2;
 			buttonRef.current.style.setProperty("--x", String(centerX));
 			buttonRef.current.style.setProperty("--y", String(centerY));
 			return;
 		}
-		buttonRef.current.style.setProperty("--x", String(clientX - x));
-		buttonRef.current.style.setProperty("--y", String(clientY - y));
+		const clampedX = Math.min(Math.max(clientX - x, 0), width);
+		const clampedY = Math.min(Math.max(clientY - y, 0), height);
+		buttonRef.current.style.setProperty("--x", String(clampedX));
+		buttonRef.current.style.setProperty("--y", String(clampedY));
 	}
 
 	function getShineWidth(): number {
@@ -165,9 +166,11 @@ export const ShinyButton = ({
 		if (!button) return;
 		if ((e.buttons & 1) === 0 && (e.buttons & 4) === 0) {
 			clicked.current = false;
+			button.style.setProperty("--scale", "1")
 			button.style.setProperty("--shine-width", `${getShineWidth()}px`);
 			button.style.removeProperty("--no-shadow");
 		} else {
+			button.style.setProperty("--scale", "0.9");
 			button.style.setProperty("--shine-width", `${getShineWidth() / 1.75}px`);
 			button.style.setProperty("--no-shadow", "none");
 		}
@@ -177,6 +180,7 @@ export const ShinyButton = ({
 		const button = buttonRef.current;
 		if (!button) return;
 		clicked.current = false;
+		button.style.setProperty("--scale", "1");
 		setTimeout(() => {
 			const { width, height } = button.getBoundingClientRect();
 			button.style.setProperty("--x", String(width / 2));
@@ -231,6 +235,7 @@ export const ShinyButton = ({
 			() => button.style.setProperty("--transitions", transitions.current),
 			50,
 		);
+		button.style.setProperty("--scale", "0.9");
 		button.style.setProperty("--shine-width", `${getShineWidth() / 1.75}px`);
 		button.style.setProperty("--no-shadow", "none");
 	}
@@ -248,6 +253,7 @@ export const ShinyButton = ({
 			"--transitions",
 			transitions.current + transitionAddition,
 		);
+		button.style.setProperty("--scale", "1");
 		setTimeout(() => {
 			button.style.setProperty("--shine-width", `${getShineWidth()}px`);
 		}, 5);
@@ -278,6 +284,7 @@ export const ShinyButton = ({
 			setTimeout(() => button.style.setProperty("--transitions", transitions.current), 500);
 			button.style.setProperty("--x", String(centerX));
 			button.style.setProperty("--y", String(centerY));
+			button.style.setProperty("--scale", "0.9");
 			button.style.setProperty("--shine-width", `${getShineWidth()}px`);
 		}
 	}
@@ -287,18 +294,9 @@ export const ShinyButton = ({
 		if (!button) return;
 		if (lastTabDirection != "click") {
 			const rect = button.getBoundingClientRect();
-			const centerX = rect.width / 2;
-			const centerY = rect.height / 2;
-			button.style.setProperty("--y", String(centerY));
-
-			const offset = rect.width;
-			if (lastTabDirection === "forward") {
-				button.style.setProperty("--x", String(centerX + offset));
-			} else {
-				button.style.setProperty("--x", String(centerX - offset));
-			}
-
-			setTimeout(() => button.style.setProperty("--x", String(centerX)), 200);
+			button.style.setProperty("--scale", "1");
+			button.style.setProperty("--x", String(rect.width / 2));
+			button.style.setProperty("--y", String(rect.height / 2));
 		}
 	}
 
@@ -381,7 +379,7 @@ export const ShinyButton = ({
 				path === "/" + pathname.split("/")[1] && name != "back"
 					? "var(--button-active)"
 					: "",
-			transition: "background-color 150ms, box-shadow 50ms",
+			transition: "background-color 150ms, box-shadow 100ms, scale 75ms ease-out",
 			...style,
 		},
 		"aria-label": ariaLabel,
