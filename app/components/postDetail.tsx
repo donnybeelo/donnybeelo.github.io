@@ -68,7 +68,7 @@ export default function PostDetail({
 				maxheight
 			/>
 
-			<div className="flex justify-between items-end-safe mb-8">
+			<div className="flex flex-col sm:flex-row sm:justify-between sm:items-end-safe mb-8">
 				<div>
 					<Typer className="title font-semibold text-2xl tracking-tighter">
 						{post.metadata.title}
@@ -87,7 +87,7 @@ export default function PostDetail({
 						</span>
 					</div>
 				</div>
-				<div className="flex flex-col items-end-safe">
+				<div className="flex flex-col mt-4 sm:mt-0 sm:items-end-safe">
 					{post.metadata.installUrl && (
 						<ShinyButton
 							path={post.metadata.installUrl}
