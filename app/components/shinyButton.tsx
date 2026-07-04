@@ -180,7 +180,6 @@ export const ShinyButton = ({
 		const button = buttonRef.current;
 		if (!button) return;
 		clicked.current = false;
-		button.style.setProperty("--scale", "1");
 		setTimeout(() => {
 			const { width, height } = button.getBoundingClientRect();
 			button.style.setProperty("--x", String(width / 2));
@@ -320,10 +319,10 @@ export const ShinyButton = ({
 			button.addEventListener("touchend", touchEndEvent);
 			button.addEventListener("touchcancel", touchEndEvent);
 			button.addEventListener("mousedown", mouseDownEvent);
-			button.addEventListener("mouseup", mouseUpEvent);
 			button.addEventListener("focus", handleFocus);
 			button.addEventListener("blur", handleBlur);
 			window.addEventListener("keydown", handleKeyDown);
+			window.addEventListener("mouseup", mouseUpEvent);
 			transitions.current =
 				getComputedStyle(button).getPropertyValue("--transitions");
 
@@ -335,9 +334,9 @@ export const ShinyButton = ({
 				button.removeEventListener("touchend", touchEndEvent);
 				button.removeEventListener("touchcancel", touchEndEvent);
 				button.removeEventListener("mousedown", mouseDownEvent);
-				button.removeEventListener("mouseup", mouseUpEvent);
 				button.removeEventListener("focus", handleFocus);
 				button.removeEventListener("blur", handleBlur);
+				window.removeEventListener("mouseup", mouseUpEvent);
 				window.removeEventListener("keydown", handleKeyDown);
 			};
 		}
