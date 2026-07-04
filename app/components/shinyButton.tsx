@@ -164,6 +164,7 @@ export const ShinyButton = ({
 		updateButtonVars(e.clientX, e.clientY);
 		const button = buttonRef.current;
 		if (!button) return;
+		button.classList.remove("held-away");
 		if ((e.buttons & 1) === 0 && (e.buttons & 4) === 0) {
 			clicked.current = false;
 			button.style.setProperty("--scale", "1")
@@ -176,10 +177,11 @@ export const ShinyButton = ({
 		}
 	}
 
-	function mouseLeaveEvent(): void {
+	function mouseLeaveEvent(e: MouseEvent): void {
 		const button = buttonRef.current;
 		if (!button) return;
 		clicked.current = false;
+		if ((e.buttons & 1) !== 0) button.classList.add("held-away");
 		setTimeout(() => {
 			const { width, height } = button.getBoundingClientRect();
 			button.style.setProperty("--x", String(width / 2));
@@ -248,6 +250,7 @@ export const ShinyButton = ({
 		}
 		const button = buttonRef.current;
 		if (!button) return;
+		button.classList.remove("held-away");
 		button.style.setProperty(
 			"--transitions",
 			transitions.current + transitionAddition,
@@ -378,7 +381,7 @@ export const ShinyButton = ({
 				path === "/" + pathname.split("/")[1] && name != "back"
 					? "var(--button-active)"
 					: "",
-			transition: "background-color 150ms, box-shadow 100ms, scale 75ms ease-out",
+			transition: "background-color 150ms, box-shadow 100ms, scale 75ms ease-out, filter 200ms",
 			...style,
 		},
 		"aria-label": ariaLabel,

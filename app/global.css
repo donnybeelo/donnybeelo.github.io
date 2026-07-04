@@ -246,6 +246,9 @@ table {
 .shinyButton.homeButton::after {
 	background: radial-gradient(transparent, black 17.5%);
 }
+.shinyButton.homeButton.held-away {
+	filter: brightness(0.6);
+}
 
 /*Styling for desktop*/
 @media (hover: hover) {
