@@ -5,11 +5,11 @@ import Typer from "../components/typer";
 const content = `
 <Image className="float-end w-70 mt-0! ml-5! p-2!" src="/me.webp" />
 I graduated in Computer Science from the University of York in 2025,
-and I'm currently working as a Full-stack Engineer at Thier.
-I specialise in UI/UX design and cloud computing,
-and have worked with Sanger Institute and Genes & Health in the past,
-where I brought my unique perspective to how software should be built,
-focusing on visual details and interactions.
+and I'm currently working as a Full-stack Engineer at Thier,
+building a health data platform from the ground up, from dashboard UI to CI/CD infrastructure and performance optimisation.
+Before that, I spent a year at the Wellcome Sanger Institute and Genes & Health,
+working on research infrastructure used across the institute,
+including deploying an updated research environment that cut software install times from 7 hours to 10 minutes.
 
 I am a firm believer that great software is built on user studies, clear communication and agile teamwork,
 which led me to become a certified Scrum Master and Product Owner with Scrum.org within 6 months.
