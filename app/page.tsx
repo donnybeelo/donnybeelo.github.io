@@ -47,7 +47,7 @@ export default function Page() {
 				</div>
 			</div>
 			<ShinyButton name="about me" className={`aboutButton ${done ? "opacity-100" : "opacity-0 h-0! p-0! my-6!"}`} path="/about"></ShinyButton>
-			{[
+			{done && [
 				{ src: bauhaus.src, visibility: "dark:invisible visible" },
 				{ src: bauhausDark.src, visibility: "invisible dark:visible" },
 			].map(({ src, visibility }) => (
