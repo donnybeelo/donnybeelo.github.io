@@ -101,7 +101,7 @@ export default function PostDetail({
 					{post.metadata.repoUrl && (
 						<ShinyButton
 							path={post.metadata.repoUrl}
-							name="github repo"
+							name="open github repo"
 							className="mb-1!"
 							icon={
 								<img
