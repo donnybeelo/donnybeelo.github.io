@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { formatDate, getBlogPosts, getProjectPosts } from "@/posts/utils";
 import { ShinyButton } from "./shinyButton";
 
@@ -12,7 +11,7 @@ function RightArrowIcon() {
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<path
-				d="M4.5 2L7.5 6L4.5 10"
+				d="M2 2H10V10M10 2L2 10"
 				stroke="currentColor"
 				strokeWidth="1.5"
 				strokeLinecap="round"
@@ -74,7 +73,7 @@ function Posts({
 									{post.metadata.summary}
 								</p>
 							</div>
-							<div className="shrink-0 ml-2 mt-1 text-neutral-400">
+							<div className="shrink-0 ml-2 mt-1 dark:text-neutral-200 text-neutral-700">
 								<RightArrowIcon />
 							</div>
 						</div>
