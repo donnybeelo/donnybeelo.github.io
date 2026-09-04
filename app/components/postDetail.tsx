@@ -23,7 +23,7 @@ type Post = {
 	content: string;
 };
 
-type PostType = "blog" | "project";
+type PostType = "article" | "project";
 
 export default function PostDetail({
 	post,
@@ -33,7 +33,7 @@ export default function PostDetail({
 	type: PostType;
 }) {
 	const schemaType = "BlogPosting";
-	const url = `${baseUrl}/${type === "project" ? "projects" : "blog"}/${post.slug}`;
+	const url = `${baseUrl}/${type === "project" ? "projects" : "articles"}/${post.slug}`;
 
 	return (
 		<section>

@@ -1,11 +1,11 @@
 import { writeFileSync } from "fs";
 import { join } from "path";
-import { getBlogPosts, getProjectPosts } from "../posts/utils";
+import { getArticles, getProjectPosts } from "../posts/utils";
 import { baseUrl } from "../app/config";
 
 function generateSitemap() {
-	const blogs = getBlogPosts().map((post) => ({
-		url: `${baseUrl}/blog/${post.slug}`,
+	const articles = getArticles().map((post) => ({
+		url: `${baseUrl}/articles/${post.slug}`,
 		lastModified: post.metadata.publishedAt,
 	}));
 
@@ -14,12 +14,12 @@ function generateSitemap() {
 		lastModified: post.metadata.publishedAt,
 	}));
 
-	const routes = ["", "/blog", "/projects"].map((route) => ({
+	const routes = ["", "/articles", "/projects"].map((route) => ({
 		url: `${baseUrl}${route}`,
 		lastModified: new Date().toISOString().split("T")[0],
 	}));
 
-	const allUrls = [...routes, ...blogs, ...projects];
+	const allUrls = [...routes, ...articles, ...projects];
 
 	const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

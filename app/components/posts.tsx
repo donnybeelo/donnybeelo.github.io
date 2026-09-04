@@ -1,4 +1,4 @@
-import { formatDate, getBlogPosts, getProjectPosts } from "@/posts/utils";
+import { formatDate, getArticles, getProjectPosts } from "@/posts/utils";
 import { ShinyButton } from "./shinyButton";
 
 function RightArrowIcon() {
@@ -21,10 +21,10 @@ function RightArrowIcon() {
 	);
 }
 
-export function BlogPosts() {
-	let allBlogs = getBlogPosts();
+export function Articles() {
+	let allArticles = getArticles();
 
-	return <Posts posts={allBlogs} url="blog" />;
+	return <Posts posts={allArticles} url="articles" />;
 }
 
 export function ProjectPosts() {
